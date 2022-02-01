@@ -8,7 +8,7 @@ import { nftaddress, nftmarketaddress } from '../config';
 import NFT from '../artifacts/contracts/NFT.sol/NFT.json';
 import Market from '../artifacts/contracts/Market.sol/NFTMarket.json';
 
-let rpcEndpoint: string = 'http://127.0.0.1:8545/';
+let rpcEndpoint: string = 'https://rpc-mumbai.maticvigil.com';
 
 export default function Home() {
 	const [nfts, setNfts] = useState<Token[]>([]);
