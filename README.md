@@ -2,18 +2,26 @@
 
 This is a basic NFT Marketplace.
 
+<br>
+
 ## Building the Docker image
 
-From the root of this repo, run `docker build -t . nftm`.
+From the root of this repo, run `docker build . -t nftm`.
+
+<br>
 
 ## Running NFTM in a Docker container
 
 Run it using `docker run -p 3000:3000 nftm`.
 
+<br>
+
 ## Testing against a local hardhat node
 
 From the repo root, run `npx hardhat node`.
 In a separate window, run `npx hardhat run scripts/deploy.js --network localhost`. This will deploy the contracts to the local node. Assuming no changes have been made to HH config, the addresses for the NFT and Market contracts should be the same each time. No need to update `config.js`.
+
+<br>
 
 ## Testing against Mumbai testnet
 

@@ -29,6 +29,7 @@ export default function Home() {
 	}
 
 	async function loadNFTs(): Promise<void> {
+		console.log('connecting to endpoint:', rpcEndpoint);
 		const provider = new ethers.providers.JsonRpcProvider(rpcEndpoint);
 		const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
 		const marketContract = new ethers.Contract(
