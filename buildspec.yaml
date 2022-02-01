@@ -10,12 +10,12 @@ phases:
       - echo Logging into Amazon ECR...
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 284217827608.dkr.ecr.eu-west-2.amazonaws.com
-      - REPOSITORY_URI=284217827608.dkr.ecr.eu-west-2.amazonaws.com/nftm
+      - REPOSITORY_URI=284217827608.dkr.ecr.eu-west-2.amazonaws.com/nftm-webapp
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
   build:
     commands:
-      - echo Build started on `date`
+      - echo Build started on `date`s
       - echo Buidling the Docker image
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
