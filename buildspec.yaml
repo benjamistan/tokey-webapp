@@ -7,6 +7,7 @@ phases:
     commands:
       - echo Running npm install...
       - npm install
+      - npx hardhat compile
       - echo Logging into Amazon ECR...
       - aws --version
       - echo Default region is $AWS_DEFAULT_REGION
