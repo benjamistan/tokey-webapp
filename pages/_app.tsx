@@ -15,6 +15,7 @@ function Marketplace({ Component, pageProps }: AppProps) {
 				<title>Ownr NFT Marketplace</title>
 			</Head>
 			<Header />
+			<Component {...pageProps} />
 		</div>
 	);
 }

@@ -1,9 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Collection = () => {
 	const router = useRouter();
-	return <div>{router.query.collectionId}</div>;
+	return <Link href='/'>{router.query.collectionId}</Link>;
 };
 
 export default Collection;
