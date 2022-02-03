@@ -2,6 +2,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Link from 'next/link';
 import Image from 'next/image';
+import Head from 'next/head';
 
 import Header from '../components/Header';
 
@@ -10,6 +11,9 @@ import logo from '../assets/Logo.svg';
 function Marketplace({ Component, pageProps }: AppProps) {
 	return (
 		<div>
+			<Head>
+				<title>Ownr NFT Marketplace</title>
+			</Head>
 			<Header />
 		</div>
 	);
