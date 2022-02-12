@@ -6,7 +6,7 @@ import Head from 'next/head';
 
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 
-import Header from '../components/Header';
+import Header from '../components/Header.jsx';
 
 import logo from '../assets/Logo.svg';
 

@@ -1,10 +1,9 @@
-import Head from 'next/head';
 import Header from '../components/Header';
+import Hero from '../components/Hero';
 import { useWeb3 } from '@3rdweb/hooks';
 import { useEffect } from 'react';
 import { client } from '../lib/sanityClient';
 import toast, { Toaster } from 'react-hot-toast';
-import { Toast } from 'react-hot-toast/dist/core/types';
 
 const style = {
 	wrapper: ``,
@@ -16,16 +15,13 @@ const style = {
 export default function Home() {
 	const { address, connectWallet } = useWeb3();
 
-	const welcomeUser = (userName: string, toastHandler = toast) => {
-		toastHandler.success(
-			`Welcome back ${userName != 'Unamed' ? `${userName}` : ''}`,
-			{
-				style: {
-					background: '#04111d',
-					color: '#fff',
-				},
-			}
-		);
+	const welcomeUser = (walletAddress: string, toastHandler = toast) => {
+		toastHandler.success(`Connected to ${walletAddress.slice(1, 7)}...`, {
+			style: {
+				background: '#04111d',
+				color: '#fff',
+			},
+		});
 	};
 
 	useEffect(() => {
@@ -39,16 +35,17 @@ export default function Home() {
 			};
 
 			const result = await client.createIfNotExists(userDoc);
-			welcomeUser(result.userName);
+			welcomeUser(result.walletAddress);
 		})();
 	}, [address]);
 
 	return (
 		<div className={style.wrapper}>
-			<Toaster position='top-center' reverseOrder={false} />
+			<Toaster position='top-right' reverseOrder={false} />
 			{address ? (
 				<>
 					<Header />
+					<Hero />
 				</>
 			) : (
 				<div className={style.walletConnectWrapper}>
