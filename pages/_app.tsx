@@ -4,6 +4,8 @@ import Head from 'next/head';
 
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 
+import Footer from '../components/Footer';
+
 const supportedChainIds = [80001];
 const connectors = {
 	injected: {},
@@ -20,6 +22,9 @@ function Marketplace({ Component, pageProps }: AppProps) {
 					<title>Ownr NFT Marketplace</title>
 				</Head>
 				<Component {...pageProps} />
+			</div>
+			<div>
+				<Footer />
 			</div>
 		</ThirdwebWeb3Provider>
 	);
