@@ -41,7 +41,7 @@ export default function Home() {
 
 	return (
 		<div className={style.wrapper}>
-			<Toaster position='top-right' reverseOrder={false} />
+			<Toaster position='bottom-right' reverseOrder={false} />
 			{address ? (
 				<>
 					<Header />

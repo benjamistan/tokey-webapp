@@ -4,7 +4,7 @@ import Head from 'next/head';
 
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 
-import Footer from '../components/Footer';
+import Footer from '../components/Footer/Footer';
 
 const supportedChainIds = [80001];
 const connectors = {
