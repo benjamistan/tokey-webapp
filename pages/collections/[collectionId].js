@@ -7,7 +7,6 @@ import { client } from '../../lib/sanityClient';
 import { useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';
 
-import Header from '../../components/Header';
 import NFTCard from '../../components/NFTCard';
 import { CgWebsite } from 'react-icons/cg';
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
@@ -110,7 +109,6 @@ const Collection = () => {
 
 	return (
 		<div className='overflow-hidden'>
-			<Header />
 			<div className={style.bannerImageContainer}>
 				<img
 					className={style.bannerImage}

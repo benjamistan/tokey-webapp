@@ -4,6 +4,7 @@ import Head from 'next/head';
 
 import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 
+import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 const supportedChainIds = [80001];
@@ -21,6 +22,7 @@ function Marketplace({ Component, pageProps }: AppProps) {
 				<Head>
 					<title>Ownr NFT Marketplace</title>
 				</Head>
+				<Header />
 				<Component {...pageProps} />
 			</div>
 			<div>

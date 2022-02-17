@@ -1,4 +1,4 @@
-import Header from '../components/Header';
+import Header from '../components/Header/Header';
 import Hero from '../components/Hero';
 import { useWeb3 } from '@3rdweb/hooks';
 import { useEffect } from 'react';
@@ -44,7 +44,6 @@ export default function Home() {
 			<Toaster position='bottom-right' reverseOrder={false} />
 			{address ? (
 				<>
-					<Header />
 					<Hero />
 				</>
 			) : (
