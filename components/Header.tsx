@@ -26,7 +26,7 @@ const Header = () => {
 		<div className={style.wrapper}>
 			<Link href='/' passHref>
 				<div className={style.logoContainer}>
-					<Image className={style.logoSize} src={logo} alt='Ownr logo' />
+					<Image className={style.logoText} src={logo} alt='Ownr logo' />
 				</div>
 			</Link>
 			<div className={style.searchBar}>

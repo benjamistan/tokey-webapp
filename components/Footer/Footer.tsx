@@ -1,6 +1,7 @@
 import React from 'react';
 import FooterSocial from './FooterSocial';
 import NewsletterSignup from './NewsletterSignup';
+import FooterLinks from './FooterLinks';
 
 const style = {
 	footer: `bg-[#034078] w-screen px-[1.2rem] py-[0.8rem] pt-6 flex text-white relative justify-center flex-wrap items-center`,
@@ -21,6 +22,9 @@ const Footer = () => {
 			</div>
 			<div className={style.footer}>
 				<NewsletterSignup />
+			</div>
+			<div>
+				<FooterLinks />
 			</div>
 			<div className={style.footer}>
 				<div className={style.logoText}>

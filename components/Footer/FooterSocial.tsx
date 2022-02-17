@@ -7,6 +7,7 @@ import {
 } from 'react-icons/ai';
 
 const style = {
+	footer: `bg-[#034078] w-screen px-[1.2rem] py-[0.8rem] pt-6 flex text-white relative justify-center flex-wrap items-center`,
 	iconAnchor: `rounded-full border-2 border-white text-white leading-normal uppercase hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out w-9 h-9 m-1`,
 	iconAnchorImage: `w-3 h-full mx-auto`,
 	iconLinkedIn:
