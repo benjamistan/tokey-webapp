@@ -2,9 +2,9 @@ import React from 'react';
 import Link from 'next/link';
 
 const style = {
-	footer: `bg-[#034078] text-white relative justify-center flex flex-wrap grid grid-cols-5 items-center text-center`,
-	link: `text-white`,
-	linksColHeader: `font-bold mb-2.5`,
+	footer: `bg-[#034078] text-white relative justify-center flex flex-wrap grid grid-cols-5 items-center text-center pb-20`,
+	link: `text-white hover:text-[#a7b0c4]`,
+	linksColHeader: `font-bold text-xl mb-4 border-b`,
 	linksList: `list-non mb-0`,
 	linksListItem: `text-white`,
 };
@@ -30,34 +30,34 @@ const FooterLinks = () => {
 				</ul>
 			</div>
 			<div>
-				<h5 className={style.linksColHeader}>Assets</h5>
+				<h5 className={style.linksColHeader}>Resources</h5>
 				<ul className={style.linksList}>
 					<li>
 						<a href='/collections' className={style.link}>
-							Collections
+							Help Centre
 						</a>
 					</li>
 					<li className={style.link}>
-						<Link href='/create-item'>Mint</Link>
+						<Link href='/create-item'>Platform Status</Link>
 					</li>
 					<li className={style.link}>
-						<Link href='/dashboard'>Dashboard</Link>
+						<Link href='/dashboard'>Partners</Link>
 					</li>
 				</ul>
 			</div>
 			<div>
-				<h5 className={style.linksColHeader}>Assets</h5>
+				<h5 className={style.linksColHeader}>Company</h5>
 				<ul className={style.linksList}>
 					<li>
 						<a href='/collections' className={style.link}>
-							Collections
+							Who we are
 						</a>
 					</li>
 					<li className={style.link}>
-						<Link href='/create-item'>Mint</Link>
+						<Link href='/create-item'>Privacy Policy</Link>
 					</li>
 					<li className={style.link}>
-						<Link href='/dashboard'>Dashboard</Link>
+						<Link href='/dashboard'>Terms of Service</Link>
 					</li>
 				</ul>
 			</div>

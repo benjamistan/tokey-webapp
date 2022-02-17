@@ -18,13 +18,14 @@ const Footer = () => {
 	return (
 		<>
 			<div className={style.footer}>
-				<FooterSocial />
-			</div>
-			<div className={style.footer}>
 				<NewsletterSignup />
 			</div>
+
 			<div>
 				<FooterLinks />
+			</div>
+			<div className={style.footer}>
+				<FooterSocial />
 			</div>
 			<div className={style.footer}>
 				<div className={style.logoText}>
