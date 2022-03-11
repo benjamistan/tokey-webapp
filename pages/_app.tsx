@@ -20,7 +20,7 @@ function Marketplace({ Component, pageProps }: AppProps) {
 		>
 			<div>
 				<Head>
-					<title>Ownr NFT Marketplace</title>
+					<title>Tokey NFT Marketplace</title>
 				</Head>
 				<Header />
 				<Component {...pageProps} />
