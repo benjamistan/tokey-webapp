@@ -44,8 +44,12 @@ const Header = () => {
 						Collections
 					</Link>
 				</div>
-				<div className={style.headerItem}>Mint</div>
-				<div className={style.headerItem}>Dashboard</div>
+				<div className={style.headerItem}>
+					<Link href='/create-item'>Mint</Link>
+				</div>
+				<div className={style.headerItem}>
+					<Link href='/dashboard'>Dashboard</Link>
+				</div>
 				<div className={style.headerIcon}>
 					<CgProfile />
 				</div>
