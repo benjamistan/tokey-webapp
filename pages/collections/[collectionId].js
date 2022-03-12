@@ -206,7 +206,7 @@ const Collection = () => {
 			<div className={style.midRow}>
 				<div className={style.description}>{collection?.description}</div>
 			</div>
-			<div className='flex flex-wrap '>
+			{/* <div className='flex flex-wrap '>
 				{nfts.map((nftItem, id) => (
 					<NFTCard
 						key={id}
@@ -215,7 +215,7 @@ const Collection = () => {
 						listings={listings}
 					/>
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 };

@@ -4,6 +4,9 @@ const nextConfig = {
 	images: {
 		domains: ['ipfs.infura.io'],
 	},
+	env: {
+		PASSWORD_PROTECT: true,
+	},
 };
 
 module.exports = nextConfig;

@@ -1,4 +1,4 @@
-import Header from '../../components/Header';
+import Header from '../../components/Header/Header';
 import { useEffect, useMemo, useState } from 'react';
 import { useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';

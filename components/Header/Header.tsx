@@ -16,7 +16,7 @@ const style = {
 	searchBar: `flex flex-1 mx-[0.8rem] w-max-[520px] items-center bg-[#e5e5e5] rounded-[0.8rem] hover:bg-[#fefcfb]`,
 	searchIcon: `text-[#000] mx-3 font-bold text-lg`,
 	searchInput: `h-[2.6rem] w-full border-0 bg-transparent outline-0 ring-0 px-2 pl-0 text-[#000] placeholder:text-[#8a939b]`,
-	searchButton: `border bg-[#2081e2] font-semibold cursor-pointer text-black`,
+	searchButton: `border bg-[#2081e2] font-semibold44sdw cursor-pointer text-black`,
 	headerItems: ` flex items-center justify-end`,
 	headerItem: `text-white px-4 font-bold text-[#fefcfb] hover:text-white cursor-pointer`,
 	headerIcon: `text-[#fefcfb] text-3xl font-black px-4 hover:text-white cursor-pointer`,
