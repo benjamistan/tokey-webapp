@@ -11,7 +11,7 @@ phases:
       - echo Logging into Amazon ECR...
       - aws --version
       - echo Default region is $AWS_DEFAULT_REGION
-      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.284217827608.amazonaws.com
+      - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin 284217827608.dkr.ecr.eu-west-2.amazonaws.com
       - REPOSITORY_URI=284217827608.dkr.ecr.eu-west-2.amazonaws.com/nftm-webapp
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=${COMMIT_HASH:=latest}
