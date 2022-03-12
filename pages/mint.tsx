@@ -8,7 +8,7 @@ const style = {
 const account = () => {
 	return (
 		<div className={style.container}>
-			<span className={style.text}>Dashboard</span>
+			<span className={style.text}>Mint screen</span>
 		</div>
 	);
 };

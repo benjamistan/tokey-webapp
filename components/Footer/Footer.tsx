@@ -3,6 +3,8 @@ import FooterSocial from './FooterSocial';
 import NewsletterSignup from './NewsletterSignup';
 import FooterLinks from './FooterLinks';
 
+import Link from 'next/link';
+
 const style = {
 	footer: `bg-[#034078] w-screen px-[1.2rem] py-[0.8rem] pt-6 flex text-white relative justify-center flex-wrap items-center`,
 	form: `ml-[0.8rem] grid md:grid-cols-3 gird-cols-1 gap-4 flex justify-center items-center text-white`,
@@ -29,11 +31,10 @@ const Footer = () => {
 			</div>
 			<div className={style.footer}>
 				<div className={style.logoText}>
-					&copy;2022 DBS Technology Ltd |
-					<a className={style.textAnchor} href='/privacypolicy'>
-						{' '}
-						Privacy Policy
-					</a>
+					<strong>&copy;2022 Tokey Ltd</strong> |
+					<span className={style.textAnchor}>
+						<Link href='/privacy'> Privacy Policy</Link>
+					</span>
 					|
 					<a className={style.textAnchor} href='/termsofservice'>
 						{' '}

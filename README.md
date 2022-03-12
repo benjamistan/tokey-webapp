@@ -6,13 +6,13 @@ This is a basic NFT Marketplace.
 
 ## Building the Docker image
 
-From the root of this repo, run `docker build . -t nftm`.
+From the root of this repo, run `docker build . -t tokey-webapp`.
 
 <br>
 
 ## Running NFTM in a Docker container
 
-Run it using `docker run -p 3000:3000 nftm`.
+Run it using `docker run -p 3000:3000 tokey-webapp`.
 
 <br>
 

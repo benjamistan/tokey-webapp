@@ -27,7 +27,7 @@ const style = {
 const FooterSocial = () => {
 	return (
 		<div className={style.footer}>
-			<a href='https://twitter.com/' type='button'>
+			<a href='https://twitter.com/tokeyapp' type='button'>
 				<div className={style.iconLinkedIn}>
 					<FaTwitter />
 				</div>
@@ -45,7 +45,7 @@ const FooterSocial = () => {
 				</div>
 			</a>
 
-			<a href='https://github.com/' type='button'>
+			<a href='https://github.com/tokeyapp' type='button'>
 				<div className={style.iconLinkedIn}>
 					<FaGithub />
 				</div>
