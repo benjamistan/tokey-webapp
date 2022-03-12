@@ -33,15 +33,15 @@ const FooterLinks = () => {
 				<h5 className={style.linksColHeader}>Resources</h5>
 				<ul className={style.linksList}>
 					<li>
-						<a href='/collections' className={style.link}>
+						<a href='/' className={style.link}>
 							Help Centre
 						</a>
 					</li>
 					<li className={style.link}>
-						<Link href='/create-item'>Platform Status</Link>
+						<Link href='/'>Platform Status</Link>
 					</li>
 					<li className={style.link}>
-						<Link href='/dashboard'>Partners</Link>
+						<Link href='/'>Partners</Link>
 					</li>
 				</ul>
 			</div>
@@ -54,10 +54,10 @@ const FooterLinks = () => {
 						</a>
 					</li>
 					<li className={style.link}>
-						<Link href='/create-item'>Privacy Policy</Link>
+						<Link href='/privacy'>Privacy Policy</Link>
 					</li>
 					<li className={style.link}>
-						<Link href='/dashboard'>Terms of Service</Link>
+						<Link href='/'>Terms of Service</Link>
 					</li>
 				</ul>
 			</div>

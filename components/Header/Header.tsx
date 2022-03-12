@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 import { AiOutlineSearch } from 'react-icons/ai';
 
-import logo from '../../assets/tokey_logo_white_75.svg';
+import logo from '../../assets/tokey_logo_white.svg';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
@@ -26,7 +26,13 @@ const Header = () => {
 		<div className={style.wrapper}>
 			<Link href='/' passHref>
 				<div className={style.logoContainer}>
-					<Image className={style.logoText} src={logo} alt='Tokey logo' />
+					<Image
+						className={style.logoText}
+						src={logo}
+						alt='Tokey logo'
+						height={39}
+						width={120}
+					/>
 				</div>
 			</Link>
 			<div className={style.searchBar}>

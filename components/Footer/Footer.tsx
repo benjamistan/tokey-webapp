@@ -30,7 +30,7 @@ const Footer = () => {
 			<div className={style.footer}>
 				<div className={style.logoText}>
 					&copy;2022 DBS Technology Ltd |
-					<a className={style.textAnchor} href='/privacypolicy'>
+					<a className={style.textAnchor} href='/privacy'>
 						{' '}
 						Privacy Policy
 					</a>
