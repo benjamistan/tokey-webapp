@@ -16,6 +16,7 @@ const style = {
 	searchBar: `flex flex-1 mx-[0.8rem] w-max-[520px] items-center bg-[#e5e5e5] rounded-[0.8rem] hover:bg-[#fefcfb]`,
 	searchIcon: `text-[#000] mx-3 font-bold text-lg`,
 	searchInput: `h-[2.6rem] w-full border-0 bg-transparent outline-0 ring-0 px-2 pl-0 text-[#000] placeholder:text-[#8a939b]`,
+	searchButton: `border bg-[#2081e2] font-semibold cursor-pointer text-black`,
 	headerItems: ` flex items-center justify-end`,
 	headerItem: `text-white px-4 font-bold text-[#fefcfb] hover:text-white cursor-pointer`,
 	headerIcon: `text-[#fefcfb] text-3xl font-black px-4 hover:text-white cursor-pointer`,
@@ -43,7 +44,11 @@ const Header = () => {
 					className={style.searchInput}
 					placeholder='Search items, collections and accounts'
 				/>
+				<button className={style.searchButton}>
+					<Link href='/search'>Search</Link>
+				</button>
 			</div>
+
 			<div className={style.headerItems}>
 				<div className={style.headerItem}>
 					<Link href='/collections/0x77053C5e0cd65Af65f39b58d3e1BCE52DA246bFc'>
@@ -51,13 +56,15 @@ const Header = () => {
 					</Link>
 				</div>
 				<div className={style.headerItem}>
-					<Link href='/create-item'>Mint</Link>
+					<Link href='/mint'>Mint</Link>
 				</div>
 				<div className={style.headerItem}>
 					<Link href='/dashboard'>Dashboard</Link>
 				</div>
 				<div className={style.headerIcon}>
-					<CgProfile />
+					<Link href='/account' passHref>
+						<CgProfile />
+					</Link>
 				</div>
 				<div className={style.headerIcon}>
 					<MdOutlineAccountBalanceWallet />

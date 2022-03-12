@@ -45,7 +45,7 @@ const FooterSocial = () => {
 				</div>
 			</a>
 
-			<a href='https://github.com/' type='button'>
+			<a href='https://github.com/tokeyapp' type='button'>
 				<div className={style.iconLinkedIn}>
 					<FaGithub />
 				</div>
