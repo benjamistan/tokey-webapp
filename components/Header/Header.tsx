@@ -51,9 +51,7 @@ const Header = () => {
 
 			<div className={style.headerItems}>
 				<div className={style.headerItem}>
-					<Link href='/collections/0x77053C5e0cd65Af65f39b58d3e1BCE52DA246bFc'>
-						Collections
-					</Link>
+					<Link href='/collections'>Collections</Link>
 				</div>
 				<div className={style.headerItem}>
 					<Link href='/mint'>Mint</Link>

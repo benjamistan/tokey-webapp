@@ -55,7 +55,7 @@ const FooterLinks = () => {
 						<Link href='/privacy'>Privacy Policy</Link>
 					</li>
 					<li className={style.link}>
-						<Link href='/'>Terms of Service</Link>
+						<Link href='/termsofservice'>Terms of Service</Link>
 					</li>
 				</ul>
 			</div>

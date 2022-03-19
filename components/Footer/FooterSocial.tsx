@@ -33,13 +33,13 @@ const FooterSocial = () => {
 				</div>
 			</a>
 
-			<a href='https://reddit.com/' type='button'>
+			{/* <a href='https://reddit.com/' type='button'>
 				<div className={style.iconLinkedIn}>
 					<FaRedditAlien />
 				</div>
-			</a>
+			</a> */}
 
-			<a href='https://linkedin.com' type='button'>
+			<a href='https://www.linkedin.com/company/tokeyapp' type='button'>
 				<div className={style.iconLinkedIn}>
 					<FaLinkedinIn />
 				</div>
@@ -51,7 +51,7 @@ const FooterSocial = () => {
 				</div>
 			</a>
 
-			<a href='https://discord.com/' type='button'>
+			<a href='https://discord.gg/hKyxnq8GPX' type='button'>
 				<div className={style.iconLinkedIn}>
 					<FaDiscord />
 				</div>
