@@ -1,8 +1,10 @@
-import Hero from '../components/Hero';
 import { useWeb3 } from '@3rdweb/hooks';
 import { useEffect } from 'react';
 import { client } from '../lib/sanityClient';
 import toast, { Toaster } from 'react-hot-toast';
+
+import Hero from '../components/HomePage/Hero';
+import ValueProposition from '../components/HomePage/ValueProposition';
 
 const style = {
 	wrapper: ``,
@@ -41,20 +43,10 @@ export default function Home() {
 	return (
 		<div className={style.wrapper}>
 			<Toaster position='bottom-right' reverseOrder={false} />
-			{address ? (
-				<>
-					<Hero />
-				</>
-			) : (
-				<div className={style.walletConnectWrapper}>
-					<button
-						className={style.button}
-						onClick={() => connectWallet('injected')}
-					>
-						Connect Wallet
-					</button>
-				</div>
-			)}
+			<>
+				<Hero />
+				<ValueProposition />
+			</>
 		</div>
 	);
 }

@@ -10,10 +10,10 @@ import { CgProfile } from 'react-icons/cg';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
 const style = {
-	wrapper: `bg-[#034078] w-screen px-[1.2rem] py-[0.8rem] flex `,
+	wrapper: `flex bg-[#034078] w-[screen] px-[1.2rem] py-[0.8rem] `,
 	logoContainer: `flex items-center cursor-pointer`,
 	logoText: ` ml-[0.8rem] text-white font-semibold text-2xl`,
-	searchBar: `flex flex-1 mx-[0.8rem] w-max-[520px] items-center bg-[#e5e5e5] rounded-[0.8rem] hover:bg-[#fefcfb]`,
+	searchBar: `flex flex-auto mx-[0.8rem] w-max-[520px] items-center bg-[#e5e5e5] rounded-[0.8rem] hover:bg-[#fefcfb]`,
 	searchIcon: `text-[#000] mx-3 font-bold text-lg`,
 	searchInput: `h-[2.6rem] w-full border-0 bg-transparent outline-0 ring-0 px-2 pl-0 text-[#000] placeholder:text-[#8a939b]`,
 	searchButton: `border bg-[#2081e2] font-semibold44sdw cursor-pointer text-black`,
@@ -49,7 +49,7 @@ const Header = () => {
 				</button>
 			</div>
 
-			<div className={style.headerItems}>
+			<nav className={style.headerItems}>
 				<div className={style.headerItem}>
 					<Link href='/collections'>Collections</Link>
 				</div>
@@ -60,14 +60,9 @@ const Header = () => {
 					<Link href='/dashboard'>Dashboard</Link>
 				</div>
 				<div className={style.headerIcon}>
-					<Link href='/account' passHref>
-						<CgProfile />
-					</Link>
-				</div>
-				<div className={style.headerIcon}>
 					<MdOutlineAccountBalanceWallet />
 				</div>
-			</div>
+			</nav>
 		</div>
 	);
 };

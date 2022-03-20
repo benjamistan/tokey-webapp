@@ -27,7 +27,7 @@ const Hero = () => {
 							Discover, collect and sell extraordinary NFTs
 						</div>
 						<div className={style.description}>
-							Ownr is the world&apos;s first and largest NFT marketplace
+							Tokey is the world&apos;s first and largest NFT marketplace
 						</div>
 						<div className={style.ctaContainer}>
 							<button className={style.accentedButton}>Explore</button>
