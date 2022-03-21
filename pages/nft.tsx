@@ -5,12 +5,12 @@ const style = {
 	text: 'inline-block align-middle text-5xl',
 };
 
-const account = () => {
+const nft = () => {
 	return (
 		<div className={style.container}>
-			<span className={style.text}>Mint screen</span>
+			<span className={style.text}>NFT individual view screen</span>
 		</div>
 	);
 };
 
-export default account;
+export default nft;
