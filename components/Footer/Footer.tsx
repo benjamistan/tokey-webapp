@@ -36,10 +36,9 @@ const Footer = () => {
 						<Link href='/privacy'> Privacy Policy</Link>
 					</span>
 					|
-					<a className={style.textAnchor} href='/termsofservice'>
-						{' '}
-						Terms of Service
-					</a>
+					<div className={style.textAnchor}>
+						<Link href='/termsofservice'> Terms of Service</Link>
+					</div>
 				</div>
 			</div>
 		</>
