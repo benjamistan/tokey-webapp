@@ -8,7 +8,7 @@ const style = {
 const account = () => {
 	return (
 		<div className={style.container}>
-			<span className={style.text}>Mint screen</span>
+			<span className={style.text}>Create NFT screen</span>
 		</div>
 	);
 };
