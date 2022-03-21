@@ -5,23 +5,17 @@ import Image from 'next/image';
 
 import { AiOutlineSearch } from 'react-icons/ai';
 
-import logo from '../../assets/tokey_logo_white.svg';
+import Logo from '../../assets/tokey_logo_white.svg';
 import { CgProfile } from 'react-icons/cg';
 import { MdOutlineAccountBalanceWallet } from 'react-icons/md';
 
 const Header = () => {
 	return (
-		<div className='block sm:flex justify-items-end sm:justify-between align-middle bg-[#034078] w-[screen] px-[10rem] py-[0.8rem]'>
+		<div className='block sm:flex container mx-auto justify-items-end sm:justify-between align-middle bg-[#034078] w-[screen] px-[10rem] py-[0.8rem]'>
 			<div>
 				<Link href='/' passHref>
 					<div className='cursor-pointer'>
-						<Image
-							className='text-white font-semibold'
-							src={logo}
-							alt='Tokey logo'
-							height={39}
-							width={120}
-						/>
+						<Logo />
 					</div>
 				</Link>
 			</div>
