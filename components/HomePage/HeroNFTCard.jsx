@@ -9,7 +9,7 @@ import { SiEthereum } from 'react-icons/si';
 const HeroNFTCard = ({ image, collection, nftName, price }) => {
 	console.log('Collection:', { collection });
 	return (
-		<div className='border-2 shadow-xl rounded-[12px] h-min cursor-pointer'>
+		<div className='border hover:shadow-2xl rounded-[12px] h-min cursor-pointer hover:bg-slate-300'>
 			<Link href='/nft' passHref>
 				<Image src={image} alt='An NFT Image' width={250} height={250} />
 			</Link>

@@ -33,13 +33,13 @@ const Header = () => {
 			</div> */}
 
 			<nav className='flex items-center justify-center sm:justify-end'>
-				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all'>
+				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
 					<Link href='/collections'>Collections</Link>
 				</div>
-				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all'>
+				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
 					<Link href='/create'>Create</Link>
 				</div>
-				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all'>
+				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
 					<Link href='/dashboard'>Dashboard</Link>
 				</div>
 				<div className='text-[#fefcfb] text-3xl font-black px-4 hover:text-gray-400 transition-all cursor-pointer'>

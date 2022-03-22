@@ -4,9 +4,11 @@ module.exports = {
 		'./components/**/*.{js,ts,jsx,tsx}',
 	],
 	theme: {
-		extend: {},
-		fontFamily: {
-			sans: ['Roboto', 'sans-serif'],
+		extend: {
+			fontFamily: {
+				gotham: ['Gotham'],
+				sans: ['Gotham', 'sans-serif'],
+			},
 		},
 	},
 	plugins: [],
