@@ -16,10 +16,8 @@ const FooterLinks = () => {
 			<div>
 				<h5 className={style.linksColHeader}>Assets</h5>
 				<ul className={style.linksList}>
-					<li>
-						<a href='/collections' className={style.link}>
-							Collections
-						</a>
+					<li className={style.link}>
+						<Link href='/collections'>Collections</Link>
 					</li>
 					<li className={style.link}>
 						<Link href='/create-item'>Mint</Link>
@@ -46,10 +44,8 @@ const FooterLinks = () => {
 			<div>
 				<h5 className={style.linksColHeader}>Company</h5>
 				<ul className={style.linksList}>
-					<li>
-						<a href='/collections' className={style.link}>
-							Who we are
-						</a>
+					<li className={style.link}>
+						<Link href='/collections'>Who we are</Link>
 					</li>
 					<li className={style.link}>
 						<Link href='/privacy'>Privacy Policy</Link>

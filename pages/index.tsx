@@ -4,7 +4,8 @@ import { client } from '../lib/sanityClient';
 import toast, { Toaster } from 'react-hot-toast';
 
 import Hero from '../components/HomePage/Hero';
-import ValueProposition from '../components/HomePage/ValueProposition';
+import HotCollections from '../components/HomePage/HotCollections';
+import HotNFTs from '../components/HomePage/HotNFTs';
 
 const style = {
 	wrapper: ``,
@@ -45,7 +46,8 @@ export default function Home() {
 			<Toaster position='bottom-right' reverseOrder={false} />
 			<>
 				<Hero />
-				<ValueProposition />
+				<HotCollections />
+				<HotNFTs />
 			</>
 		</div>
 	);
