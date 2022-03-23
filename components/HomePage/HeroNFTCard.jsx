@@ -3,11 +3,24 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { FaEthereum } from 'react-icons/fa';
 import { SiEthereum } from 'react-icons/si';
 
+// Alchemy api key to talk to Thirdweb contracts on Mumbai
+const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
+
+// get NFT contract in form of Thirdweb module
+
+// useEffect for handling NFT module changes
+
+// get Marketplace contract in form of Thirdweb module
+
+// useEffect for Marketplace module changes
+
+// get collection data from Sanity
+
+// useEffect for Collection changes
+
 const HeroNFTCard = ({ image, collection, nftName, price }) => {
-	console.log('Collection:', { collection });
 	return (
 		<div className='border hover:shadow-2xl rounded-[12px] h-min cursor-pointer hover:bg-slate-300'>
 			<Link href='/nft' passHref>

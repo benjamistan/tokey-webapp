@@ -42,8 +42,7 @@ const Collection = () => {
 	const [nfts, setNfts] = useState([]);
 	const [listings, setListings] = useState([]);
 
-	const apiKey =
-		'https://polygon-mumbai.g.alchemy.com/v2/RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
+	const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
 
 	// getting our NFT contract (in the form of a thirdweb module)
 	const nftModule = useMemo(() => {
