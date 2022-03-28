@@ -42,8 +42,6 @@ export default function Home() {
 	}, [address]);
 
 	const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
-	console.log('apiKey is', apiKey);
-	console.log('Current environment is', process.env.NEXT_PUBLIC_ENVIRONMENT);
 
 	return (
 		<div className={style.wrapper}>

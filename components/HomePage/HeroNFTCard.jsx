@@ -1,26 +1,48 @@
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import { useWeb3 } from '@3rdweb/hooks';
+import { ThirdwebSDK } from '@3rdweb/sdk';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { SiEthereum } from 'react-icons/si';
 
-// Alchemy api key to talk to Thirdweb contracts on Mumbai
-const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
-
-// get NFT contract in form of Thirdweb module
-
-// useEffect for handling NFT module changes
-
-// get Marketplace contract in form of Thirdweb module
-
-// useEffect for Marketplace module changes
-
-// get collection data from Sanity
-
-// useEffect for Collection changes
-
 const HeroNFTCard = ({ image, collection, nftName, price }) => {
+	const { provider } = useWeb3();
+
+	// Alchemy api key to talk to Thirdweb contracts on Mumbai
+	const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
+
+	// get NFT contract in form of Thirdweb module
+	// const nftModule = useMemo(() => {
+	// 	if (!provider) return;
+	// 	console.log('fetching nftModule:', provider);
+
+	// 	const sdk = new ThirdwebSDK(provider.getSigner(), apiKey);
+	// 	const res = sdk.getNFTModule();
+	// 	return;
+	// }, [provider]);
+
+	// useEffect for handling NFT module changes
+
+	// get Marketplace contract in form of Thirdweb module
+	const marketplaceModule = useMemo(() => {
+		if (!provider) return;
+		const sdk = new ThirdwebSDK(provider.getSigner(), apiKey);
+		const res = sdk.getMarketplaceModule(
+			process.env.THIRDWEB_MARKETPLACE_MUMBAI
+		);
+		console.log(`Marketplace contract is: ${res}`);
+		return res;
+	}, [provider]);
+
+	// useEffect for Marketplace module changes
+
+	// get collection data from Sanity
+
+	// useEffect for Collection changes
+
 	return (
 		<div className='border hover:shadow-2xl rounded-[12px] h-min cursor-pointer hover:bg-slate-300'>
 			<Link href='/nft' passHref>
