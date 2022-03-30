@@ -1,21 +1,15 @@
 import '../styles/globals.css';
+
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import Script from 'next/script';
+import Link from 'next/link';
 
 import { ThirdwebProvider } from '@thirdweb-dev/react';
-
-//import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 import { withPasswordProtect } from '@storyofams/next-password-protect';
-
-// const supportedChainIds = [80001];
-// const connectors = {
-// 	injected: {},
-// };
 
 function App({ Component, pageProps }: AppProps) {
 	return (

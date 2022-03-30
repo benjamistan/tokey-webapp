@@ -15,16 +15,24 @@ const Header = () => {
 				</Link>
 			</div>
 			<nav className='flex items-center justify-center sm:justify-end'>
-				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
-					<Link href='/collections'>Collections</Link>
-				</div>
-				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
-					<Link href='/create'>Create</Link>
-				</div>
-				<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
-					<Link href='/dashboard'>Dashboard</Link>
-				</div>
-				<div className='text-[#fefcfb] font-black px-4 transition-all cursor-pointer pt-3'>
+				<Link href='/collections' passHref>
+					<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
+						Collections
+					</div>
+				</Link>
+
+				<Link href='/create' passHref>
+					<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
+						Create
+					</div>
+				</Link>
+
+				<Link href='/dashboard' passHref>
+					<div className='text-white px-4 font-bold hover:text-gray-400 cursor-pointer transition-all pt-3'>
+						Dashboard
+					</div>
+				</Link>
+				<div className='text-[#fefcfb] font-black px-4 transition-all pt-3'>
 					<Dropdown />
 				</div>
 			</nav>
