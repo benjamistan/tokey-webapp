@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { useAddress, useMetamask, useNFTCollection } from '@thirdweb-dev/react';
 import {
+	useAddress,
+	useMetamask,
+	useNFTCollection,
+	useSigner,
+} from '@thirdweb-dev/react';
+import {
+	NetworkOrSignerOrProvider,
 	NFTCollection,
 	NFTContractDeployMetadata,
 	ThirdwebSDK,
@@ -13,26 +19,34 @@ const style = {
 };
 
 const Create = () => {
-	const [formInput, setFormInput] = useState({
+	const address = useAddress();
+
+	const [formInput, setFormInput] = useState<NFTContractDeployMetadata>({
 		name: '',
 		symbol: '',
 		description: '',
-		primary_sale_recipient: '',
+		primary_sale_recipient: '0x0',
 	});
 
-	// get provider
+	const signer: any = useSigner();
+	const sdk = new ThirdwebSDK(signer);
 
-	//const provider = ethers.Wallet.createRandom();
-	//const sdk = new ThirdwebSDK(provider);
-
-	const metadata: NFTContractDeployMetadata = {
-		name: 'Fancy Dans',
-		symbol: 'DANS',
-		primary_sale_recipient: '0x68883956e7e3E410Da868e5b2645aF78ef43d649',
-	};
+	// Get connected Wallet from Thirdweb SDK
+	useEffect(() => {
+		if (!address) {
+			console.log('Connected wallet: none');
+			return;
+		}
+		console.log('Connected wallet: ', address);
+		setFormInput({ ...formInput, primary_sale_recipient: address });
+	}, [address]);
 
 	const createCollection = async () => {
-		//const collection: String = await sdk.deployer.deployNFTCollection(metadata);
+		console.log(sdk);
+		const collection: String = await sdk.deployer.deployNFTCollection(
+			formInput
+		);
+		console.log(collection);
 		console.log(formInput);
 	};
 
