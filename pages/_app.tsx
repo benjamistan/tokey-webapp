@@ -1,25 +1,25 @@
 import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import Script from 'next/script';
 
-import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
+import { ThirdwebProvider } from '@thirdweb-dev/react';
+
+//import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 import { withPasswordProtect } from '@storyofams/next-password-protect';
 
-const supportedChainIds = [80001];
-const connectors = {
-	injected: {},
-};
+// const supportedChainIds = [80001];
+// const connectors = {
+// 	injected: {},
+// };
 
 function App({ Component, pageProps }: AppProps) {
 	return (
-		<ThirdwebWeb3Provider
-			supportedChainIds={supportedChainIds}
-			connectors={connectors}
-		>
+		<ThirdwebProvider desiredChainId={80001}>
 			<div>
 				<Head>
 					<title>Tokey NFT Marketplace</title>
@@ -30,7 +30,7 @@ function App({ Component, pageProps }: AppProps) {
 			<div>
 				<Footer />
 			</div>
-		</ThirdwebWeb3Provider>
+		</ThirdwebProvider>
 	);
 }
 

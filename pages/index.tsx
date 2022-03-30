@@ -15,33 +15,33 @@ const style = {
 };
 
 export default function Home() {
-	const { address, connectWallet } = useWeb3();
+	// //const { address, connectWallet } = useWeb3();
 
-	const welcomeUser = (walletAddress: string, toastHandler = toast) => {
-		toastHandler.success(`Connected to ${walletAddress.slice(1, 7)}...`, {
-			style: {
-				background: '#04111d',
-				color: '#fff',
-			},
-		});
-	};
+	// const welcomeUser = (walletAddress: string, toastHandler = toast) => {
+	// 	toastHandler.success(`Connected to ${walletAddress.slice(1, 7)}...`, {
+	// 		style: {
+	// 			background: '#04111d',
+	// 			color: '#fff',
+	// 		},
+	// 	});
+	// };
 
-	useEffect(() => {
-		if (!address) return;
-		(async () => {
-			const userDoc = {
-				_type: 'users',
-				_id: address,
-				userName: 'Unnamed',
-				walletAddress: address,
-			};
+	// useEffect(() => {
+	// 	if (!address) return;
+	// 	(async () => {
+	// 		const userDoc = {
+	// 			_type: 'users',
+	// 			_id: address,
+	// 			userName: 'Unnamed',
+	// 			walletAddress: address,
+	// 		};
 
-			const result = await client.createIfNotExists(userDoc);
-			welcomeUser(result.walletAddress);
-		})();
-	}, [address]);
+	// 		const result = await client.createIfNotExists(userDoc);
+	// 		welcomeUser(result.walletAddress);
+	// 	})();
+	// }, [address]);
 
-	const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
+	// const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
 
 	return (
 		<div className={style.wrapper}>
