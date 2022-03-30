@@ -21,6 +21,8 @@ export default function Dropdown() {
 
 	const chainz = {
 		1: 'Eth Mainnet',
+		3: 'Eth Rinkeby',
+		56: 'Binance SC',
 		137: 'Polygon Mainnet',
 		80001: 'Polygon Mumbai',
 	};
