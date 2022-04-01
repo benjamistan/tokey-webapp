@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import {
 	useAddress,
 	useMetamask,
@@ -11,7 +12,8 @@ import {
 	NFTContractDeployMetadata,
 	ThirdwebSDK,
 } from '@thirdweb-dev/sdk';
-import { ethers } from 'ethers';
+
+import Dropzone from '../components/Create/Dropzone';
 
 const style = {
 	container: 'flex justify-center text-center h-screen bg-white pt-96',
@@ -20,12 +22,29 @@ const style = {
 
 const Create = () => {
 	const address = useAddress();
+	const [file, setFile] = useState(null);
+	const router = useRouter();
 
-	const [formInput, setFormInput] = useState<NFTContractDeployMetadata>({
+	const handleChange = (file: any) => {
+		setFile(file);
+	};
+
+	const fileTypes = ['JPG', 'PNG', 'GIF'];
+
+	// Metadata for the NFTCollection
+	const [nftCollectionMetadata, setNftCollectionMetadata] =
+		useState<NFTContractDeployMetadata>({
+			name: '',
+			symbol: '',
+			description: '',
+			primary_sale_recipient: '0x0',
+		});
+
+	// Metadata for the NFT
+	const [nftMetadata, setNftMetadata] = useState<any>({
 		name: '',
-		symbol: '',
 		description: '',
-		primary_sale_recipient: '0x0',
+		image: '',
 	});
 
 	const signer: any = useSigner();
@@ -38,54 +57,80 @@ const Create = () => {
 			return;
 		}
 		console.log('Connected wallet: ', address);
-		setFormInput({ ...formInput, primary_sale_recipient: address });
+		setNftCollectionMetadata({
+			...nftCollectionMetadata,
+			primary_sale_recipient: address,
+		});
 	}, [address]);
 
+	// Create Collection on Smart Contracts or Thirdweb
 	const createCollection = async () => {
-		console.log(sdk);
-		const collection: String = await sdk.deployer.deployNFTCollection(
-			formInput
+		console.log('Creating Collection...');
+		const collection: string = await sdk.deployer.deployNFTCollection(
+			nftCollectionMetadata
 		);
-		console.log(collection);
-		console.log(formInput);
+		console.log('NFTCollection created at :', collection);
+		createNFT(collection);
 	};
 
-	// Create Collection on Smart Contracts or Thirdweb
-
 	// Add NFT to the Collection
+	const createNFT = async (collection: string) => {
+		console.log('Creating NFT in', collection);
+		const contract = sdk.getNFTCollection(collection);
+		const tx = await contract.mint(nftMetadata);
+		console.log('Created NFT in tx:', tx);
+	};
 
 	return (
 		<div className={style.container}>
 			<div className='flex w-1/2 flex-col align-middle'>
-				<h2 className='text-left mt-4 font-bold'>Name</h2>
+				<Dropzone />
+				<h2 className='text-left mt-4 font-bold'>NFT Name</h2>
 				<input
 					className='border rounded p-4 mb-4'
 					placeholder='asset name'
-					onChange={(e) => setFormInput({ ...formInput, name: e.target.value })}
+					onChange={(e) =>
+						setNftMetadata({ ...nftMetadata, name: e.target.value })
+					}
 				/>
-				<h2 className='text-left mt-4 font-bold'>Symbol</h2>
+				<h2 className='text-left mt-4 font-bold'>NFT Description</h2>
+				<textarea
+					className='border rounded mb-4 p-4'
+					placeholder='lorem ipsum...'
+					onChange={(e) =>
+						setNftMetadata({ ...nftMetadata, description: e.target.value })
+					}
+				/>
+				<h2 className='text-left mt-4 font-bold'>Collection Name</h2>
+				<input
+					className='border rounded p-4 mb-4'
+					placeholder='asset name'
+					onChange={(e) =>
+						setNftCollectionMetadata({
+							...nftCollectionMetadata,
+							name: e.target.value,
+						})
+					}
+				/>
+				<h2 className='text-left mt-4 font-bold'>Collection Symbol</h2>
 				<input
 					className='border rounded p-4 mb-4'
 					placeholder='asset symbol'
 					onChange={(e) =>
-						setFormInput({ ...formInput, symbol: e.target.value })
+						setNftCollectionMetadata({
+							...nftCollectionMetadata,
+							symbol: e.target.value,
+						})
 					}
 				/>
-				<h2 className='text-left mt-4 font-bold'>Description</h2>
-				<textarea
-					className='border rounded mb-4 p-4'
-					placeholder='asset description'
-					onChange={(e) =>
-						setFormInput({ ...formInput, description: e.target.value })
-					}
-				/>
+
 				<button
 					className='inline-flex justify-center w-60 px-4 py-2 font-medium text-[#F7F7FF] bg-[#FE5F55] rounded-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
 					onClick={() => {
 						createCollection();
 					}}
 				>
-					Create NFT Collection
+					Create this NFT (2 tx)
 				</button>
 			</div>
 		</div>
