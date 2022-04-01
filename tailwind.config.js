@@ -5,6 +5,13 @@ module.exports = {
 	],
 	theme: {
 		extend: {
+			colors: {
+				tblue: '#0d559d',
+				tlightblue: '#bdd5ea',
+				twhite: '#f7f7ff',
+				tred: '#fe5f55',
+				tpink: '#a2708a',
+			},
 			fontFamily: {
 				gotham: ['Gotham'],
 				sans: ['Gotham', 'sans-serif'],
