@@ -10,9 +10,9 @@ const Header = () => {
 	return (
 		<div className='bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 mt-3 w-screen divide-y'>
 			<div className='container flex flex-wrap justify-between items-center mx-auto py-4 px-20 border-b-2'>
-				<a href='https://tokey.app' className='flex items-center'>
+				<Link href='https://tokey.app'>
 					<Logo />
-				</a>
+				</Link>
 				<button
 					data-collapse-toggle='mobile-menu'
 					type='button'
@@ -53,19 +53,25 @@ const Header = () => {
 					>
 						<ul className='flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-base cursor-pointer'>
 							<li>
-								<div className='block py-2 pr-4 pl-3 mt-3.5  text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-tred md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-semibold'>
-									<Link href='/collections'>Collections</Link>
-								</div>
+								<Link href='/collections'>
+									<div className='block py-2 pr-4 pl-3 mt-3.5  text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-tred md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-semibold'>
+										Collections
+									</div>
+								</Link>
 							</li>
 							<li>
-								<div className='block py-2 pr-4 pl-3 mt-3.5  text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-tred md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-semibold'>
-									<Link href='/create'>Create</Link>
-								</div>
+								<Link href='/create'>
+									<div className='block py-2 pr-4 pl-3 mt-3.5  text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-tred md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-semibold'>
+										Create
+									</div>
+								</Link>
 							</li>
 							<li>
-								<div className='block py-2 pr-4 pl-3 mt-3.5  text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-tred md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-semibold'>
-									<Link href='/dashboard'>Dashboard</Link>
-								</div>
+								<Link href='/dashboard'>
+									<div className='block py-2 pr-4 pl-3 mt-3.5  text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-tred md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 font-semibold'>
+										Dashboard
+									</div>
+								</Link>
 							</li>
 							<li>
 								<Dropdown />
