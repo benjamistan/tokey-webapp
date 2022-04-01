@@ -28,15 +28,15 @@ export default function Dropdown() {
 
 	if (address) {
 		return (
-			<div className='w-46 text-right text-white text-sm'>
+			<div className='w-46 text-right text-tred text-sm mt-2'>
 				<Menu as='div' className='inline-block text-left'>
-					<div className='block'>
+					<div className='block font-semibold'>
 						Address:{' '}
 						<div className='inline font-thin'>
 							{address.substring(0, 6) + '...'}
 						</div>
 					</div>
-					<div>
+					<div className='font-semibold'>
 						Chain:{' '}
 						<div className='inline font-thin'>
 							{network[0].data.chain && chainz[network[0].data.chain.id]}

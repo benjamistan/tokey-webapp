@@ -16,7 +16,7 @@ import {
 import Dropzone from '../components/Create/Dropzone';
 
 const style = {
-	container: 'flex justify-center text-center h-screen bg-white pt-96',
+	container: 'flex justify-center text-center bg-white pt-20 pb-40',
 	text: 'inline-block align-middle text-5xl',
 };
 
@@ -87,23 +87,34 @@ const Create = () => {
 				<Dropzone />
 				<h2 className='text-left mt-4 font-bold'>NFT Name</h2>
 				<input
-					className='border rounded p-4 mb-4'
+					className='border rounded-lg p-4 mb-4'
 					placeholder='asset name'
 					onChange={(e) =>
 						setNftMetadata({ ...nftMetadata, name: e.target.value })
 					}
 				/>
-				<h2 className='text-left mt-4 font-bold'>NFT Description</h2>
-				<textarea
-					className='border rounded mb-4 p-4'
+				<h2 className='text-left mt-4 font-bold px-2'>NFT Description</h2>
+				{/* <textarea
+					className='border rounded-lg mb-4 p-4'
 					placeholder='lorem ipsum...'
 					onChange={(e) =>
 						setNftMetadata({ ...nftMetadata, description: e.target.value })
 					}
-				/>
+				/> */}
+				<label className='text-gray-700' htmlFor='name'>
+					<textarea
+						className='flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent'
+						id='comment'
+						placeholder='Describe your NFT...'
+						name='NFT description'
+						onChange={(e) =>
+							setNftMetadata({ ...nftMetadata, description: e.target.value })
+						}
+					/>
+				</label>
 				<h2 className='text-left mt-4 font-bold'>Collection Name</h2>
 				<input
-					className='border rounded p-4 mb-4'
+					className='border rounded-lg p-4 mb-4'
 					placeholder='asset name'
 					onChange={(e) =>
 						setNftCollectionMetadata({
@@ -114,7 +125,7 @@ const Create = () => {
 				/>
 				<h2 className='text-left mt-4 font-bold'>Collection Symbol</h2>
 				<input
-					className='border rounded p-4 mb-4'
+					className='border rounded-lg p-4 mb-4'
 					placeholder='asset symbol'
 					onChange={(e) =>
 						setNftCollectionMetadata({
@@ -125,7 +136,7 @@ const Create = () => {
 				/>
 
 				<button
-					className='inline-flex justify-center w-60 px-4 py-2 font-medium text-[#F7F7FF] bg-[#FE5F55] rounded-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
+					className='inline-flex justify-center w-60 px-4 py-2 font-medium text-[#F7F7FF] bg-[#FE5F55] rounded-lg-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'
 					onClick={() => {
 						createCollection();
 					}}
