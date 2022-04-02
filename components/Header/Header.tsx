@@ -10,7 +10,7 @@ const Header = () => {
 	return (
 		<div className='bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-800 mt-3 w-screen divide-y'>
 			<div className='container flex flex-wrap justify-between items-center mx-auto py-4 px-20 border-b-2'>
-				<Link href='https://tokey.app'>
+				<Link href='https://tokey.app' passHref>
 					<Logo />
 				</Link>
 				<button
