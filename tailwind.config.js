@@ -16,6 +16,10 @@ module.exports = {
 				gotham: ['Gotham'],
 				sans: ['Gotham', 'sans-serif'],
 			},
+			padding: {
+				'1/2': '50%',
+				'full': '100%',
+			},
 		},
 	},
 	plugins: [],

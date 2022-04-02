@@ -83,7 +83,12 @@ const Create = () => {
 
 	return (
 		<div className={style.container}>
-			<Form />
+			<Form
+				setNftMetadata={setNftMetadata}
+				nftMetadata={nftMetadata}
+				nftCollectionMetadata={nftCollectionMetadata}
+				setNftCollectionMetadata={setNftCollectionMetadata}
+			/>
 		</div>
 	);
 };
