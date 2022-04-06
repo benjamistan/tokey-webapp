@@ -14,7 +14,7 @@ const HeroNFTCard = ({ image, collection, nftName, price }) => {
 	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
 
 	const provider = new AlchemyProvider('maticmum', apiKey);
-	console.log(provider);
+	//console.log(provider);
 
 	// get NFT contract in form of Thirdweb module
 	// const nftModule = useMemo(() => {
@@ -35,7 +35,7 @@ const HeroNFTCard = ({ image, collection, nftName, price }) => {
 		const res = sdk.getMarketplaceModule(
 			'0x254aF607E999D48574c03f520B0637bd07ab81aC'
 		);
-		console.log('Marketplace is:', res);
+		//console.log('Marketplace is:', res);
 		return res;
 	}, []);
 
@@ -44,11 +44,11 @@ const HeroNFTCard = ({ image, collection, nftName, price }) => {
 	// useEffect for Collection changes
 
 	return (
-		<div className='border hover:shadow-2xl rounded-[12px] h-min cursor-pointer hover:bg-slate-300'>
+		<div className='border hover:shadow-2xl rounded-[12px] h-min cursor-pointer hover:bg-slate-300 items-center'>
 			<Link href='/nft' passHref>
 				<Image src={image} alt='An NFT Image' width={250} height={250} />
 			</Link>
-			<div className='flex justify-between px-1'>
+			{/* <div className='flex justify-between px-1'>
 				<div className='font font-medium hover:text-gray-600 transition-all ease-in'>
 					<Link href='/collections'>{collection}</Link>
 				</div>
@@ -62,7 +62,7 @@ const HeroNFTCard = ({ image, collection, nftName, price }) => {
 			<div className='font-bold text-[#0d559d] hover:text-blue-300 transition-all ease-in px-1'>
 				<Link href='/nft'>{nftName}</Link>
 			</div>
-			<div className='border-b-2 border-b-gray-200 pt-4 mb-4 mx-2'></div>
+			<div className='border-b-2 border-b-gray-200 pt-4 mb-4 mx-2'></div> */}
 		</div>
 	);
 };

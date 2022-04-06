@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import { create as ipfsHttpClient } from 'ipfs-http-client';
+
+const ipfsClient = ipfsHttpClient('https://ipfs.infura.io:5001/api/v0');
 
 const Form = (props) => {
 	const {
@@ -8,14 +11,41 @@ const Form = (props) => {
 		setNftCollectionMetadata,
 	} = props;
 
+	const [fileUrl, setFileUrl] = useState();
+	console.log('file:', fileUrl);
+
 	const createNFT = () => {
 		console.log('nftMetadata:', nftMetadata);
 		console.log('nftCollectionMetadata:', nftCollectionMetadata);
 	};
 
+	const uploadContentFile = async (e) => {
+		const file = e.target.files[0];
+
+		// upload file to IPFS
+		try {
+			const uploadedFile = await ipfsClient.add(file, {
+				progress: (prog) => console.log(`Upload progress: ${prog} bytes`),
+			});
+			const uploadedFileUrl = `https://ipfs.infura.io/ipfs/${uploadedFile.path}`;
+			setFileUrl(uploadedFileUrl);
+		} catch (error) {
+			console.log('Error uploading file:', error);
+		}
+
+		// upload metadata to IPFS
+	};
+
+	const uploadNFTAndMetadata = () => {
+		const { name, description, price } = nftMetadata;
+		if (!name || !description || !price) {
+			return;
+		}
+	};
+
 	return (
-		<div className='flex w-3/5 mx-auto p-4 justify-center'>
-			<form className='w-2/5 text-left'>
+		<div className='flex w-3/5 mx-auto p-4'>
+			<form className='w-3/5 text-left'>
 				<div>
 					<label
 						className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
@@ -26,8 +56,10 @@ const Form = (props) => {
 					<input
 						className='block w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 cursor-pointer dark:text-gray-400 focus:outline-none focus:border-transparent dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400'
 						aria-describedby='user_avatar_help'
-						id='user_avatar'
+						id='asset'
+						name='asset'
 						type='file'
+						onChange={uploadContentFile}
 					/>
 				</div>
 				<div className='my-6'>
@@ -66,7 +98,7 @@ const Form = (props) => {
 					/>
 				</div>
 
-				<div className='my-6'>
+				{/* <div className='my-6'>
 					<label
 						htmlFor='email'
 						className='block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300'
@@ -103,7 +135,7 @@ const Form = (props) => {
 							})
 						}
 					/>
-				</div>
+				</div> */}
 
 				<div className='flex items-start mb-6'>
 					<div className='flex items-center h-5'>
