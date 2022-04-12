@@ -40,12 +40,12 @@ const NFTCardCarousel = () => {
 										</div>
 										<p className='text-gray-600'>
 											{' '}
-											<span className='font-serif'>"</span> Lorem ipsum dolor
-											sit amet consectetur adipisicing elit. Quaerat repellat
-											perspiciatis excepturi est. Non ipsum iusto aliquam
-											consequatur repellat provident, omnis ut, sapiente
+											<span className='font-serif'>&quot;</span> Lorem ipsum
+											dolor sit amet consectetur adipisicing elit. Quaerat
+											repellat perspiciatis excepturi est. Non ipsum iusto
+											aliquam consequatur repellat provident, omnis ut, sapiente
 											voluptates veritatis cum deleniti repudiandae ad
-											doloribus. <span className='font-serif'>"</span>
+											doloribus. <span className='font-serif'>&quot;</span>
 										</p>
 										<h6 className='text-lg font-semibold leading-none'>
 											John Doe
@@ -79,12 +79,12 @@ const NFTCardCarousel = () => {
 										</div>
 										<p className='text-gray-600'>
 											{' '}
-											<span className='font-serif'>"</span> Lorem ipsum dolor
-											sit amet consectetur adipisicing elit. Quaerat repellat
-											perspiciatis excepturi est. Non ipsum iusto aliquam
-											consequatur repellat provident, omnis ut, sapiente
+											<span className='font-serif'>&quot;</span> Lorem ipsum
+											dolor sit amet consectetur adipisicing elit. Quaerat
+											repellat perspiciatis excepturi est. Non ipsum iusto
+											aliquam consequatur repellat provident, omnis ut, sapiente
 											voluptates veritatis cum deleniti repudiandae ad
-											doloribus. <span className='font-serif'>"</span>
+											doloribus. <span className='font-serif'>&quot;</span>
 										</p>
 										<h6 className='text-lg font-semibold leading-none'>
 											John Doe
@@ -118,12 +118,12 @@ const NFTCardCarousel = () => {
 										</div>
 										<p className='text-gray-600'>
 											{' '}
-											<span className='font-serif'>"</span> Lorem ipsum dolor
-											sit amet consectetur adipisicing elit. Quaerat repellat
-											perspiciatis excepturi est. Non ipsum iusto aliquam
-											consequatur repellat provident, omnis ut, sapiente
+											<span className='font-serif'>&quot;</span> Lorem ipsum
+											dolor sit amet consectetur adipisicing elit. Quaerat
+											repellat perspiciatis excepturi est. Non ipsum iusto
+											aliquam consequatur repellat provident, omnis ut, sapiente
 											voluptates veritatis cum deleniti repudiandae ad
-											doloribus. <span className='font-serif'>"</span>
+											doloribus. <span className='font-serif'>&quot;</span>
 										</p>
 										<h6 className='text-lg font-semibold leading-none'>
 											John Doe
