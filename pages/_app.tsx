@@ -4,12 +4,16 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Link from 'next/link';
 
+import { ThirdwebWeb3Provider } from '@3rdweb/hooks';
 import { ThirdwebProvider } from '@thirdweb-dev/react';
 
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 
 import { withPasswordProtect } from '@storyofams/next-password-protect';
+
+const supportedChainIds = [4, 80001];
+const connectors = { injected: {} };
 
 function App({ Component, pageProps }: AppProps) {
 	return (

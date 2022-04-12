@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import { client } from '../../lib/sanityClient';
 
-import { useWeb3 } from '@3rdweb/hooks';
+import { useThirdwebContext, useWeb3 } from '@3rdweb/hooks';
 import { ThirdwebSDK } from '@3rdweb/sdk';
 
 import NFTCard from '../../components/NFTCard';
@@ -36,7 +36,7 @@ const style = {
 
 const Collection = () => {
 	const router = useRouter();
-	const { provider } = useWeb3();
+	const { provider } = useThirdwebContext;
 	const { collectionId } = router.query;
 	const [collection, setCollection] = useState({});
 	const [nfts, setNfts] = useState([]);
@@ -46,7 +46,10 @@ const Collection = () => {
 
 	// getting our NFT contract (in the form of a thirdweb module)
 	const nftModule = useMemo(() => {
-		if (!provider) return;
+		if (!provider) {
+			console.log('Provider:', provider);
+			return;
+		}
 
 		const sdk = new ThirdwebSDK(provider.getSigner(), apiKey);
 		const res = sdk.getNFTModule(collectionId);
@@ -205,7 +208,7 @@ const Collection = () => {
 			<div className={style.midRow}>
 				<div className={style.description}>{collection?.description}</div>
 			</div>
-			{/* <div className='flex flex-wrap '>
+			<div className='flex flex-wrap '>
 				{nfts.map((nftItem, id) => (
 					<NFTCard
 						key={id}
@@ -214,7 +217,7 @@ const Collection = () => {
 						listings={listings}
 					/>
 				))}
-			</div> */}
+			</div>
 		</div>
 	);
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useAddress, useSigner } from '@thirdweb-dev/react';
-//import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import toast, { Toaster } from 'react-hot-toast';
 import { ThirdwebSDK } from '@3rdweb/sdk';
 
 import { create as ipfsHttpClient } from 'ipfs-http-client';
@@ -59,7 +59,7 @@ const Create = () => {
 		}
 
 		console.log('Error: no metadata');
-		//router.push('/');
+		router.push('/');
 	};
 
 	/********************************************/
@@ -71,6 +71,7 @@ const Create = () => {
 		console.log('Collection contract object is', contract);
 		const tx = await contract.mint(nftMetadata);
 		console.log('Created NFT in tx:', tx);
+		toast.success('NFT created!', { duration: 4000 });
 	};
 
 	/********************************************/
@@ -123,6 +124,7 @@ const Create = () => {
 
 	return (
 		<div className={style.container}>
+			<Toaster position='bottom-right' reverseOrder={false} />
 			{!address ? (
 				<div className='py-96'>Connect a wallet to get started</div>
 			) : (
