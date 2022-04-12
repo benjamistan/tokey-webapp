@@ -16,7 +16,7 @@ const style = {
 	detailsContainer: `flex-[2] ml-4`,
 };
 
-const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${ALCHEMY_KEY_POLYGON_MUMBAI}`;
+const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
 
 const Nft = () => {
 	const { provider } = useWeb3();
