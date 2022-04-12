@@ -12,6 +12,8 @@ phases:
       - echo Running npm install...
       - npm install
       - npx hardhat compile
+      - echo Logging into Dockerhub
+      - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASS
       - echo Logging into Amazon ECR...
       - aws --version
       - echo Default region is $AWS_DEFAULT_REGION
