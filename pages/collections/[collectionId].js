@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 import { client } from '../../lib/sanityClient';
 
-import { useThirdwebContext, useWeb3 } from '@3rdweb/hooks';
-import { ThirdwebSDK } from '@3rdweb/sdk';
+import { AlchemyProvider } from '@ethersproject/providers';
+
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 import NFTCard from '../../components/NFTCard';
 import { CgWebsite } from 'react-icons/cg';
@@ -16,8 +16,8 @@ const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
 	bannerImage: `w-full object-cover`,
 	infoContainer: `w-screen px-4`,
-	midRow: `w-full flex justify-center text-white`,
-	endRow: `w-full flex justify-end text-white`,
+	midRow: `w-full flex justify-center text-black`,
+	endRow: `w-full flex justify-end text-black`,
 	profileImg: `w-40 h-40 object-cover rounded-full border-2 border-[#202225] mt-[-4rem]`,
 	socialIconsContainer: `flex text-3xl mb-[-2rem]`,
 	socialIconsWrapper: `w-44`,
@@ -36,48 +36,53 @@ const style = {
 
 const Collection = () => {
 	const router = useRouter();
-	const { provider } = useThirdwebContext;
+	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
+	const apiFullKey = `https://polygon-mumbai.g.alchemy.com/v2/RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+	const provider = new AlchemyProvider('maticmum', apiFullKey);
+	console.log('Provider:', provider);
+
 	const { collectionId } = router.query;
 	const [collection, setCollection] = useState({});
 	const [nfts, setNfts] = useState([]);
 	const [listings, setListings] = useState([]);
 
-	const apiKey = `https://polygon-mumbai.g.alchemy.com/v2/${process.env.ALCHEMY_KEY_POLYGON_MUMBAI}`;
-
-	// getting our NFT contract (in the form of a thirdweb module)
+	// instantiating the NFT Collection in the SDK
 	const nftModule = useMemo(() => {
 		if (!provider) {
-			console.log('Provider:', provider);
+			console.log('Not yet a Provider');
 			return;
 		}
 
-		const sdk = new ThirdwebSDK(provider.getSigner(), apiKey);
-		const res = sdk.getNFTModule(collectionId);
+		const sdk = new ThirdwebSDK(provider);
+		console.log('SDK is:', sdk);
+		const res = sdk.getNFTCollection(collectionId);
 		console.log('NFT Module is:', res);
 		return res;
 	}, [provider]);
 
-	// useEffect for handling nftModule changes. nftModule is undefined when this is invoked!!!
-	useEffect(() => {
-		if (!nftModule) return;
-		(async () => {
-			const nfts = await nftModule.getAll();
-			//console.log('useEffect- nftModule:', nfts);
-
-			setNfts(nfts);
-		})();
-	}, [nftModule]);
-
+	// instantiating the Marketplace in the SDK
 	const marketPlaceModule = useMemo(() => {
 		if (!provider) return;
-		const sdk = new ThirdwebSDK(provider.getSigner(), apiKey);
-		const res = sdk.getMarketplaceModule(
+		const sdk = new ThirdwebSDK(provider);
+		const res = sdk.getMarketplace(
 			'0x2EFf51666da8686fE7Ae5092da5D94A60b3eBada'
 		);
 		console.log('Marketplace is:', res);
 		return res;
 	}, [provider]);
 
+	// handle changes to the NFT Collection
+	useEffect(() => {
+		if (!nftModule) return;
+		(async () => {
+			const nfts = await nftModule.getAll();
+			console.log('useEffect- nftModule:', nfts);
+
+			setNfts(nfts);
+		})();
+	}, [nftModule]);
+
+	// handle changes to the Marketplace
 	useEffect(() => {
 		if (!marketPlaceModule) return;
 		(async () => {
@@ -85,6 +90,7 @@ const Collection = () => {
 		})();
 	}, [marketPlaceModule]);
 
+	// Retrieve data on the collection from our Sanity store
 	const fetchCollectionData = async (sanityClient = client) => {
 		const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
       "imageUrl": profileImage.asset->url,
@@ -105,6 +111,7 @@ const Collection = () => {
 		await setCollection(collectionData[0]);
 	};
 
+	// get new data from Sanity when collection is changed
 	useEffect(() => {
 		fetchCollectionData();
 	}, [collectionId]);

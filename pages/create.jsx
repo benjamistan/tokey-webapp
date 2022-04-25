@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useAddress, useSigner } from '@thirdweb-dev/react';
 import toast, { Toaster } from 'react-hot-toast';
-import { ThirdwebSDK } from '@3rdweb/sdk';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 import nft from './nft';

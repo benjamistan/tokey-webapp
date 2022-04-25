@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useWeb3 } from '@3rdweb/hooks';
-import { ThirdwebSDK } from '@3rdweb/sdk';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 import { AlchemyProvider } from '@ethersproject/providers';
 
