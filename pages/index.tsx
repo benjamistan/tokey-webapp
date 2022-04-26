@@ -7,6 +7,8 @@ import Hero from '../components/HomePage/Hero';
 import HotCollections from '../components/HomePage/HotCollections';
 import HotNFTs from '../components/HomePage/HotNFTs';
 
+import { Assets } from '../components/HomePage';
+
 const style = {
 	wrapper: ``,
 	walletConnectWrapper: `flex flex-col justify-center items-center h-screen w-screen bg-[#3b3d42] `,
@@ -48,8 +50,10 @@ export default function Home() {
 			<Toaster position='bottom-right' reverseOrder={false} />
 			<>
 				<Hero />
+				<Assets />
 				<HotCollections />
 				<HotNFTs />
+
 			</>
 		</div>
 	);
