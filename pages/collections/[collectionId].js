@@ -55,9 +55,11 @@ const Collection = () => {
 
 		const sdk = new ThirdwebSDK(provider);
 		console.log('SDK is:', sdk);
-		const res = sdk.getNFTCollection(collectionId);
-		console.log('NFT Module is:', res);
-		return res;
+		console.log('collectionId is', collectionId);
+		//const res = sdk.getNFTCollection(collectionId);
+		//console.log('NFT Module is:', res);
+		//return res;
+		return;
 	}, [provider]);
 
 	// instantiating the Marketplace in the SDK
