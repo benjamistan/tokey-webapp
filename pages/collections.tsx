@@ -7,8 +7,10 @@ const style = {
 
 const collections = () => {
 	return (
-		<div className={style.container}>
-			<span className={style.text}>Collections screen</span>
+		<div>
+			<div className={style.container}>
+				<span className={style.text}>Collections</span>
+			</div>
 		</div>
 	);
 };
