@@ -1,14 +1,15 @@
 import React from 'react';
+import { Assets } from '../components/HomePage';
 
 const style = {
-	container: 'text-center h-screen bg-white pt-96',
+	container: 'text-center bg-white pt-96',
 	text: 'inline-block align-middle text-5xl',
 };
 
 const collections = () => {
 	return (
-		<div className={style.container}>
-			<span className={style.text}>Collections screen</span>
+		<div>
+			<Assets />
 		</div>
 	);
 };

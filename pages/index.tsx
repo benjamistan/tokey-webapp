@@ -50,7 +50,7 @@ export default function Home() {
 			<Toaster position='bottom-right' reverseOrder={false} />
 			<>
 				<Hero />
-				<Assets />
+				{/*<Assets />*/}
 				<HotCollections />
 				<HotNFTs />
 
