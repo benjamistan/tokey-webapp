@@ -1,10 +1,10 @@
 import React from "react";
 
-const Filters = () => {
+const Filters = ({onNameChange, onCollectionChange, onMinChange, onMaxChange, onCurrencyChange}) => {
 	let listPrice = [
-		{ id: 1, title: "United State Dollar (USD)" },
-		{ id: 2, title: "Ether (ETH)" },
-		{ id: 3, title: "Solana (Sol)" }
+		{ id: 1, title: "All", symbol: "" },
+		{ id: 2, title: "WMATIC", symbol: "WMATIC" },
+		{ id: 3, title: "MATIC", symbol: "MATIC" }
 	];
 	return (
 		<div className="w-11/12 h-[540px] shadow-lg border-r-3 border-gray-200">
@@ -18,21 +18,21 @@ const Filters = () => {
 					<h2 className="mb-0">Price</h2>
 					<div className="py-2">
 						<div className="mb-3 w-full">
-							<select className="form-select appearance-none block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded-xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:shadow-xl focus:outline-none">
-								<option disabled value="1">
-									United State Dollar (USD)
+							<select onChange={(e) => onCurrencyChange(e.target.value)}className="form-select appearance-none block w-full px-3 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded-xl transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:shadow-xl focus:outline-none">
+								<option disabled value="">
+									Please select currency
 								</option>
 								{listPrice.map((item, i) => (
-									<option key={i} value={item.id}>
+									<option key={i} value={item.symbol}>
 										{item.title}
 									</option>
 								))}
 							</select>
 						</div>
 						<div className="flex mt-5 mb-3 items-center justify-space space-3">
-							<input type="number" className="rounded-xl px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Min" />
+							<input onChange={(e) => onMinChange(e.target.value)} type="number" className="rounded-xl px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Min" />
 							<div className="mx-3">to</div>
-							<input type="number" className="rounded-xl px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Max" />
+							<input onChange={(e) => onMaxChange(e.target.value)} type="number" className="rounded-xl px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Max" />
 						</div>
 					</div>
 				</div>
@@ -62,6 +62,7 @@ const Filters = () => {
 											placeholder="Search"
 											aria-label="Search"
 											aria-describedby="collection-search"
+											onChange={(e) => onCollectionChange(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -95,6 +96,7 @@ const Filters = () => {
 											placeholder="Search"
 											aria-label="Search"
 											aria-describedby="name-search"
+											onChange={(e) => onNameChange(e.target.value)}
 										/>
 									</div>
 								</div>
