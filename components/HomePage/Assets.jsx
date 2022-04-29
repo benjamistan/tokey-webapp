@@ -24,7 +24,7 @@ const AssetsView = () => {
     getMarketCollections();
   }, []);
 
-  console.log('assets:', assets);
+  // console.log('assets:', assets);
   const getMarketCollections = async () => {
     marketCollection?.getAllListings().then(async (results) => {
       let mappedAssets = [];
@@ -48,7 +48,7 @@ const AssetsView = () => {
 
     const collectionData = await sanityClient.fetch(query);
     if (collectionData[0]) {
-      console.log('Collection data: ', collectionData);
+      // console.log('Collection data: ', collectionData);
     }
     return collectionData[0].title;
 
@@ -76,8 +76,8 @@ const AssetsView = () => {
   }
 
   return (
-    <div className="flex flex-row px-4">
-      <div className="basis-[320px] bg-white ">
+    <div className="flex flex-col lg:flex-row px-4">
+      <div className="basis-aut lg:basis-[320px] bg-white ">
         <Filters
           onNameChange={onNameChange}
           onCollectionChange={onCollectionChange}
@@ -86,9 +86,9 @@ const AssetsView = () => {
           onCurrencyChange={onCurrencyChange}
         />
       </div>
-      <div className="basis-[calc(100%_-_320px)]">
-        <div className='text-3xl font-extrabold pb-5'>Assets Collections</div>
-        <div className='grid grid-cols-3 gap-3 py-4 justify-center'>
+      <div className="basis-auto lg:basis-[calc(100%_-_320px)]">
+        {/*<div className='text-3xl font-extrabold pb-5'>Assets Collections</div>*/}
+        <div className='grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-3 lg:gap-3 py-6 justify-center'>
           {assets.length == 0 ? (<div> Loading... </div>) : null}
           {
             assets &&

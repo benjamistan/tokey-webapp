@@ -7,7 +7,7 @@ const Filters = ({onNameChange, onCollectionChange, onMinChange, onMaxChange, on
 		{ id: 3, title: "MATIC", symbol: "MATIC" }
 	];
 	return (
-		<div className="w-11/12 h-[540px] shadow-lg border-r-3 border-gray-200">
+		<div className="w-full mb-4 lg:w-11/12 lg:mt-6 h-[540px] shadow-lg border-r-3 border-gray-200">
 			<div className="w-full text-gray-400 bg-white border border-gray-200 border-b-0 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
 				<button type="button" className="relative inline-flex items-center justify-between w-full px-4 py-4 text-lg font-medium border-b border-gray-200 rounded-t-lg hover:text-gray-600">
 					<span className="text-black font-medium">Filter</span>
