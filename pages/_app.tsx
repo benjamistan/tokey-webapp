@@ -10,15 +10,15 @@ import Footer from '../components/Footer/Footer';
 
 import { withPasswordProtect } from '@storyofams/next-password-protect';
 
-const supportedChainIds = [4, 80001];
-const connectors = {
-	injected: {},
-	walletlink: {
-		appName: 'thirdweb - demo',
-		url: 'https://thirdweb.com',
-		darkMode: false,
-	},
-};
+// const supportedChainIds = [4, 80001];
+// const connectors = {
+// 	injected: {},
+// 	walletlink: {
+// 		appName: 'thirdweb - demo',
+// 		url: 'https://thirdweb.com',
+// 		darkMode: false,
+// 	},
+// };
 
 function App({ Component, pageProps }: AppProps) {
 	return (

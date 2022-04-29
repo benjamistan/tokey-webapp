@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, Provider } from 'react';
 import { useRouter } from 'next/router';
 
 import { client } from '../../lib/sanityClient';
@@ -36,9 +36,13 @@ const style = {
 
 const Collection = () => {
 	const router = useRouter();
-	const apiFullKey = `https://polygon-mumbai.g.alchemy.com/v2/RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
-	const provider = new AlchemyProvider('maticmum', apiFullKey);
-	console.log('Provider:', provider);
+	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+
+	const provider = useMemo(() => {
+		return new AlchemyProvider('maticmum', apiKey);
+	}, [apiKey]);
+
+	console.log('Provider URL:', provider.connection.url);
 
 	const { collectionId } = router.query;
 	const [collection, setCollection] = useState({});
