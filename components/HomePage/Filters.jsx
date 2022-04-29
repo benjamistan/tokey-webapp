@@ -30,9 +30,9 @@ const Filters = ({onNameChange, onCollectionChange, onMinChange, onMaxChange, on
 							</select>
 						</div>
 						<div className="flex mt-5 mb-3 items-center justify-space space-3">
-							<input onChange={(e) => onMinChange(e.target.value)} type="number" className="rounded-xl px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Min" />
+							<input onChange={(e) => onMinChange(e.target.value)} type="number" className="rounded-xl caret-black px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Min" />
 							<div className="mx-3">to</div>
-							<input onChange={(e) => onMaxChange(e.target.value)} type="number" className="rounded-xl px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Max" />
+							<input onChange={(e) => onMaxChange(e.target.value)} type="number" className="rounded-xl caret-black px-2 py-2 border border-gray-200 focus:outline-none focus:border-gray-200 w-full" placeholder="Max" />
 						</div>
 					</div>
 				</div>
@@ -58,7 +58,7 @@ const Filters = ({onNameChange, onCollectionChange, onMinChange, onMaxChange, on
 										</button>
 										<input
 											type="search"
-											className="form-control relative flex-auto min-w-0 block w-full px-3 pl-0 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-200 rounded-lg rounded-tl-none rounded-bl-none border-l-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-200 focus:outline-none"
+											className="form-control caret-black relative flex-auto min-w-0 block w-full px-3 pl-0 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-200 rounded-lg rounded-tl-none rounded-bl-none border-l-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-200 focus:outline-none"
 											placeholder="Search"
 											aria-label="Search"
 											aria-describedby="collection-search"
@@ -92,7 +92,7 @@ const Filters = ({onNameChange, onCollectionChange, onMinChange, onMaxChange, on
 										</button>
 										<input
 											type="search"
-											className="form-control relative flex-auto min-w-0 block w-full px-3 pl-0 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-200 rounded-lg rounded-tl-none rounded-bl-none border-l-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-200 focus:outline-none"
+											className="form-control caret-black relative flex-auto min-w-0 block w-full px-3 pl-0 py-2 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-200 rounded-lg rounded-tl-none rounded-bl-none border-l-0 transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-gray-200 focus:outline-none"
 											placeholder="Search"
 											aria-label="Search"
 											aria-describedby="name-search"
