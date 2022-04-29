@@ -111,7 +111,7 @@ const AssetsView = () => {
                 })
               .filter(
                 obj => {
-                  return searchCollection ? obj.asset.name.includes(searchCollection) : true
+                  return searchCollection ? obj.collectionName.includes(searchCollection) : true
                 })
               .map((asset, index) => {
                 return (
