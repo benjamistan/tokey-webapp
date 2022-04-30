@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@3rdweb/hooks": "^1.9.2",
+    "@3rdweb/react": "^1.9.3",
     "@3rdweb/sdk": "^1.39.3",
     "@alch/alchemy-web3": "^1.3.0",
     "@headlessui/react": "^1.5.0",

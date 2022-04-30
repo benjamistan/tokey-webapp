@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
 import { useAddress, useSigner } from '@thirdweb-dev/react';
 import toast, { Toaster } from 'react-hot-toast';
-import { ThirdwebSDK } from '@3rdweb/sdk';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+
+import { AlchemyProvider } from '@ethersproject/providers';
 
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 import nft from './nft';
@@ -22,6 +24,13 @@ const Create = () => {
 		image: '',
 	});
 	const router = useRouter();
+
+	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+	const provider = useMemo(() => {
+		return new AlchemyProvider('maticmum', apiKey);
+	}, [apiKey]);
+
+	console.log('Provider URL:', provider.connection.url);
 
 	const ipfsGateway = 'https://ipfs.infura.io:5001/api/v0';
 	const ipfsClient = ipfsHttpClient(ipfsGateway);

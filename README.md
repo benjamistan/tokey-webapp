@@ -1,6 +1,6 @@
-# NFTM
+![Tokey](https://s3.eu-west-2.amazonaws.com/tokey.app/tokey_logo300x99.svg)
 
-This is a basic NFT Marketplace.
+This is an NFT Marketplace.
 
 <br>
 
