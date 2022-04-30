@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useWeb3 } from '@3rdweb/hooks';
-import { ThirdwebSDK } from '@3rdweb/sdk';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 import { AlchemyProvider } from '@ethersproject/providers';
 
@@ -32,7 +31,7 @@ const HeroNFTCard = ({ image, collection, nftName, price }) => {
 	const marketplaceModule = useMemo(() => {
 		if (!provider) return;
 		const sdk = new ThirdwebSDK(provider);
-		const res = sdk.getMarketplaceModule(
+		const res = sdk.getMarketplace(
 			'0x254aF607E999D48574c03f520B0637bd07ab81aC'
 		);
 		//console.log('Marketplace is:', res);
