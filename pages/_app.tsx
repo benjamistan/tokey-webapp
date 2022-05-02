@@ -3,7 +3,7 @@ import '../styles/globals.css';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 
-import { ThirdwebProvider } from '@thirdweb-dev/react';
+import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
@@ -22,7 +22,7 @@ import { withPasswordProtect } from '@storyofams/next-password-protect';
 
 function App({ Component, pageProps }: AppProps) {
 	return (
-		<ThirdwebProvider desiredChainId={800001}>
+		<ThirdwebProvider desiredChainId={ChainId.Mumbai}>
 			<div>
 				<Head>
 					<title>Tokey NFT Marketplace</title>

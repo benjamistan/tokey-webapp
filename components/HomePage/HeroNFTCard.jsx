@@ -45,7 +45,9 @@ const HeroNFTCard = ({ image, collection, nftName, price }) => {
 	return (
 		<div className='border hover:shadow-2xl rounded-[12px] h-min cursor-pointer hover:bg-slate-300 items-center'>
 			<Link href='/nft' passHref>
-				<Image src={image} alt='An NFT Image' width={250} height={250} />
+				<a>
+					<Image src={image} alt='An NFT Image' width={250} height={250} />
+				</a>
 			</Link>
 			{/* <div className='flex justify-between px-1'>
 				<div className='font font-medium hover:text-gray-600 transition-all ease-in'>
