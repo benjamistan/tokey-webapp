@@ -1,9 +1,7 @@
 import React from 'react';
-import { Assets } from '../components/HomePage';
+import { Assets } from '../components/AssetView';
 
 const collections = () => {
-	const collectionId = '0x4b94B8077da9db887a37a8814dAc0CFAD22B5A99';
-
 	return (
 		<div>
 			<Assets />

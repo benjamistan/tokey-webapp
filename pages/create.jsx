@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useAddress, useSigner } from '@thirdweb-dev/react';
-import toast, { Toaster } from 'react-hot-toast';
+import { useAddress, useSigner, useNFTCollection } from '@thirdweb-dev/react';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+
+import toast, { Toaster } from 'react-hot-toast';
 
 import { AlchemyProvider } from '@ethersproject/providers';
 
@@ -76,9 +77,9 @@ const Create = () => {
   /********************************************/
 	const createNftOnChain = async (collection) => {
 		console.log('Creating NFT in collection contract', collection);
-		const contract = sdk.getNFTModule(collection);
+		const contract = sdk.getNFTCollection(collection);
 		console.log('Collection contract object is', contract);
-		const tx = await contract.mint(nftMetadata);
+		const tx = await contract.mintToSelf(nftMetadata);
 		console.log('Created NFT in tx:', tx);
 		toast.success('NFT created!', { duration: 4000 });
 	};

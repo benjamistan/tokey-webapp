@@ -6,8 +6,9 @@ import toast, { Toaster } from 'react-hot-toast';
 import Hero from '../components/HomePage/Hero';
 import HotCollections from '../components/HomePage/HotCollections';
 import HotNFTs from '../components/HomePage/HotNFTs';
+import NFTListComponent from './collections/NFTListComponent';
 
-import { Assets } from '../components/HomePage';
+import { Assets } from '../components/AssetView';
 
 const style = {
 	wrapper: ``,
@@ -49,11 +50,7 @@ export default function Home() {
 		<div className={style.wrapper}>
 			<Toaster position='bottom-right' reverseOrder={false} />
 			<>
-				<Hero />
-				{/*<Assets />*/}
-				<HotCollections />
-				<HotNFTs />
-
+				<NFTListComponent />
 			</>
 		</div>
 	);
