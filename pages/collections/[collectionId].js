@@ -75,7 +75,7 @@ const Collection = () => {
 	// try getting NFTS
 	useEffect(() => {
 		async function fetchNftData() {
-			const nfts = await collectionObject.getAll();
+			const nfts = await collectionObject.getAll(); // this is the problematic one
 		}
 		fetchNftData();
 		setNfts(nfts);

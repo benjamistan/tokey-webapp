@@ -8,7 +8,7 @@ import HotCollections from '../components/HomePage/HotCollections';
 import HotNFTs from '../components/HomePage/HotNFTs';
 import NFTListComponent from './collections/NFTListComponent';
 
-import { Assets } from '../components/HomePage';
+import { Assets } from '../components/AssetView';
 
 const style = {
 	wrapper: ``,

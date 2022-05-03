@@ -19,8 +19,8 @@ const NFTListComponent = () => {
 		const nbNfts = nfts.toNumber();
 		console.log('nfts:', nbNfts);
 
-		setAll(await nftCollection.getAll());
-		console.log('all is all:', all);
+		//setAll(await nftCollection.getAll());
+		//console.log('all is all:', all);
 	}
 
 	return (
