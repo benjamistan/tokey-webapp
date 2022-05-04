@@ -85,7 +85,7 @@ const AssetsView = () => {
 			</div>
 			<div className='basis-auto lg:basis-[calc(100%_-_320px)]'>
 				{/*<div className='text-3xl font-extrabold pb-5'>Assets Collections</div>*/}
-				<div className='grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-3 lg:gap-3 py-6 justify-center'>
+				<div className='grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-3 py-6 justify-center'>
 					{assets.length == 0 ? <div> Loading... </div> : null}
 					{assets &&
 						assets
