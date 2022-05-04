@@ -11,6 +11,7 @@ import NFTListComponent from './collections/NFTListComponent';
 import { Assets } from '../components/AssetView';
 
 const style = {
+	container: 'flex text-center bg-white  pb-40 pl-10',
 	wrapper: ``,
 	walletConnectWrapper: `flex flex-col justify-center items-center h-screen w-screen bg-[#3b3d42] `,
 	button: `border border-[#282b2f] bg-[#2081e2] p-[0.8rem] text-xl font-semibold rounded-lg cursor-pointer text-black`,
@@ -49,9 +50,9 @@ export default function Home() {
 	return (
 		<div className={style.wrapper}>
 			<Toaster position='bottom-right' reverseOrder={false} />
-			<>
-				<NFTListComponent />
-			</>
+			<div className={style.container}>
+				<Assets />
+			</div>
 		</div>
 	);
 }
