@@ -15,7 +15,8 @@ const AssetsView = () => {
 	const [minSearch, setMinSearch] = useState(0);
 	const [maxSearch, setMaxSearch] = useState(0);
 
-	const marketAddress = '0x254aF607E999D48574c03f520B0637bd07ab81aC';
+	// const marketAddress = '0x254aF607E999D48574c03f520B0637bd07ab81aC';
+	const marketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
 	const marketCollection = useMarketplace(marketAddress);
 
 	useEffect(() => {
@@ -24,13 +25,20 @@ const AssetsView = () => {
 
 	// console.log('assets:', assets);
 	const getMarketCollections = async () => {
-		marketCollection?.getAllListings().then(async (results) => {
+		console.log('Getting Marketplace collections...');
+		const res = await marketCollection.getActiveListings();
+		if (res.length == 0) {
+			console.log('ERROR: No active listings for this Marketplace contract');
+			return;
+		}
+		await marketCollection?.getAllListings().then(async (results) => {
 			let mappedAssets = [];
 			for (let asset of results) {
 				let name = await fetchCollectionData(
 					client,
 					asset.assetContractAddress
 				);
+				console.log('getting a collection...');
 				asset.collectionName = name;
 				mappedAssets.push(asset);
 			}
@@ -39,6 +47,7 @@ const AssetsView = () => {
 	};
 
 	const fetchCollectionData = async (sanityClient = client, contractId) => {
+		console.log('Retrieving for NFTs:', marketCollection);
 		const query = `*[_type == "marketItems" && contractAddress == "${contractId}" ] {
       contractAddress,
       title
@@ -73,50 +82,56 @@ const AssetsView = () => {
 	};
 
 	return (
-		<div className='flex flex-col lg:flex-row px-4'>
-			<div className='basis-aut lg:basis-[320px] bg-white '>
-				<Filters
-					onNameChange={onNameChange}
-					onCollectionChange={onCollectionChange}
-					onMinChange={onMinChange}
-					onMaxChange={onMaxChange}
-					onCurrencyChange={onCurrencyChange}
-				/>
-			</div>
-			<div className='basis-auto lg:basis-[calc(100%_-_320px)]'>
-				{/*<div className='text-3xl font-extrabold pb-5'>Assets Collections</div>*/}
-				<div className='grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-3 py-6 justify-center'>
-					{assets.length == 0 ? <div> Loading... </div> : null}
-					{assets &&
-						assets
-							.filter((obj) => {
-								return currency
-									? obj.buyoutCurrencyValuePerToken.symbol == currency
-									: true;
-							})
-							.filter((obj) => {
-								return searchName ? obj.asset.name.includes(searchName) : true;
-							})
-							.filter((obj) => {
-								return minSearch
-									? parseFloat(obj.buyoutCurrencyValuePerToken.displayValue) >=
-											minSearch
-									: true;
-							})
-							.filter((obj) => {
-								return maxSearch
-									? parseFloat(obj.buyoutCurrencyValuePerToken.displayValue) <=
-											maxSearch
-									: true;
-							})
-							.filter((obj) => {
-								return searchCollection
-									? obj.collectionName.includes(searchCollection)
-									: true;
-							})
-							.map((asset, index) => {
-								return <AssetCard key={`asset-${index}`} data={asset} />;
-							})}
+		<div className='w-full mx-40'>
+			<div className='flex flex-col lg:flex-row px-4'>
+				<div className='basis-aut lg:basis-[320px] bg-white '>
+					<Filters
+						onNameChange={onNameChange}
+						onCollectionChange={onCollectionChange}
+						onMinChange={onMinChange}
+						onMaxChange={onMaxChange}
+						onCurrencyChange={onCurrencyChange}
+					/>
+				</div>
+				<div className='basis-auto lg:basis-[calc(100%_-_320px)]'>
+					{/*<div className='text-3xl font-extrabold pb-5'>Assets Collections</div>*/}
+					<div className='grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-3 lg:grid-cols-4 lg:gap-3 py-6 justify-center'>
+						{assets.length == 0 ? <div> Loading... </div> : null}
+						{assets &&
+							assets
+								.filter((obj) => {
+									return currency
+										? obj.buyoutCurrencyValuePerToken.symbol == currency
+										: true;
+								})
+								.filter((obj) => {
+									return searchName
+										? obj.asset.name.includes(searchName)
+										: true;
+								})
+								.filter((obj) => {
+									return minSearch
+										? parseFloat(
+												obj.buyoutCurrencyValuePerToken.displayValue
+										  ) >= minSearch
+										: true;
+								})
+								.filter((obj) => {
+									return maxSearch
+										? parseFloat(
+												obj.buyoutCurrencyValuePerToken.displayValue
+										  ) <= maxSearch
+										: true;
+								})
+								.filter((obj) => {
+									return searchCollection
+										? obj.collectionName.includes(searchCollection)
+										: true;
+								})
+								.map((asset, index) => {
+									return <AssetCard key={`asset-${index}`} data={asset} />;
+								})}
+					</div>
 				</div>
 			</div>
 		</div>

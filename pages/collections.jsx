@@ -2,7 +2,7 @@ import React from 'react';
 import { Assets } from '../components/AssetView';
 
 const style = {
-	container: 'flex text-center bg-white  pb-40 pl-10',
+	container: 'flex text-center bg-white pb-40 justify-center ml-10',
 };
 
 const collections = () => {
