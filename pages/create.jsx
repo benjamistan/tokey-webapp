@@ -1,15 +1,14 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useAddress, useSigner, useNFTCollection } from '@thirdweb-dev/react';
-import { NATIVE_TOKEN_ADDRESS, ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { useAddress, useSigner } from '@thirdweb-dev/react';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 import toast, { Toaster } from 'react-hot-toast';
 
 import { AlchemyProvider } from '@ethersproject/providers';
 
 import { create as ipfsHttpClient } from 'ipfs-http-client';
-import nft from './nft';
 
 const style = {
 	container: 'flex justify-center text-center bg-white pt-20 pb-40',
@@ -36,8 +35,6 @@ const Create = () => {
 	const tokeyNftCollectionAddress =
 		'0xcbD4895D6B2BCfaFce6Ac55FBe9F22EC97256c5B';
 	const maticERC20TokenAddress = '0x0000000000000000000000000000000000001010';
-
-	//console.log('Provider URL:', provider.connection.url);
 
 	const ipfsGateway = 'https://ipfs.infura.io:5001/api/v0';
 	const ipfsClient = ipfsHttpClient(ipfsGateway);
