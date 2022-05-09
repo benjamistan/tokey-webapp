@@ -1,14 +1,13 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { useAddress } from '@thirdweb-dev/react';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { client } from '../../lib/sanityClient';
 import { CgWebsite } from 'react-icons/cg';
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import { HiDotsVertical } from 'react-icons/hi';
 import NFTCard from '../../components/nft/NFTCard';
-import AssetCard from '../../components/AssetView/AssetCard';
 
 const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -38,6 +37,7 @@ const Collection = () => {
 	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
+	console.log('sdk', sdk);
 
 	const { collectionId } = router.query;
 	const [collection, setCollection] = useState({});
@@ -46,7 +46,6 @@ const Collection = () => {
 
 	// create the Collection object
 	const nftModule = useMemo(() => {
-		console.log('nftModule useMemo()');
 		return sdk.getNFTCollection(collectionId);
 	}, []);
 
