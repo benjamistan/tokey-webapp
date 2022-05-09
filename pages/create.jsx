@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import Image from 'next/image';
-import { useAddress, useSigner, useNFTCollection } from '@thirdweb-dev/react';
+import { useAddress, useSigner } from '@thirdweb-dev/react';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 
 import toast, { Toaster } from 'react-hot-toast';
@@ -9,7 +9,6 @@ import toast, { Toaster } from 'react-hot-toast';
 import { AlchemyProvider } from '@ethersproject/providers';
 
 import { create as ipfsHttpClient } from 'ipfs-http-client';
-import nft from './nft';
 
 const style = {
 	container: 'flex justify-center text-center bg-white pt-20 pb-40',
@@ -24,6 +23,7 @@ const Create = () => {
 		description: '',
 		image: '',
 	});
+	const [listingPrice, setListingPrice] = useState(0);
 	const router = useRouter();
 
 	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
@@ -31,7 +31,10 @@ const Create = () => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
-	console.log('Provider URL:', provider.connection.url);
+	const tokeyMarketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
+	const tokeyNftCollectionAddress =
+		'0xcbD4895D6B2BCfaFce6Ac55FBe9F22EC97256c5B';
+	const maticERC20TokenAddress = '0x0000000000000000000000000000000000001010';
 
 	const ipfsGateway = 'https://ipfs.infura.io:5001/api/v0';
 	const ipfsClient = ipfsHttpClient(ipfsGateway);
@@ -59,12 +62,46 @@ const Create = () => {
   /********************************************/
 	const createNft = async (event) => {
 		event.preventDefault();
+		const listing = event.target.listing.checked;
+
 		await uploadNFTandMetadata();
 
 		// Test to see if IPFS upload was successful
 		if (nftMetadata.name !== '') {
 			console.log('Metadata complete. Creating NFT...');
-			await createNftOnChain('0x4b94B8077da9db887a37a8814dAc0CFAD22B5A99');
+
+			const contract = sdk.getNFTCollection(tokeyNftCollectionAddress);
+			console.log('createNftOnChain: Collection contract object is', contract);
+			const tx = await contract.mintToSelf(nftMetadata);
+			toast.success('NFT created!', { duration: 4000 });
+
+			const receipt = tx.receipt;
+			console.log('createNft: tx receipt', receipt);
+
+			const tokenId = tx.id.toNumber();
+			console.log('createNft: tokenId', tokenId);
+
+			if (listing) {
+				const listing = {
+					assetContractAddress: tokeyNftCollectionAddress,
+					tokenId: tokenId,
+					startTimestamp: new Date(),
+					listingDurationInSeconds: 157680000, // this is 5 years in seconds
+					quantity: 1,
+					currencyContractAddress: maticERC20TokenAddress,
+					buyoutPricePerToken: listingPrice,
+				};
+
+				console.log('createNft: listing', listing);
+
+				const contract = sdk.getMarketplace(tokeyMarketAddress);
+				const listingTx = await contract.direct.createListing(listing);
+				const receipt = listingTx.receipt;
+				console.log('createNft: listing tx receipt', receipt);
+
+				const listingId = listingTx.id;
+				console.log('createNft: listingId', listingId);
+			}
 			return;
 		}
 
@@ -75,14 +112,17 @@ const Create = () => {
 	/********************************************/
 	/*    CREATING NFT ON-CHAIN FROM IPFS FQ URL
   /********************************************/
-	const createNftOnChain = async (collection) => {
-		console.log('Creating NFT in collection contract', collection);
-		const contract = sdk.getNFTCollection(collection);
-		console.log('Collection contract object is', contract);
-		const tx = await contract.mintToSelf(nftMetadata);
-		console.log('Created NFT in tx:', tx);
-		toast.success('NFT created!', { duration: 4000 });
-	};
+	// const createNftOnChain = async (collection) => {
+	// 	console.log(
+	// 		'createNftOnChain: Creating NFT in collection contract',
+	// 		collection
+	// 	);
+	// 	const contract = sdk.getNFTCollection(collection);
+	// 	console.log('createNftOnChain: Collection contract object is', contract);
+	// 	const tx = await contract.mintToSelf(nftMetadata);
+	// 	console.log('createNftOnChain: Created NFT in tx:', tx);
+	// 	toast.success('NFT created!', { duration: 4000 });
+	// };
 
 	/********************************************/
 	/*    UPLOAD NFT + METADATA TO IPFS
@@ -209,9 +249,7 @@ const Create = () => {
 								className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-tblue block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-tblue dark:shadow-sm-light'
 								placeholder='price'
 								required
-								onChange={(e) =>
-									setNftMetadata({ ...nftMetadata, price: e.target.value })
-								}
+								onChange={(e) => setListingPrice(e.target.value)}
 							/>
 						</div>
 
@@ -253,7 +291,25 @@ const Create = () => {
 						}
 					/>
 				</div> */}
-
+						<div className='flex items-start mb-6'>
+							<div className='flex items-center h-5'>
+								<input
+									id='listing'
+									aria-describedby='listing'
+									type='checkbox'
+									className='w-4 h-4 bg-gray-50 rounded border border-gray-300 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800'
+									defaultChecked
+								/>
+							</div>
+							<div className='ml-3 text-sm'>
+								<label
+									htmlFor='listing'
+									className='font-medium text-gray-900 dark:text-gray-300'
+								>
+									List this NFT for sale
+								</label>
+							</div>
+						</div>
 						<div className='flex items-start mb-6'>
 							<div className='flex items-center h-5'>
 								<input

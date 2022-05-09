@@ -1,17 +1,13 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
-
-import { client } from '../../lib/sanityClient';
-
-import { AlchemyProvider } from '@ethersproject/providers';
-
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import { useNFTCollection, useNFTList } from '@thirdweb-dev/react';
-
-import NFTCard from '../../components/NFTCard';
+import { useAddress } from '@thirdweb-dev/react';
+import { AlchemyProvider } from '@ethersproject/providers';
+import { client } from '../../lib/sanityClient';
 import { CgWebsite } from 'react-icons/cg';
 import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
 import { HiDotsVertical } from 'react-icons/hi';
+import NFTCard from '../../components/nft/NFTCard';
 
 const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -25,7 +21,7 @@ const style = {
 	socialIconsContent: `flex container justify-between text-[1.4rem] border-2 rounded-lg px-2`,
 	socialIcon: `my-2`,
 	divider: `border-r-2`,
-	title: `text-5xl font-bold mb-4`,
+	title: `text-5xl font-bold mb-4 pt-4`,
 	createdBy: `text-lg mb-4`,
 	statsContainer: `w-[44vw] flex justify-between py-4 border border-[#151b22] rounded-xl mb-4`,
 	collectionStat: `w-1/4`,
@@ -38,66 +34,46 @@ const style = {
 const Collection = () => {
 	const router = useRouter();
 
-	// Setting up the provider and thirdweb sdk
-	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
-	const provider = useMemo(() => {
-		return new AlchemyProvider('maticmum', apiKey);
-	}, [apiKey]);
+	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
+	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
+	console.log('sdk', sdk);
 
 	const { collectionId } = router.query;
-	const [collectionSanityData, setCollectionSanityData] = useState({});
+	const [collection, setCollection] = useState({});
 	const [nfts, setNfts] = useState([]);
 	const [listings, setListings] = useState([]);
 
-	// instantiating the NFT Collection in the SDK
-	// const nftModule = useMemo(() => {
-	// 	if (!provider) {
-	// 		console.log('Not yet a Provider');
-	// 		return;
-	// 	}
-	// 	const res = sdk.getNFTCollection(collectionId);
-	// 	return res;
-	// }, [provider]);
-
-	// instantiating the Marketplace in the SDK
-	const marketPlaceModule = useMemo(() => {
-		if (!provider) {
-			console.log('Not yet a provider');
-			return;
-		}
-		const res = sdk.getMarketplace(
-			'0x2EFf51666da8686fE7Ae5092da5D94A60b3eBada'
-		);
-		return res;
-	}, [provider]);
-
-	// try getting NFTS
-	useEffect(() => {
-		async function fetchNftData() {
-			const nfts = await collectionObject.getAll(); // this is the problematic one
-		}
-		fetchNftData();
-		setNfts(nfts);
+	// create the Collection object
+	const nftModule = useMemo(() => {
+		return sdk.getNFTCollection(collectionId);
 	}, []);
 
-	// const nftCollection = useNFTCollection(collectionId);
-	// setNfts(useNFTList(nftCollection));
-	// console.log('show me some NFTs:', nfts);
-
-	// handle changes to the Marketplace
+	// get the NFTs from the Collection
 	useEffect(() => {
-		if (!marketPlaceModule) {
-			console.log('Not yet a Market place module');
-			return;
-		}
+		if (!nftModule) return;
+		(async () => {
+			const nfts = await nftModule.getAll();
+			setNfts(nfts);
+		})();
+	}, [nftModule]);
+
+	// create the Marketplace object
+	const marketPlaceModule = useMemo(() => {
+		console.log('marketplaceModule useMemo()');
+		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
+	}, []);
+
+	// get the listings from the Marketplace
+	useEffect(() => {
+		if (!marketPlaceModule) return;
 		(async () => {
 			setListings(await marketPlaceModule.getAllListings());
 		})();
 	}, [marketPlaceModule]);
 
-	// Retrieve data on the collection from our Sanity store
-	const fetchCollectionSanityData = async (sanityClient = client) => {
+	// get our Collection data from Sanity
+	const fetchCollectionData = async (sanityClient = client) => {
 		const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
       "imageUrl": profileImage.asset->url,
       "bannerImageUrl": bannerImage.asset->url,
@@ -114,16 +90,12 @@ const Collection = () => {
 		if (collectionData[0]) {
 			console.log('Collection Sanity data: ', collectionData);
 		}
-		await setCollectionSanityData(collectionData[0]);
+		await setCollection(collectionData[0]);
 	};
 
-	// get new data from Sanity when collection is changed
 	useEffect(() => {
-		fetchCollectionSanityData();
-		console.log('Thirdweb NFT Module:', collectionObject);
-		console.log('Thirdweb Marketplace:', marketPlaceModule);
-		console.log('nfts', nfts);
-		console.log('listings:', listings);
+		fetchCollectionData();
+		console.log('nfts:', nfts);
 	}, [collectionId]);
 
 	return (
@@ -132,8 +104,8 @@ const Collection = () => {
 				<img
 					className={style.bannerImage}
 					src={
-						collectionSanityData?.bannerImageUrl
-							? collectionSanityData.bannerImageUrl
+						collection?.bannerImageUrl
+							? collection.bannerImageUrl
 							: 'https://via.placeholder.com/200'
 					}
 					alt='banner'
@@ -144,8 +116,8 @@ const Collection = () => {
 					<img
 						className={style.profileImg}
 						src={
-							collectionSanityData?.imageUrl
-								? collectionSanityData.imageUrl
+							collection?.imageUrl
+								? collection.imageUrl
 								: 'https://via.placeholder.com/200'
 						}
 						alt='Profile Image'
@@ -178,14 +150,11 @@ const Collection = () => {
 				</div>
 			</div>
 			<div className={style.midRow}>
-				<div className={style.title}>{collectionSanityData?.title}</div>
+				<div className={style.title}>{collection?.title}</div>
 			</div>
 			<div className={style.midRow}>
 				<div className={style.createdBy}>
-					Created by{' '}
-					<span className='text-[#2081e2]'>
-						{collectionSanityData?.creator}
-					</span>
+					Created by <span>{collection?.creator}</span>
 				</div>
 			</div>
 			<div className={style.midRow}>
@@ -196,9 +165,7 @@ const Collection = () => {
 					</div>
 					<div className={style.collectionStat}>
 						<div className={style.statValue}>
-							{collectionSanityData?.allOwners
-								? collectionSanityData.allOwners.length
-								: ''}
+							{collection?.allOwners ? collection.allOwners.length : 0}
 						</div>
 						<div className={style.statName}>owners</div>
 					</div>
@@ -209,7 +176,7 @@ const Collection = () => {
 								alt='eth'
 								className={style.ethLogo}
 							/>
-							{collectionSanityData?.floorPrice}
+							{collection?.floorPrice}
 						</div>
 						<div className={style.statName}>floor price</div>
 					</div>
@@ -220,23 +187,24 @@ const Collection = () => {
 								alt='eth'
 								className={style.ethLogo}
 							/>
-							{collectionSanityData?.volumeTraded}.5K
+							{collection?.volumeTraded}
 						</div>
 						<div className={style.statName}>volume traded</div>
 					</div>
 				</div>
 			</div>
 			<div className={style.midRow}>
-				<div className={style.description}>
-					{collectionSanityData?.description}
-				</div>
+				<div className={style.description}>{collection?.description}</div>
 			</div>
-			<div className='flex flex-wrap '>
-				{nfts.length == 0 ? (
-					<div className={style.midRow}>No NFTs</div>
-				) : (
-					<div>Some NFTs</div>
-				)}
+			<div className='grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7'>
+				{nfts.map((nftItem, id) => (
+					<NFTCard
+						key={id}
+						nftItem={nftItem}
+						title={collection?.title}
+						listings={listings}
+					/>
+				))}
 			</div>
 		</div>
 	);
