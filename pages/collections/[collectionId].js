@@ -4,6 +4,7 @@ import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { client } from '../../lib/sanityClient';
 import NFTCard from '../../components/nft/NFTCard';
+import Image from 'next/image';
 
 const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -106,7 +107,7 @@ const Collection = () => {
 					src={
 						collection?.bannerImageUrl
 							? collection.bannerImageUrl
-							: 'https://via.placeholder.com/200'
+							: '/white_square_200x200.png'
 					}
 					alt='banner'
 				/>
@@ -118,7 +119,7 @@ const Collection = () => {
 						src={
 							collection?.imageUrl
 								? collection.imageUrl
-								: 'https://via.placeholder.com/200'
+								: '/white_square_200x200.png'
 						}
 						alt='Profile Image'
 					/>
