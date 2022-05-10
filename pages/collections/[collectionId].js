@@ -33,9 +33,9 @@ const Collection = () => {
 	const sdk = new ThirdwebSDK(provider);
 
 	const router = useRouter();
-	console.log('router object:', router);
-	const { collectionId } = router.query;
-	console.log('collectionId is', collectionId);
+	const {
+		query: { collectionId },
+	} = router;
 
 	const [collection, setCollection] = useState({});
 	const [nfts, setNfts] = useState([]);
@@ -43,14 +43,18 @@ const Collection = () => {
 
 	// create the Collection object
 	const nftModule = useMemo(() => {
-		console.log('inside nftModule useMemo, collectionId is', collectionId);
+		if (!collectionId) {
+			console.log('collectionId not ready');
+			return;
+		}
 		return sdk.getNFTCollection(collectionId);
-	}, []);
+	}, [collectionId]);
 
 	// get the NFTs from the Collection
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
+			console.log('getting nfts...');
 			const nfts = await nftModule.getAll();
 			setNfts(nfts);
 		})();
@@ -58,7 +62,6 @@ const Collection = () => {
 
 	// create the Marketplace object
 	const marketPlaceModule = useMemo(() => {
-		console.log('marketplaceModule useMemo()');
 		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
 	}, []);
 
@@ -66,7 +69,7 @@ const Collection = () => {
 	useEffect(() => {
 		if (!marketPlaceModule) return;
 		(async () => {
-			console.log('getting listings');
+			console.log('getting listings...');
 			setListings(await marketPlaceModule.getAllListings());
 		})();
 	}, [marketPlaceModule]);
@@ -86,9 +89,6 @@ const Collection = () => {
     }`;
 
 		const collectionData = await sanityClient.fetch(query);
-		if (collectionData[0]) {
-			console.log('Collection Sanity data: ', collectionData);
-		}
 		await setCollection(collectionData[0]);
 	};
 
@@ -96,7 +96,7 @@ const Collection = () => {
 		fetchCollectionData();
 		console.log('nfts:', nfts);
 		console.log('listings:', listings);
-	}, [collectionId]);
+	}, [collectionId, listings, nfts]);
 
 	return (
 		<div className='overflow-hidden'>
