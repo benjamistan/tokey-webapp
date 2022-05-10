@@ -27,19 +27,26 @@ const NFTCard = ({ nftItem, title, listings }) => {
 	/*    DISCOVER LISTING PRICE IF LISTED
   /********************************************/
 	useEffect(() => {
-		const listing = listings.find((listing) => listing.asset.id === nftItem.id);
+		const nftItemId = nftItem.metadata.id.toNumber();
+		const listing = listings.find(
+			(listing) => listing.id === nftItemId.toString()
+		);
 		if (Boolean(listing)) {
 			setIsListed(true);
 			setPrice(listing.buyoutCurrencyValuePerToken.displayValue);
 		}
 	}, [listings, nftItem]);
 
+	useEffect(() => {
+		console.log('price', price);
+	}, [price]);
+
 	return (
 		<div
 			className={style.wrapper}
 			onClick={() => {
 				Router.push({
-					pathname: `/assets/${nftItem.id}`,
+					pathname: `/nfts/${nftItem.id}`,
 					query: { isListed: isListed },
 				});
 			}}

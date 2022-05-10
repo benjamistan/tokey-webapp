@@ -1,12 +1,8 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import { useAddress } from '@thirdweb-dev/react';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { client } from '../../lib/sanityClient';
-import { CgWebsite } from 'react-icons/cg';
-import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
-import { HiDotsVertical } from 'react-icons/hi';
 import NFTCard from '../../components/nft/NFTCard';
 
 const style = {
@@ -15,7 +11,7 @@ const style = {
 	infoContainer: `w-screen px-4`,
 	midRow: `w-full flex justify-center text-black`,
 	endRow: `w-full flex justify-end text-black`,
-	profileImg: `w-40 h-40 object-cover rounded-full border-2 border-[#202225] mt-[-4rem]`,
+	profileImg: `w-40 h-40 object-cover rounded-full bg-white border-2 border-[#202225] mt-[-4rem]`,
 	socialIconsContainer: `flex text-3xl mb-[-2rem]`,
 	socialIconsWrapper: `w-44`,
 	socialIconsContent: `flex container justify-between text-[1.4rem] border-2 rounded-lg px-2`,
@@ -32,20 +28,22 @@ const style = {
 };
 
 const Collection = () => {
-	const router = useRouter();
-
 	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
-	console.log('sdk', sdk);
 
+	const router = useRouter();
+	console.log('router object:', router);
 	const { collectionId } = router.query;
+	console.log('collectionId is', collectionId);
+
 	const [collection, setCollection] = useState({});
 	const [nfts, setNfts] = useState([]);
 	const [listings, setListings] = useState([]);
 
 	// create the Collection object
 	const nftModule = useMemo(() => {
+		console.log('inside nftModule useMemo, collectionId is', collectionId);
 		return sdk.getNFTCollection(collectionId);
 	}, []);
 
@@ -68,6 +66,7 @@ const Collection = () => {
 	useEffect(() => {
 		if (!marketPlaceModule) return;
 		(async () => {
+			console.log('getting listings');
 			setListings(await marketPlaceModule.getAllListings());
 		})();
 	}, [marketPlaceModule]);
@@ -96,6 +95,7 @@ const Collection = () => {
 	useEffect(() => {
 		fetchCollectionData();
 		console.log('nfts:', nfts);
+		console.log('listings:', listings);
 	}, [collectionId]);
 
 	return (
@@ -122,31 +122,6 @@ const Collection = () => {
 						}
 						alt='Profile Image'
 					/>
-				</div>
-			</div>
-			<div>
-				<div className={style.endRow}>
-					<div className={style.socialIconsContainer}>
-						<div className={style.socialIconsWrapper}>
-							<div className={style.socialIconsContent}>
-								<div className={style.socialIcon}>
-									<CgWebsite />
-								</div>
-								<div className={style.divider} />
-								<div className={style.socialIcon}>
-									<AiOutlineInstagram />
-								</div>
-								<div className={style.divider} />
-								<div className={style.socialIcon}>
-									<AiOutlineTwitter />
-								</div>
-								<div className={style.divider} />
-								<div className={style.socialIcon}>
-									<HiDotsVertical />
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div className={style.midRow}>
