@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BiHeart } from 'react-icons/bi';
 import { useRouter } from 'next/router';
+import Router from 'next/router';
 
 const style = {
 	wrapper: ` bg-[#303339] flex-auto w-[14rem] h-[22rem] pb-5 rounded-2xl overflow-hidden cursor-pointer`,
@@ -28,12 +29,14 @@ const NFTCard = ({ nftItem, title, listings }) => {
 		query: { collectionId },
 	} = router;
 
+	const nftItemId = nftItem.metadata.id.toNumber();
+
 	/****************************************************/
 	/*    DISCOVER LISTING STATUS AND PRICE IF LISTED
   /****************************************************/
 	useEffect(() => {
 		// get the NFT id
-		const nftItemId = nftItem.metadata.id.toNumber();
+		//const nftItemId = nftItem.metadata.id.toNumber();
 
 		// from listings, get the matches between id and listing
 		const listing = listings.find(
@@ -51,8 +54,11 @@ const NFTCard = ({ nftItem, title, listings }) => {
 			className={style.wrapper}
 			onClick={() => {
 				Router.push({
-					pathname: `/nfts/${nftItem.id}`,
-					query: { isListed: isListed },
+					pathname: `/nfts/${nftItemId}`,
+					query: {
+						isListed: isListed,
+						collectionId: collectionId,
+					},
 				});
 			}}
 		>

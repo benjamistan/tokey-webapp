@@ -22,23 +22,44 @@ const Nft = () => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
+	const router = useRouter();
+	const {
+		pathname,
+		query: { collectionId, isListed },
+	} = router;
+
+	console.log('we want info on the NFT with id:', pathname);
+	console.log('We want info from an NFT in this collection:', collectionId);
+	console.log('the listed status of this NFT is', isListed);
+
 	const [selectedNft, setSelectedNft] = useState();
 	const [listings, setListings] = useState([]);
-	const router = useRouter();
 
 	const nftModule = useMemo(() => {
-		if (!provider) return;
+		if (!provider) {
+			console.log('No provider');
+			return;
+		}
+
+		if (!collectionId) {
+			console.log('No collectionId');
+			return;
+		}
 
 		const sdk = new ThirdwebSDK(provider);
-		return sdk.getNFTModule('0x77053C5e0cd65Af65f39b58d3e1BCE52DA246bFc');
-	}, [provider]);
+		console.log('[nftId] - Getting NFT Collection', collectionId);
+		return sdk.getNFTCollection(collectionId);
+	}, [provider, collectionId]);
 
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
+			console.log('[nftId] - Getting all NFTs from collection', collectionId);
 			const nfts = await nftModule.getAll();
 
-			const selectedNftItem = nfts.find((nft) => nft.id === router.query.nftId);
+			const selectedNftItem = nfts.find(
+				(nft) => nft.id === router.query.nftItemId
+			);
 
 			setSelectedNft(selectedNftItem);
 		})();
@@ -49,10 +70,8 @@ const Nft = () => {
 
 		const sdk = new ThirdwebSDK(provider);
 
-		return sdk.getMarketplaceModule(
-			'0x2EFf51666da8686fE7Ae5092da5D94A60b3eBada'
-		);
-	}, [provider]);
+		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
+	}, [provider, nftModule]);
 
 	useEffect(() => {
 		if (!marketPlaceModule) return;
@@ -63,7 +82,6 @@ const Nft = () => {
 
 	return (
 		<div>
-			<Header />
 			<div className={style.wrapper}>
 				<div className={style.container}>
 					<div className={style.topContent}>
