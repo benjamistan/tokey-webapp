@@ -1,5 +1,6 @@
 import Header from '../../components/Header/Header';
 import { useEffect, useMemo, useState } from 'react';
+import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { useRouter } from 'next/router';
 import NFTImage from '../../components/nft/NFTImage';

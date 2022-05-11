@@ -4,7 +4,6 @@ import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { client } from '../../lib/sanityClient';
 import NFTCard from '../../components/nft/NFTCard';
-import Image from 'next/image';
 
 const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -55,8 +54,8 @@ const Collection = () => {
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
-			console.log('getting nfts...');
 			const nfts = await nftModule.getAll();
+
 			setNfts(nfts);
 		})();
 	}, [nftModule]);
@@ -70,7 +69,6 @@ const Collection = () => {
 	useEffect(() => {
 		if (!marketPlaceModule) return;
 		(async () => {
-			console.log('getting listings...');
 			setListings(await marketPlaceModule.getAllListings());
 		})();
 	}, [marketPlaceModule]);
@@ -95,8 +93,9 @@ const Collection = () => {
 
 	useEffect(() => {
 		fetchCollectionData();
-		console.log('nfts:', nfts);
-		console.log('listings:', listings);
+		console.log('[collectionId] collectionId is', collectionId);
+		//console.log('[collectionId] listings:', listings);
+		console.log('[collectionId] nfts:', nfts);
 	}, [collectionId, listings, nfts]);
 
 	return (

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BiHeart } from 'react-icons/bi';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 
 const style = {
 	wrapper: ` bg-[#303339] flex-auto w-[14rem] h-[22rem] my-10 mx-5 rounded-2xl overflow-hidden cursor-pointer`,
@@ -23,23 +23,28 @@ const NFTCard = ({ nftItem, title, listings }) => {
 	const [isListed, setIsListed] = useState(false);
 	const [price, setPrice] = useState(0);
 
-	/********************************************/
-	/*    DISCOVER LISTING PRICE IF LISTED
-  /********************************************/
+	const router = useRouter();
+	const {
+		query: { collectionId },
+	} = router;
+
+	/****************************************************/
+	/*    DISCOVER LISTING STATUS AND PRICE IF LISTED
+  /****************************************************/
 	useEffect(() => {
+		// get the NFT id
 		const nftItemId = nftItem.metadata.id.toNumber();
+
+		// from listings, get the matches between id and listing
 		const listing = listings.find(
-			(listing) => listing.id === nftItemId.toString()
+			(listing) => listing.asset.id.toNumber() === nftItemId
 		);
-		if (Boolean(listing)) {
+
+		if (Boolean(listing) && listing.assetContractAddress === collectionId) {
 			setIsListed(true);
 			setPrice(listing.buyoutCurrencyValuePerToken.displayValue);
 		}
 	}, [listings, nftItem]);
-
-	useEffect(() => {
-		console.log('price', price);
-	}, [price]);
 
 	return (
 		<div
