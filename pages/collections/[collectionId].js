@@ -9,9 +9,10 @@ const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
 	bannerImage: `w-full object-cover`,
 	infoContainer: `w-screen px-4`,
-	midRow: `w-full flex justify-center text-black`,
+	midRow: `w-full flex justify-center text-black `,
+	descriptionRow: 'w-full flex justify-center text-black pb-10',
 	endRow: `w-full flex justify-end text-black`,
-	profileImg: `w-40 h-40 object-cover rounded-full bg-white border-2 border-[#202225] mt-[-4rem]`,
+	profileImg: `w-40 h-40 object-cover rounded-2xl bg-white border-2 border-[#202225] mt-[-4rem]`,
 	socialIconsContainer: `flex text-3xl mb-[-2rem]`,
 	socialIconsWrapper: `w-44`,
 	socialIconsContent: `flex container justify-between text-[1.4rem] border-2 rounded-lg px-2`,
@@ -168,18 +169,20 @@ const Collection = () => {
 					</div>
 				</div>
 			</div>
-			<div className={style.midRow}>
+			<div className={style.descriptionRow}>
 				<div className={style.description}>{collection?.description}</div>
 			</div>
-			<div className='grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7'>
-				{nfts.map((nftItem, id) => (
-					<NFTCard
-						key={id}
-						nftItem={nftItem}
-						title={collection?.title}
-						listings={listings}
-					/>
-				))}
+			<div className='w-full flex justify-center pb-10'>
+				<div className='grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 justify-items-center max-w-fit'>
+					{nfts.map((nftItem, id) => (
+						<NFTCard
+							key={id}
+							nftItem={nftItem}
+							title={collection?.title}
+							listings={listings}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);
