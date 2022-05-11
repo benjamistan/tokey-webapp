@@ -24,14 +24,10 @@ const Nft = () => {
 
 	const router = useRouter();
 	const {
-		pathname,
-		query: { collectionId, isListed },
+		query: { nftItemId, collectionId, isListed },
 	} = router;
 
-	console.log('we want info on the NFT with id:', pathname);
-	console.log('We want info from an NFT in this collection:', collectionId);
-	console.log('the listed status of this NFT is', isListed);
-
+	const [nfts, setNfts] = useState([]);
 	const [selectedNft, setSelectedNft] = useState();
 	const [listings, setListings] = useState([]);
 
@@ -47,23 +43,23 @@ const Nft = () => {
 		}
 
 		const sdk = new ThirdwebSDK(provider);
-		console.log('[nftId] - Getting NFT Collection', collectionId);
 		return sdk.getNFTCollection(collectionId);
 	}, [provider, collectionId]);
 
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
-			console.log('[nftId] - Getting all NFTs from collection', collectionId);
-			const nfts = await nftModule.getAll();
-
-			const selectedNftItem = nfts.find(
-				(nft) => nft.id === router.query.nftItemId
-			);
-
-			setSelectedNft(selectedNftItem);
+			setNfts(await nftModule.getAll());
 		})();
 	}, [nftModule]);
+
+	useEffect(() => {
+		const selectedNftItem = nfts.find(
+			(nft) => nft.metadata.id.toString() === nftItemId
+		);
+
+		setSelectedNft(selectedNftItem);
+	}, [nfts]);
 
 	const marketPlaceModule = useMemo(() => {
 		if (!provider) return;
