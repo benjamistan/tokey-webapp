@@ -1,5 +1,6 @@
 import Header from '../../components/Header/Header';
 import { useEffect, useMemo, useState } from 'react';
+import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { useRouter } from 'next/router';
 import NFTImage from '../../components/nft/NFTImage';
@@ -15,9 +16,8 @@ const style = {
 	detailsContainer: `flex-[2] ml-4`,
 };
 
-const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
-
 const Nft = () => {
+	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);

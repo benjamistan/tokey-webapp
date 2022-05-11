@@ -1,21 +1,18 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import { useAddress } from '@thirdweb-dev/react';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { client } from '../../lib/sanityClient';
-import { CgWebsite } from 'react-icons/cg';
-import { AiOutlineInstagram, AiOutlineTwitter } from 'react-icons/ai';
-import { HiDotsVertical } from 'react-icons/hi';
 import NFTCard from '../../components/nft/NFTCard';
 
 const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
 	bannerImage: `w-full object-cover`,
 	infoContainer: `w-screen px-4`,
-	midRow: `w-full flex justify-center text-black`,
+	midRow: `w-full flex justify-center text-black `,
+	descriptionRow: 'w-full flex justify-center text-black pb-10',
 	endRow: `w-full flex justify-end text-black`,
-	profileImg: `w-40 h-40 object-cover rounded-full border-2 border-[#202225] mt-[-4rem]`,
+	profileImg: `w-40 h-40 object-cover rounded-2xl bg-white border-2 border-[#202225] mt-[-4rem]`,
 	socialIconsContainer: `flex text-3xl mb-[-2rem]`,
 	socialIconsWrapper: `w-44`,
 	socialIconsContent: `flex container justify-between text-[1.4rem] border-2 rounded-lg px-2`,
@@ -32,35 +29,40 @@ const style = {
 };
 
 const Collection = () => {
-	const router = useRouter();
-
 	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
-	console.log('sdk', sdk);
 
-	const { collectionId } = router.query;
+	const router = useRouter();
+	const {
+		query: { collectionId },
+	} = router;
+
 	const [collection, setCollection] = useState({});
 	const [nfts, setNfts] = useState([]);
 	const [listings, setListings] = useState([]);
 
 	// create the Collection object
 	const nftModule = useMemo(() => {
+		if (!collectionId) {
+			console.log('collectionId not ready');
+			return;
+		}
 		return sdk.getNFTCollection(collectionId);
-	}, []);
+	}, [collectionId]);
 
 	// get the NFTs from the Collection
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
 			const nfts = await nftModule.getAll();
+
 			setNfts(nfts);
 		})();
 	}, [nftModule]);
 
 	// create the Marketplace object
 	const marketPlaceModule = useMemo(() => {
-		console.log('marketplaceModule useMemo()');
 		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
 	}, []);
 
@@ -87,16 +89,15 @@ const Collection = () => {
     }`;
 
 		const collectionData = await sanityClient.fetch(query);
-		if (collectionData[0]) {
-			console.log('Collection Sanity data: ', collectionData);
-		}
 		await setCollection(collectionData[0]);
 	};
 
 	useEffect(() => {
 		fetchCollectionData();
-		console.log('nfts:', nfts);
-	}, [collectionId]);
+		console.log('[collectionId] collectionId is', collectionId);
+		//console.log('[collectionId] listings:', listings);
+		console.log('[collectionId] nfts:', nfts);
+	}, [collectionId, listings, nfts]);
 
 	return (
 		<div className='overflow-hidden'>
@@ -106,7 +107,7 @@ const Collection = () => {
 					src={
 						collection?.bannerImageUrl
 							? collection.bannerImageUrl
-							: 'https://via.placeholder.com/200'
+							: '/white_square_200x200.png'
 					}
 					alt='banner'
 				/>
@@ -118,35 +119,10 @@ const Collection = () => {
 						src={
 							collection?.imageUrl
 								? collection.imageUrl
-								: 'https://via.placeholder.com/200'
+								: '/white_square_200x200.png'
 						}
 						alt='Profile Image'
 					/>
-				</div>
-			</div>
-			<div>
-				<div className={style.endRow}>
-					<div className={style.socialIconsContainer}>
-						<div className={style.socialIconsWrapper}>
-							<div className={style.socialIconsContent}>
-								<div className={style.socialIcon}>
-									<CgWebsite />
-								</div>
-								<div className={style.divider} />
-								<div className={style.socialIcon}>
-									<AiOutlineInstagram />
-								</div>
-								<div className={style.divider} />
-								<div className={style.socialIcon}>
-									<AiOutlineTwitter />
-								</div>
-								<div className={style.divider} />
-								<div className={style.socialIcon}>
-									<HiDotsVertical />
-								</div>
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 			<div className={style.midRow}>
@@ -193,18 +169,20 @@ const Collection = () => {
 					</div>
 				</div>
 			</div>
-			<div className={style.midRow}>
+			<div className={style.descriptionRow}>
 				<div className={style.description}>{collection?.description}</div>
 			</div>
-			<div className='grid md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7'>
-				{nfts.map((nftItem, id) => (
-					<NFTCard
-						key={id}
-						nftItem={nftItem}
-						title={collection?.title}
-						listings={listings}
-					/>
-				))}
+			<div className='w-full flex justify-center pb-10'>
+				<div className='grid gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 justify-items-center max-w-fit'>
+					{nfts.map((nftItem, id) => (
+						<NFTCard
+							key={id}
+							nftItem={nftItem}
+							title={collection?.title}
+							listings={listings}
+						/>
+					))}
+				</div>
 			</div>
 		</div>
 	);
