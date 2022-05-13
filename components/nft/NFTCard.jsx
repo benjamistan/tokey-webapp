@@ -30,7 +30,7 @@ const NFTCard = ({ nftItem, title, listings }) => {
 	} = router;
 
 	const nftItemId = nftItem.metadata.id.toNumber();
-	console.log('NFTCard - we have just set the nftItemId to', nftItemId);
+	//console.log('NFTCard - we have just set the nftItemId to', nftItemId);
 
 	/****************************************************/
 	/*    DISCOVER LISTING STATUS AND PRICE IF LISTED

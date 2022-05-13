@@ -12,7 +12,7 @@ const style = {
 	wrapper: `flex flex-col items-center container-lg text-[#e5e8eb]`,
 	container: `container p-6`,
 	topContent: `flex`,
-	nftImgContainer: `flex-1 mr-4`,
+	nftImgContainer: `flex mr-4`,
 	detailsContainer: `flex-[2] ml-4`,
 };
 
@@ -54,10 +54,14 @@ const Nft = () => {
 	}, [nftModule]);
 
 	useEffect(() => {
+		if (!nfts) {
+			console.log('nfts are not ready');
+			return;
+		}
 		const selectedNftItem = nfts.find(
 			(nft) => nft.metadata.id.toString() === nftItemId
 		);
-
+		console.log('setting selectedNftItem as', selectedNftItem);
 		setSelectedNft(selectedNftItem);
 	}, [nfts]);
 
@@ -81,7 +85,7 @@ const Nft = () => {
 			<div className={style.wrapper}>
 				<div className={style.container}>
 					<div className={style.topContent}>
-						<div className={style.nftImgContainer}>
+						<div className='flex justify-items-center'>
 							<NFTImage selectedNft={selectedNft} />
 						</div>
 						<div className={style.detailsContainer}>

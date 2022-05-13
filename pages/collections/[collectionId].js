@@ -94,9 +94,9 @@ const Collection = () => {
 
 	useEffect(() => {
 		fetchCollectionData();
-		console.log('[collectionId] collectionId is', collectionId);
+		//console.log('[collectionId] collectionId is', collectionId);
 		//console.log('[collectionId] listings:', listings);
-		console.log('[collectionId] nfts:', nfts);
+		//console.log('[collectionId] nfts:', nfts);
 	}, [collectionId, listings, nfts]);
 
 	return (
