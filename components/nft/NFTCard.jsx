@@ -24,6 +24,8 @@ const NFTCard = ({ nftItem, title, listings }) => {
 	const [isListed, setIsListed] = useState(false);
 	const [price, setPrice] = useState(0);
 
+	const collectionTitle = title;
+
 	const router = useRouter();
 	const {
 		query: { collectionId },
@@ -60,6 +62,7 @@ const NFTCard = ({ nftItem, title, listings }) => {
 						nftItemId: nftItemId,
 						isListed: isListed,
 						collectionId: collectionId,
+						collectionTitle: collectionTitle,
 					},
 				});
 			}}

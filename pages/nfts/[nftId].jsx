@@ -22,6 +22,8 @@ const Nft = () => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
+	const collectionTitle = collectionTitle;
+
 	const router = useRouter();
 	const {
 		query: { nftItemId, collectionId, isListed },
@@ -89,7 +91,10 @@ const Nft = () => {
 							<NFTImage selectedNft={selectedNft} />
 						</div>
 						<div className={style.detailsContainer}>
-							<GeneralDetails selectedNft={selectedNft} />
+							<GeneralDetails
+								selectedNft={selectedNft}
+								collectionTitle={collectionTitle}
+							/>
 							<Purchase
 								isListed={router.query.isListed}
 								selectedNft={selectedNft}
