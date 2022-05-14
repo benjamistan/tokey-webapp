@@ -48,7 +48,7 @@ export default function Dropdown() {
 	}
 
 	return (
-		<div className='w-46 text-right pb-2'>
+		<div className='w-46 text-right'>
 			<Menu as='div' className='relative inline-block text-left'>
 				<Menu.Button className='inline-flex justify-center w-full px-4 py-2 font-medium text-[#F7F7FF] bg-[#FE5F55] rounded-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75'>
 					Connect

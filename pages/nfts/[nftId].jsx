@@ -22,11 +22,11 @@ const Nft = () => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
-	const collectionTitle = collectionTitle;
+	console.log('[nftId] - collectionTitle is', collectionTitle);
 
 	const router = useRouter();
 	const {
-		query: { nftItemId, collectionId, isListed },
+		query: { nftItemId, collectionId, isListed, collectionTitle },
 	} = router;
 
 	const [nfts, setNfts] = useState([]);
@@ -88,7 +88,10 @@ const Nft = () => {
 				<div className={style.container}>
 					<div className={style.topContent}>
 						<div className='flex justify-items-center'>
-							<NFTImage selectedNft={selectedNft} />
+							<NFTImage
+								selectedNft={selectedNft}
+								collectionTitle={collectionTitle}
+							/>
 						</div>
 						<div className={style.detailsContainer}>
 							<GeneralDetails

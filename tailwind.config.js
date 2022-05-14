@@ -13,8 +13,7 @@ module.exports = {
 				tpink: '#a2708a',
 			},
 			fontFamily: {
-				gotham: ['Gotham'],
-				sans: ['Gotham', 'sans-serif'],
+				sans: ['Roboto', 'sans-serif'],
 			},
 			padding: {
 				'1/2': '50%',

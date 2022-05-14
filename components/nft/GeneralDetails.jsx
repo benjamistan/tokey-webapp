@@ -23,7 +23,6 @@ const GeneralDetails = ({ selectedNft, collectionTitle }) => {
 	return (
 		<div className={style.wrapper}>
 			<div className={style.infoContainer}>
-				<div className={style.accent}>{collectionTitle}</div>
 				<div className={style.nftTitle}>{selectedNft?.name}</div>
 				<div className={style.otherInfo}>
 					<div className={style.ownedBy}>
