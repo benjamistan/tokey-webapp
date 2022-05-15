@@ -12,7 +12,7 @@ const style = {
 	wrapper: `flex flex-col items-center container-lg text-[#e5e8eb]`,
 	container: `container p-6`,
 	topContent: `flex`,
-	nftImgContainer: `flex-1 mr-4`,
+	nftImgContainer: `flex mr-4`,
 	detailsContainer: `flex-[2] ml-4`,
 };
 
@@ -22,37 +22,58 @@ const Nft = () => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
+	console.log('[nftId] - collectionTitle is', collectionTitle);
+
+	const router = useRouter();
+	const {
+		query: { nftItemId, collectionId, isListed, collectionTitle },
+	} = router;
+
+	const [nfts, setNfts] = useState([]);
 	const [selectedNft, setSelectedNft] = useState();
 	const [listings, setListings] = useState([]);
-	const router = useRouter();
 
 	const nftModule = useMemo(() => {
-		if (!provider) return;
+		if (!provider) {
+			console.log('No provider');
+			return;
+		}
+
+		if (!collectionId) {
+			console.log('No collectionId');
+			return;
+		}
 
 		const sdk = new ThirdwebSDK(provider);
-		return sdk.getNFTModule('0x77053C5e0cd65Af65f39b58d3e1BCE52DA246bFc');
-	}, [provider]);
+		return sdk.getNFTCollection(collectionId);
+	}, [provider, collectionId]);
 
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
-			const nfts = await nftModule.getAll();
-
-			const selectedNftItem = nfts.find((nft) => nft.id === router.query.nftId);
-
-			setSelectedNft(selectedNftItem);
+			setNfts(await nftModule.getAll());
 		})();
 	}, [nftModule]);
+
+	useEffect(() => {
+		if (!nfts) {
+			console.log('nfts are not ready');
+			return;
+		}
+		const selectedNftItem = nfts.find(
+			(nft) => nft.metadata.id.toString() === nftItemId
+		);
+		console.log('setting selectedNftItem as', selectedNftItem);
+		setSelectedNft(selectedNftItem);
+	}, [nfts]);
 
 	const marketPlaceModule = useMemo(() => {
 		if (!provider) return;
 
 		const sdk = new ThirdwebSDK(provider);
 
-		return sdk.getMarketplaceModule(
-			'0x2EFf51666da8686fE7Ae5092da5D94A60b3eBada'
-		);
-	}, [provider]);
+		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
+	}, [provider, nftModule]);
 
 	useEffect(() => {
 		if (!marketPlaceModule) return;
@@ -63,15 +84,20 @@ const Nft = () => {
 
 	return (
 		<div>
-			<Header />
 			<div className={style.wrapper}>
 				<div className={style.container}>
 					<div className={style.topContent}>
-						<div className={style.nftImgContainer}>
-							<NFTImage selectedNft={selectedNft} />
+						<div className='flex justify-items-center'>
+							<NFTImage
+								selectedNft={selectedNft}
+								collectionTitle={collectionTitle}
+							/>
 						</div>
 						<div className={style.detailsContainer}>
-							<GeneralDetails selectedNft={selectedNft} />
+							<GeneralDetails
+								selectedNft={selectedNft}
+								collectionTitle={collectionTitle}
+							/>
 							<Purchase
 								isListed={router.query.isListed}
 								selectedNft={selectedNft}

@@ -7,7 +7,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const style = {
 	button: `mr-8 flex items-center py-2 px-12 rounded-lg cursor-pointer`,
 	buttonIcon: `text-xl`,
-	buttonText: `ml-2 text-lg font-semibold`,
+	buttonText: `ml-2 my-auto text-lg font-semibold`,
 };
 
 const MakeOffer = ({ isListed, selectedNft, listings, marketPlaceModule }) => {

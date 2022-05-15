@@ -19,11 +19,10 @@ const style = {
 	divider: `border-r-2`,
 };
 
-const GeneralDetails = ({ selectedNft }) => {
+const GeneralDetails = ({ selectedNft, collectionTitle }) => {
 	return (
 		<div className={style.wrapper}>
 			<div className={style.infoContainer}>
-				<div className={style.accent}>Fancy Dans</div>
 				<div className={style.nftTitle}>{selectedNft?.name}</div>
 				<div className={style.otherInfo}>
 					<div className={style.ownedBy}>
