@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import Router from 'next/router';
 
 const style = {
-	wrapper: ` bg-[#303339] flex-auto w-[14rem] h-[22rem] pb-5 rounded-2xl overflow-hidden cursor-pointer`,
+	wrapper: ` bg-gray-200 flex-auto w-[14rem] h-[22rem] pb-5 rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-[2px] hover:ease-[ all 0.1s ease 0s] hover:shadow-[0px_0px_8px_0px_rgb(4,17,29,25%)] group`,
 	imgContainer: `h-2/3 w-full overflow-hidden flex justify-center items-center`,
 	nftImg: `w-full object-cover`,
 	details: `p-3`,
-	info: ` justify-between text-[#e4e8eb] drop-shadow-xl`,
+	info: ` justify-between text-gray-600 drop-shadow-xl`,
 	infoLeft: `flex-0.6 flex-wrap`,
 	collectionName: `font-semibold text-sm text-[#8a939b]`,
 	assetName: `font-bold text-lg mt-2`,
