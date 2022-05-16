@@ -42,10 +42,6 @@ const Create = () => {
 	const signer = useSigner();
 	const sdk = new ThirdwebSDK(signer);
 
-	const ipfsLoader = ({ src }) => {
-		return `${src}`;
-	};
-
 	/********************************************/
 	/*   GET CONNECTED WALLET FROM THIRDWEB
   /********************************************/

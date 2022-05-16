@@ -1,8 +1,12 @@
-import { useEffect, useState } from 'react';
-
+import { useEffect, useState, useMemo } from 'react';
+import { useAddress, useSigner } from '@thirdweb-dev/react';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { AlchemyProvider } from '@ethersproject/providers';
 import { HiTag } from 'react-icons/hi';
 import { IoMdWallet } from 'react-icons/io';
 import toast, { Toaster } from 'react-hot-toast';
+
+const maticERC20TokenAddress = '0x0000000000000000000000000000000000001010';
 
 const style = {
 	button: `mr-8 flex items-center py-2 px-12 rounded-lg cursor-pointer`,
@@ -10,9 +14,29 @@ const style = {
 	buttonText: `ml-2 my-auto text-lg font-semibold`,
 };
 
-const MakeOffer = ({ isListed, selectedNft, listings, marketPlaceModule }) => {
+const MakeOffer = ({
+	isListed,
+	selectedNft,
+	listings,
+	marketPlaceModule,
+	collectionId,
+}) => {
 	const [selectedMarketNft, setSelectedMarketNft] = useState();
 	const [enableButton, setEnableButton] = useState(false);
+
+	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+	const provider = useMemo(() => {
+		return new AlchemyProvider('maticmum', apiKey);
+	}, [apiKey]);
+
+	const signer = useSigner();
+	const sdk = new ThirdwebSDK(signer);
+
+	const tokeyMarketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
+
+	console.log('Purchase.jsx - working with this asset:', selectedNft);
+
+	const connectedWalletAddress = useAddress();
 
 	useEffect(() => {
 		if (!listings || isListed === 'false') return;
@@ -36,6 +60,36 @@ const MakeOffer = ({ isListed, selectedNft, listings, marketPlaceModule }) => {
 				color: '#fff',
 			},
 		});
+
+	const listItem = async () => {
+		// confirm attached wallet is the owner
+		if (selectedNft.owner === connectedWalletAddress) {
+			console.log(
+				'Purchase.jsx - NFT is owned by the connected wallet. Creating a listing...'
+			);
+			const listing = {
+				assetContractAddress: collectionId,
+				tokenId: selectedNft.metadata.id.toNumber(),
+				startTimestamp: new Date(),
+				listingDurationInSeconds: 157680000, // this is 5 years in seconds
+				quantity: 1,
+				currencyContractAddress: maticERC20TokenAddress,
+				buyoutPricePerToken: '1',
+			};
+
+			console.log('Purchase - we want to list this item', listing);
+
+			const contract = sdk.getMarketplace(tokeyMarketAddress);
+			const listingTx = await contract.direct.createListing(listing);
+			const receipt = listingTx.receipt;
+			console.log('Purchase.jsx: listing tx receipt', receipt);
+
+			const listingId = listingTx.id;
+			console.log('Purchase.jsx: listingId', listingId);
+			return;
+		}
+		console.log('this NFT does not belong to the connected wallet');
+	};
 
 	const buyItem = async (
 		listingId = selectedMarketNft.id,
@@ -75,7 +129,10 @@ const MakeOffer = ({ isListed, selectedNft, listings, marketPlaceModule }) => {
 					</div>
 				</>
 			) : (
-				<div className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}>
+				<div
+					className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}
+					onClick={listItem}
+				>
 					<IoMdWallet className={style.buttonIcon} />
 					<div className={style.buttonText}>List Item</div>
 				</div>
