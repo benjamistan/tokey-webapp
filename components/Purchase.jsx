@@ -23,6 +23,8 @@ const MakeOffer = ({
 }) => {
 	const [selectedMarketNft, setSelectedMarketNft] = useState();
 	const [enableButton, setEnableButton] = useState(false);
+	const [isOwnedByConnectedWallet, setIsOwnedByConnectedWallet] =
+		useState(false);
 
 	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
 	const provider = useMemo(() => {
@@ -34,12 +36,18 @@ const MakeOffer = ({
 
 	const tokeyMarketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
 
-	console.log('Purchase.jsx - working with this asset:', selectedNft);
+	//console.log('Purchase.jsx - working with this asset:', selectedNft);
 
 	const connectedWalletAddress = useAddress();
 
+	/********************************************/
+	/*    GET LISTING IF LISTED
+  /********************************************/
 	useEffect(() => {
-		if (!listings || isListed === 'false') return;
+		if (!listings || isListed === 'false') {
+			console.log('no listings or this item is not listed');
+			return;
+		}
 		(async () => {
 			setSelectedMarketNft(
 				listings.find((marketNft) => marketNft.asset?.id === selectedNft.id)
@@ -47,11 +55,33 @@ const MakeOffer = ({
 		})();
 	}, [selectedNft, listings, isListed]);
 
+	/********************************************/
+	/*    ENABLE BUY BUTTON
+  /********************************************/
 	useEffect(() => {
-		if (!selectedMarketNft || !selectedNft) return;
+		if (!selectedMarketNft || !selectedNft) {
+			console.log('No selected NFT');
+			return;
+		}
 
 		setEnableButton(true);
 	}, [selectedMarketNft, selectedNft]);
+
+	/********************************************/
+	/*    IS CONNECTED WALLET OWNER OF THIS NFT?
+  /********************************************/
+	useEffect(() => {
+		if (!connectedWalletAddress || !selectedNft) {
+			console.log('no collected wallet and/or selected NFT');
+			return;
+		}
+		(() => {
+			if (connectedWalletAddress === selectedNft.owner) {
+				console.log('Purchase.jsx - this NFT is owned by connected wallet');
+				setIsOwnedByConnectedWallet(true);
+			}
+		})();
+	}, [connectedWalletAddress]);
 
 	const confirmPurchase = (toastHandler = toast) =>
 		toastHandler.success(`Purchase successful!`, {
@@ -91,6 +121,12 @@ const MakeOffer = ({
 		console.log('this NFT does not belong to the connected wallet');
 	};
 
+	const unlistItem = async () => {
+		console.log('Purchase.jsx - unlisting item');
+
+		// call cancelListing on Marketplace
+	};
+
 	const buyItem = async (
 		listingId = selectedMarketNft.id,
 		quantityDesired = 1,
@@ -108,33 +144,62 @@ const MakeOffer = ({
 	};
 
 	return (
-		<div className='flex h-20 w-full items-center rounded-lg border border-[#151c22] bg-[#303339] px-12'>
-			<Toaster position='top-right' reverseOrder={false} />
-			{isListed === 'true' ? (
-				<>
-					<div
-						onClick={() => {
-							enableButton ? buyItem(selectedMarketNft.id, 1) : null;
-						}}
-						className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}
-					>
-						<IoMdWallet className={style.buttonIcon} />
-						<div className={style.buttonText}>Buy Now</div>
-					</div>
-					<div
-						className={`${style.button} border border-[#151c22]  bg-[#363840] hover:bg-[#4c505c]`}
-					>
-						<HiTag className={style.buttonIcon} />
-						<div className={style.buttonText}>Make Offer</div>
-					</div>
-				</>
+		<div>
+			{!connectedWalletAddress ? (
+				<div>Connect a wallet to interact with this NFT</div>
 			) : (
-				<div
-					className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}
-					onClick={listItem}
-				>
-					<IoMdWallet className={style.buttonIcon} />
-					<div className={style.buttonText}>List Item</div>
+				<div className='flex h-20 w-full items-center rounded-lg border border-[#151c22] bg-[#303339] px-12'>
+					{isOwnedByConnectedWallet ? (
+						<div>
+							{isListed === 'true' ? (
+								<div
+									className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}
+									onClick={unlistItem}
+								>
+									<IoMdWallet className={style.buttonIcon} />
+									<div className={style.buttonText}>Unlist Item</div>
+								</div>
+							) : (
+								<div
+									className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}
+									onClick={listItem}
+								>
+									<IoMdWallet className={style.buttonIcon} />
+									<div className={style.buttonText}>List Item</div>
+								</div>
+							)}
+						</div>
+					) : (
+						<div className='flex h-20 w-full items-center rounded-lg border border-[#151c22] bg-[#303339] px-12'>
+							<Toaster position='top-right' reverseOrder={false} />
+							{isListed === 'true' ? (
+								<>
+									<div
+										onClick={() => {
+											enableButton ? buyItem(selectedMarketNft.id, 1) : null;
+										}}
+										className={`${style.button} bg-[#2081e2] hover:bg-[#42a0ff]`}
+									>
+										<IoMdWallet className={style.buttonIcon} />
+										<div className={style.buttonText}>Buy Now</div>
+									</div>
+									<div
+										className={`${style.button} border border-[#151c22]  bg-[#363840] hover:bg-[#4c505c]`}
+									>
+										<HiTag className={style.buttonIcon} />
+										<div className={style.buttonText}>Make Offer</div>
+									</div>
+								</>
+							) : (
+								<div
+									className={`${style.button} border border-[#151c22]  bg-[#363840] hover:bg-[#4c505c]`}
+								>
+									<HiTag className={style.buttonIcon} />
+									<div className={style.buttonText}>Make Offer</div>
+								</div>
+							)}
+						</div>
+					)}
 				</div>
 			)}
 		</div>
