@@ -91,6 +91,9 @@ const MakeOffer = ({
 			},
 		});
 
+	/********************************************/
+	/*    LIST THE ITEM
+  /********************************************/
 	const listItem = async () => {
 		// confirm attached wallet is the owner
 		if (selectedNft.owner === connectedWalletAddress) {
@@ -121,10 +124,24 @@ const MakeOffer = ({
 		console.log('this NFT does not belong to the connected wallet');
 	};
 
+	/********************************************/
+	/*    UNLIST THE ITEM
+  /********************************************/
 	const unlistItem = async () => {
 		console.log('Purchase.jsx - unlisting item');
 
-		// call cancelListing on Marketplace
+		if (!selectedMarketNft) {
+			console.log('No selected Market NFT');
+			return;
+		}
+
+		const contract = sdk.getMarketplace(tokeyMarketAddress);
+		const unlistingTx = await contract.direct.cancelListing(
+			selectedMarketNft.id
+		);
+		const receipt = unlistingTx.receipt;
+		console.log('Purchase.jsx - unlisting tx receipt', receipt);
+		return;
 	};
 
 	const buyItem = async (
