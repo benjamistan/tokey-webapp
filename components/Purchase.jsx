@@ -35,9 +35,6 @@ const MakeOffer = ({
 	const sdk = new ThirdwebSDK(signer);
 
 	const tokeyMarketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
-
-	//console.log('Purchase.jsx - working with this asset:', selectedNft);
-
 	const connectedWalletAddress = useAddress();
 
 	/********************************************/
@@ -92,7 +89,7 @@ const MakeOffer = ({
 		});
 
 	/********************************************/
-	/*    LIST THE ITEM
+	/*    LIST THE ITEM (IF YOU OWN IT)
   /********************************************/
 	const listItem = async () => {
 		// confirm attached wallet is the owner
@@ -125,7 +122,7 @@ const MakeOffer = ({
 	};
 
 	/********************************************/
-	/*    UNLIST THE ITEM
+	/*    UNLIST THE ITEM (IF YOU OWN IT)
   /********************************************/
 	const unlistItem = async () => {
 		console.log('Purchase.jsx - unlisting item');
