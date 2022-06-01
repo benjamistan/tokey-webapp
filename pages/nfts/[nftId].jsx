@@ -1,4 +1,3 @@
-import Header from '../../components/Header/Header';
 import { useEffect, useMemo, useState } from 'react';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
@@ -22,7 +21,7 @@ const Nft = () => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
-	console.log('[nftId] - collectionTitle is', collectionTitle);
+	//console.log('[nftId] - collectionTitle is', collectionTitle);
 
 	const router = useRouter();
 	const {
@@ -63,7 +62,7 @@ const Nft = () => {
 		const selectedNftItem = nfts.find(
 			(nft) => nft.metadata.id.toString() === nftItemId
 		);
-		console.log('setting selectedNftItem as', selectedNftItem);
+		console.log('[nftId].jsx - setting selectedNftItem as', selectedNftItem);
 		setSelectedNft(selectedNftItem);
 	}, [nfts]);
 
@@ -103,6 +102,7 @@ const Nft = () => {
 								selectedNft={selectedNft}
 								listings={listings}
 								marketPlaceModule={marketPlaceModule}
+								collectionId={collectionId}
 							/>
 						</div>
 					</div>

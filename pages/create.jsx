@@ -42,10 +42,6 @@ const Create = () => {
 	const signer = useSigner();
 	const sdk = new ThirdwebSDK(signer);
 
-	const ipfsLoader = ({ src }) => {
-		return `${src}`;
-	};
-
 	/********************************************/
 	/*   GET CONNECTED WALLET FROM THIRDWEB
   /********************************************/
@@ -208,7 +204,7 @@ const Create = () => {
 								type='name'
 								id='name'
 								className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-tblue block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-tblue dark:shadow-sm-light'
-								placeholder='asset name'
+								placeholder='Asset name'
 								onChange={(e) =>
 									setNftMetadata({ ...nftMetadata, name: e.target.value })
 								}
@@ -247,7 +243,7 @@ const Create = () => {
 								type='number'
 								id='price'
 								className='shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-tblue block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-tblue dark:shadow-sm-light'
-								placeholder='price'
+								placeholder='Price'
 								required
 								onChange={(e) => setListingPrice(e.target.value)}
 							/>
