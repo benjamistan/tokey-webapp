@@ -11,7 +11,6 @@ phases:
     commands:
       - echo Running npm install...
       - npm install
-      - npx hardhat compile
       - echo Logging into Dockerhub
       - docker login --username $DOCKERHUB_USERNAME --password $DOCKERHUB_PASS
       - echo Logging into Amazon ECR...
