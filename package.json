@@ -5,8 +5,7 @@
 		"dev": "cross-env NODE_OPTIONS='--inspect' next dev",
 		"build": "next build",
 		"start": "next start",
-		"lint": "next lint",
-		"prepare": "husky install"
+		"lint": "next lint"
 	},
 	"dependencies": {
 		"@3rdweb/hooks": "^1.9.2",
@@ -29,7 +28,6 @@
 		"chai": "^4.3.6",
 		"ethereum-waffle": "^3.4.0",
 		"ethers": "^5.5.3",
-		"hardhat": "^2.8.3",
 		"ipfs-http-client": "^50.1.2",
 		"next": "12.0.8",
 		"react": "17.0.2",
