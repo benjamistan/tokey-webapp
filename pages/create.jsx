@@ -1,14 +1,11 @@
-import React, { useEffect, useState, useMemo } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { AlchemyProvider } from '@ethersproject/providers';
 import { useAddress, useSigner } from '@thirdweb-dev/react';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-
-import toast, { Toaster } from 'react-hot-toast';
-
-import { AlchemyProvider } from '@ethersproject/providers';
-
 import { create as ipfsHttpClient } from 'ipfs-http-client';
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 const style = {
 	container: 'flex justify-center text-center bg-white pt-20 pb-40',
@@ -26,12 +23,13 @@ const Create = () => {
 	const [listingPrice, setListingPrice] = useState(0);
 	const router = useRouter();
 
-	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+	const apiKey = NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
-	const tokeyMarketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
+	const tokeyMarketAddress = process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI;
+	console.log('create: apiKey is ', apiKey);
 	const tokeyNftCollectionAddress =
 		'0xcbD4895D6B2BCfaFce6Ac55FBe9F22EC97256c5B';
 	const maticERC20TokenAddress = '0x0000000000000000000000000000000000001010';

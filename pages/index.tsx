@@ -6,8 +6,6 @@ const style = {
 	wrapper: `mt-auto`,
 };
 
-console.log('MY_VAR:', process.env.MY_VAR);
-
 export default function Home() {
 	return (
 		<div className={style.wrapper}>

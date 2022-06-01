@@ -1,10 +1,10 @@
-import { useEffect, useState, useMemo } from 'react';
+import { AlchemyProvider } from '@ethersproject/providers';
 import { useAddress, useSigner } from '@thirdweb-dev/react';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import { AlchemyProvider } from '@ethersproject/providers';
+import { useEffect, useMemo, useState } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 import { HiTag } from 'react-icons/hi';
 import { IoMdWallet } from 'react-icons/io';
-import toast, { Toaster } from 'react-hot-toast';
 
 const maticERC20TokenAddress = '0x0000000000000000000000000000000000001010';
 
@@ -26,7 +26,8 @@ const MakeOffer = ({
 	const [isOwnedByConnectedWallet, setIsOwnedByConnectedWallet] =
 		useState(false);
 
-	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	console.log('Purchase: apiKey is ', apiKey);
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
@@ -34,7 +35,7 @@ const MakeOffer = ({
 	const signer = useSigner();
 	const sdk = new ThirdwebSDK(signer);
 
-	const tokeyMarketAddress = '0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF';
+	const tokeyMarketAddress = process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI;
 	const connectedWalletAddress = useAddress();
 
 	/********************************************/

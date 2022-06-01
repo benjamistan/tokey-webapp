@@ -1,9 +1,9 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { AlchemyProvider } from '@ethersproject/providers';
-import { client } from '../../lib/sanityClient';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { useRouter } from 'next/router';
+import React, { useEffect, useMemo, useState } from 'react';
 import NFTCard from '../../components/nft/NFTCard';
+import { client } from '../../lib/sanityClient';
 
 const style = {
 	bannerImageContainer: `h-[20vh] w-screen overflow-hidden flex justify-center items-center`,
@@ -29,7 +29,7 @@ const style = {
 };
 
 const Collection = () => {
-	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
+	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
 
