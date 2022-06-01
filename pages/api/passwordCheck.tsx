@@ -1,6 +1,8 @@
 import { passwordCheckHandler } from '@storyofams/next-password-protect';
 
-export default passwordCheckHandler('th14', {
+const stagingPassword: any = process.env.STAGING_PASSWORD;
+
+export default passwordCheckHandler(stagingPassword, {
 	// Options go here (optional)
 	cookieName: 'next-password-protect',
 });

@@ -8,6 +8,7 @@ const nextConfig = {
 	},
 	env: {
 		PASSWORD_PROTECT: true,
+		MYVAR: process.env.MY_VAR,
 	},
 	webpack(config) {
 		config.module.rules.push({
