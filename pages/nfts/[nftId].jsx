@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState } from 'react';
 import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { useRouter } from 'next/router';
-import NFTImage from '../../components/nft/NFTImage';
+import { useEffect, useMemo, useState } from 'react';
 import GeneralDetails from '../../components/nft/GeneralDetails';
 import ItemActivity from '../../components/nft/ItemActivity';
+import NFTImage from '../../components/nft/NFTImage';
 import Purchase from '../../components/Purchase';
 
 const style = {
@@ -16,7 +16,8 @@ const style = {
 };
 
 const Nft = () => {
-	const apiKey = `RxnA6DDDU0-ukw5KwC57KafClF9si1cB`;
+	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);

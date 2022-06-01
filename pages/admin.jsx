@@ -1,14 +1,15 @@
-import React, { useMemo, useState, useEffect } from 'react';
-import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { AlchemyProvider } from '@ethersproject/providers';
+import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import React, { useEffect, useMemo, useState } from 'react';
 
 const Admin = () => {
 	const [nbOfListings, setNbOfListings] = useState();
 
-	const apiKey = 'RxnA6DDDU0-ukw5KwC57KafClF9si1cB';
+	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
 
 	const marketplaceModule = useMemo(() => {
 		const provider = new AlchemyProvider('maticmum', apiKey);
+		console.log('Admin: apiKey is ', apiKey);
 		const sdk = new ThirdwebSDK(provider);
 		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
 	}, []);
