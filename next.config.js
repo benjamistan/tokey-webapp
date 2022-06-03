@@ -8,7 +8,10 @@ const nextConfig = {
 	},
 	env: {
 		PASSWORD_PROTECT: true,
-		MYVAR: process.env.MY_VAR,
+		NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI:
+			process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI,
+		NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI:
+			process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI,
 	},
 	webpack(config) {
 		config.module.rules.push({
