@@ -1,14 +1,10 @@
-import '../styles/globals.css';
-
+import { withPasswordProtect } from '@storyofams/next-password-protect';
+import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-
-import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
-
-import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-
-import { withPasswordProtect } from '@storyofams/next-password-protect';
+import Header from '../components/Header/Header';
+import '../styles/globals.css';
 
 function App({ Component, pageProps }: AppProps) {
 	return (
