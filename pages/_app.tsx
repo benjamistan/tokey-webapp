@@ -6,6 +6,12 @@ import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import '../styles/globals.css';
 
+console.log('ENV VARS');
+console.log('=========');
+console.log('Password Protect:', process.env.PASSWORD_PROTECT);
+console.log('Alchemy key:', process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI);
+console.log('Tokey Mkt:', process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI);
+
 function App({ Component, pageProps }: AppProps) {
 	return (
 		<ThirdwebProvider desiredChainId={ChainId.Mumbai}>

@@ -4,6 +4,10 @@ This is an NFT Marketplace.
 
 <br>
 
+## Pre-build Config
+
+In `next.config.js`, update the AWS_REGION param to your desired region. By default it is eu-west-2 (London).
+
 ## Building the Docker image
 
 From the root of this repo, run `docker build . -t tokey-webapp`.

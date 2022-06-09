@@ -8,10 +8,7 @@ const nextConfig = {
 	},
 	env: {
 		PASSWORD_PROTECT: true,
-		NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI:
-			process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI,
-		NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI:
-			process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI,
+		AWS_REGION: 'eu-west-2',
 	},
 	webpack(config) {
 		config.module.rules.push({
