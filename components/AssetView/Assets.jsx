@@ -23,7 +23,7 @@ const AssetsView = () => {
 
 	// console.log('assets:', assets);
 	const getMarketCollections = async () => {
-		console.log('Getting Marketplace collections...');
+		console.log('Getting Marketplace collections from', marketAddress);
 		const res = await marketCollection.getActiveListings();
 		if (res.length == 0) {
 			console.log('ERROR: No active listings for this Marketplace contract');
