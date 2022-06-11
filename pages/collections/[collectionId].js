@@ -1,7 +1,7 @@
 import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import NFTCard from '../../components/nft/NFTCard';
 import { client } from '../../lib/sanityClient';
 
@@ -29,7 +29,7 @@ const style = {
 };
 
 const Collection = () => {
-	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
 

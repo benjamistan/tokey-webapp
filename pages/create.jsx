@@ -4,7 +4,7 @@ import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { create as ipfsHttpClient } from 'ipfs-http-client';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 
 const style = {
@@ -23,12 +23,12 @@ const Create = () => {
 	const [listingPrice, setListingPrice] = useState(0);
 	const router = useRouter();
 
-	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
 
-	const tokeyMarketAddress = process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI;
+	const tokeyMarketAddress = process.env.TOKEY_MKT_ADDRESS_MUMBAI;
 	console.log('create: apiKey is ', apiKey);
 	const tokeyNftCollectionAddress =
 		'0xcbD4895D6B2BCfaFce6Ac55FBe9F22EC97256c5B';

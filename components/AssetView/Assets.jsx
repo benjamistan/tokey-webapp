@@ -1,5 +1,5 @@
 import { useMarketplace } from '@thirdweb-dev/react';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { client } from '../../lib/sanityClient';
 import AssetCard from './AssetCard';
 import Filters from './Filters';
@@ -13,7 +13,7 @@ const AssetsView = () => {
 	const [minSearch, setMinSearch] = useState(0);
 	const [maxSearch, setMaxSearch] = useState(0);
 
-	const marketAddress = process.env.NEXT_PUBLIC_TOKEY_MKT_ADDRESS_MUMBAI;
+	const marketAddress = process.env.TOKEY_MKT_ADDRESS_MUMBAI;
 
 	const marketCollection = useMarketplace(marketAddress);
 

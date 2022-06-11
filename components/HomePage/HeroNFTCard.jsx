@@ -2,10 +2,10 @@ import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 const HeroNFTCard = ({ image, collection, nftName, price }) => {
-	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	console.log('HeroNFTCard: apiKey is ', apiKey);

@@ -1,11 +1,11 @@
 import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 const Admin = () => {
 	const [nbOfListings, setNbOfListings] = useState();
 
-	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 
 	const marketplaceModule = useMemo(() => {
 		const provider = new AlchemyProvider('maticmum', apiKey);
