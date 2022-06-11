@@ -5,6 +5,8 @@ import { secretsClient } from '../lib/secretsClient';
 const Secrets = () => {
 	const [secret, setSecret] = useState('');
 
+	console.log('this is what we are getting from secretsClient:', secretsClient);
+
 	useEffect(() => {
 		async function getSecret() {
 			const params = {
