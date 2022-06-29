@@ -10,8 +10,8 @@ const nextConfig = {
 		PASSWORD_PROTECT: true,
 		AWS_REGION: 'eu-west-2',
 		ENVIRONMENT: process.env.ENVIRONMENT || 'production',
-		STAGING_AWS_ACCESS_KEY_ID: process.env.STAGING_AWS_ACCESS_KEY_ID,
-		STAGING_AWS_SECRET_ACCESS_KEY: process.env.STAGING_AWS_SECRET_ACCESS_KEY,
+		ALCHEMY_KEY_POLYGON_MUMBAI: process.env.ALCHEMY_KEY_POLYGON_MUMBAI,
+		TOKEY_MKT_ADDRESS_MUMBAI: process.env.TOKEY_MKT_ADDRESS_MUMBAI,
 	},
 	webpack(config) {
 		config.module.rules.push({

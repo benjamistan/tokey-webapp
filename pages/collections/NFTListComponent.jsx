@@ -1,10 +1,10 @@
 import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import React, { useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const NFTListComponent = () => {
 	const [all, setAll] = useState([]);
-	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 
 	const nftCollection = useMemo(() => {
 		const provider = new AlchemyProvider('maticmum', apiKey);

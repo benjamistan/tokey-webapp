@@ -16,7 +16,7 @@ const style = {
 };
 
 const Nft = () => {
-	const apiKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY_POLYGON_MUMBAI;
+	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);

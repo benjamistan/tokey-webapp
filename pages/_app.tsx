@@ -6,6 +6,8 @@ import Footer from '../components/Footer/Footer';
 import Header from '../components/Header/Header';
 import '../styles/globals.css';
 
+console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
+
 function App({ Component, pageProps }: AppProps) {
 	return (
 		<ThirdwebProvider desiredChainId={ChainId.Mumbai}>
