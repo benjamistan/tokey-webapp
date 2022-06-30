@@ -1,11 +1,10 @@
-import React from 'react';
 import Link from 'next/link';
 
 const style = {
 	container: 'h-screen align-middle',
 	logo: 'p-4 pt-20 flex justify-center cursor-pointer',
-	textContainer: 'grid grid-cols-3 gap-4',
-	textColumn: 'col-start-2',
+	textContainer: 'grid grid-cols-5 gap-4',
+	textColumn: 'col-start-2 col-span-3',
 	h1: 'block text-[#0d559d] font-bold text-3xl pb-1 pt-5',
 	h2: 'block text-[#0d559d] font-bold text-2xl pb-2 pt-10',
 	h3: 'block text-[#0d559d] font-bold text-xl pb-2 pt-3',

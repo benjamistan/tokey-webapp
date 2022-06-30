@@ -80,7 +80,7 @@ const AssetsView = () => {
 	};
 
 	return (
-		<div className='w-full mx-40'>
+		<div className='w-full'>
 			<div className='flex flex-col lg:flex-row px-4'>
 				<div className='basis-aut lg:basis-[320px] bg-white '>
 					<Filters

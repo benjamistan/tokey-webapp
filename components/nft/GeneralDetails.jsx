@@ -1,8 +1,4 @@
 import { AiFillHeart } from 'react-icons/ai';
-import { MdRefresh } from 'react-icons/md';
-import { RiShareBoxLine } from 'react-icons/ri';
-import { FiMoreVertical } from 'react-icons/fi';
-import { GiShare } from 'react-icons/gi';
 
 const style = {
 	wrapper: `flex`,
@@ -29,26 +25,7 @@ const GeneralDetails = ({ selectedNft, collectionTitle }) => {
 						Owned by <span className={style.accent}>Benjamistan</span>
 					</div>
 					<div className={style.likes}>
-						<AiFillHeart className={style.likeIcon} /> 2.3K favorites
-					</div>
-				</div>
-			</div>
-			<div className={style.actionButtonsContainer}>
-				<div className={style.actionButtons}>
-					<div className={`${style.actionButton} ml-2`}>
-						<MdRefresh />
-					</div>
-					<div className={style.divider} />
-					<div className={style.actionButton}>
-						<RiShareBoxLine />
-					</div>
-					<div className={style.divider} />
-					<div className={style.actionButton}>
-						<GiShare />
-					</div>
-					<div className={style.divider} />
-					<div className={`${style.actionButton} mr-2`}>
-						<FiMoreVertical />
+						<AiFillHeart className={style.likeIcon} /> 123
 					</div>
 				</div>
 			</div>

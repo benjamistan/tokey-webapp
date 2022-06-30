@@ -1,14 +1,11 @@
-import React from 'react';
+import FooterLinks from './FooterLinks';
 import FooterSocial from './FooterSocial';
 import NewsletterSignup from './NewsletterSignup';
-import FooterLinks from './FooterLinks';
 
 import Link from 'next/link';
 
 const style = {
-	footer: `bg-[#034078] w-screen px-[1.2rem] py-[0.8rem] pt-6 flex text-white relative justify-center flex-wrap items-center`,
-	logoText: ``,
-	textAnchor: ``,
+	footer: `bg-[#034078] px-[3rem] py-[0.8rem] flex text-white relative justify-center flex-wrap items-center`,
 };
 
 const Footer = () => {
