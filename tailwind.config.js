@@ -20,6 +20,9 @@ module.exports = {
 				'full': '100%',
 			},
 		},
+		container: {
+			center: true,
+		},
 	},
 	plugins: [],
 };

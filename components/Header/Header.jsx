@@ -1,6 +1,4 @@
-import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 
 import Dropdown from './Dropdown';
 
@@ -8,7 +6,7 @@ import LogoLink from './LogoLink';
 
 const Header = () => {
 	return (
-		<div className='bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded mt-3 w-screen divide-y'>
+		<div className='bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded mt-3 divide-y'>
 			<div className='container flex flex-wrap justify-between items-center mx-auto py-4 px-20 border-b-2'>
 				<LogoLink />
 				<button
