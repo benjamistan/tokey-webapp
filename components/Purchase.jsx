@@ -27,7 +27,7 @@ const MakeOffer = ({
 		useState(false);
 
 	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
-	console.log('Purchase: apiKey is ', apiKey);
+	console.log('Purchase.jsx - apiKey is ', apiKey);
 	const provider = useMemo(() => {
 		return new AlchemyProvider('maticmum', apiKey);
 	}, [apiKey]);
@@ -43,7 +43,7 @@ const MakeOffer = ({
   /********************************************/
 	useEffect(() => {
 		if (!listings || isListed === 'false') {
-			console.log('no listings or this item is not listed');
+			console.log('Purchase.jsx - no listings or this item is not listed');
 			return;
 		}
 		(async () => {
@@ -58,7 +58,7 @@ const MakeOffer = ({
   /********************************************/
 	useEffect(() => {
 		if (!selectedMarketNft || !selectedNft) {
-			console.log('No selected NFT');
+			console.log('Purchase.jsx - No selected NFT');
 			return;
 		}
 
@@ -70,7 +70,7 @@ const MakeOffer = ({
   /********************************************/
 	useEffect(() => {
 		if (!connectedWalletAddress || !selectedNft) {
-			console.log('no collected wallet and/or selected NFT');
+			console.log('Purchase.jsx - no collected wallet and/or selected NFT');
 			return;
 		}
 		(() => {
@@ -119,7 +119,9 @@ const MakeOffer = ({
 			console.log('Purchase.jsx: listingId', listingId);
 			return;
 		}
-		console.log('this NFT does not belong to the connected wallet');
+		console.log(
+			'Purchase.jsx - this NFT does not belong to the connected wallet'
+		);
 	};
 
 	/********************************************/

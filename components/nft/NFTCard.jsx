@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import Router, { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 import { BiHeart } from 'react-icons/bi';
-import { useRouter } from 'next/router';
-import Router from 'next/router';
 
 const style = {
 	wrapper: ` bg-gray-200 flex-auto w-[14rem] h-[22rem] pb-5 rounded-2xl overflow-hidden cursor-pointer hover:-translate-y-[2px] hover:ease-[ all 0.1s ease 0s] hover:shadow-[0px_0px_8px_0px_rgb(4,17,29,25%)] group`,
@@ -57,7 +56,7 @@ const NFTCard = ({ nftItem, title, listings }) => {
 			className={style.wrapper}
 			onClick={() => {
 				Router.push({
-					pathname: `/nfts/${nftItemId}`,
+					pathname: `/assets/${nftItemId}`,
 					query: {
 						nftItemId: nftItemId,
 						isListed: isListed,
