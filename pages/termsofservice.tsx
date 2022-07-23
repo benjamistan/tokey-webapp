@@ -1,5 +1,4 @@
-import React from 'react';
-import TermsOfService from '../components/TermsOfService';
+import TermsOfService from '../components/TermsOfService/TermsOfService';
 
 export default function Privacy() {
   return (
