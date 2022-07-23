@@ -9,36 +9,36 @@ import '../styles/globals.css';
 console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
 
 const styles = {
-	container: 'container mx-auto',
+  container: 'container mx-auto',
 };
 
 function App({ Component, pageProps }: AppProps) {
-	return (
-		<ThirdwebProvider desiredChainId={ChainId.Mumbai}>
-			<div className={styles.container}>
-				<div className={styles.container}>
-					<Head>
-						<title>Tokey NFT Marketplace</title>
-					</Head>
-					<Header />
-					<Component {...pageProps} />
-				</div>
-				<div>
-					<Footer />
-				</div>
-			</div>
-		</ThirdwebProvider>
-	);
+  return (
+    <ThirdwebProvider desiredChainId={ChainId.Mumbai}>
+      <div className={styles.container}>
+        <div className={styles.container}>
+          <Head>
+            <title>Tokey NFT Marketplace</title>
+          </Head>
+          <Header />
+          <Component {...pageProps} />
+        </div>
+        <div>
+          <Footer />
+        </div>
+      </div>
+    </ThirdwebProvider>
+  );
 }
 
 export default process.env.PASSWORD_PROTECT
-	? withPasswordProtect(App, {
-			loginApiUrl: '/api/login',
-			checkApiUrl: '/api/passwordCheck',
-			loginComponentProps: {
-				buttonBackgroundColor: '#0d559d',
-				buttonColor: '#ffffff',
-				logo: 'tokey_logo_262x724.png',
-			},
-	  })
-	: App;
+  ? withPasswordProtect(App, {
+      loginApiUrl: '/api/login',
+      checkApiUrl: '/api/passwordCheck',
+      loginComponentProps: {
+        buttonBackgroundColor: '#0d559d',
+        buttonColor: '#ffffff',
+        logo: 'tokey_logo_262x724.png',
+      },
+    })
+  : App;
