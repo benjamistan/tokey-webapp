@@ -29,7 +29,7 @@ const AssetsView = () => {
       console.log('ERROR: No active listings for this Marketplace contract');
       return;
     }
-    await marketCollection?.getAllListings().then(async (results) => {
+    await marketCollection?.getActiveListings().then(async (results) => {
       let mappedAssets = [];
       for (let asset of results) {
         let name = await fetchCollectionData(

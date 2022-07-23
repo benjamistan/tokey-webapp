@@ -1,5 +1,5 @@
-import { AlchemyProvider } from '@ethersproject/providers';
 import { NFTMetadataOwner, ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { ethers } from 'ethers';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import NFTCard from '../../components/nft/NFTCard';
@@ -32,8 +32,11 @@ const Collection = () => {
   /************************************************************************************************************************************/
   /*    SET UP PROVIDER
   /************************************************************************************************************************************/
-  const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
-  const provider = new AlchemyProvider('maticmum', apiKey);
+  const infuraMumbaiApiKey = process.env.INFURA_KEY_POLYGON_MUMBAI;
+  const provider = new ethers.providers.InfuraProvider(
+    'maticmum',
+    infuraMumbaiApiKey
+  );
   const sdk = new ThirdwebSDK(provider);
 
   /************************************************************************************************************************************/
@@ -92,20 +95,20 @@ const Collection = () => {
   }, []);
 
   /************************************************************************************************************************************/
-  /*    GET *ALL* THE LISTINGS FROM THE MARKETPLACE
+  /*    GET THE ACTIVE LISTINGS FROM THIS COLLECTION
   /************************************************************************************************************************************/
   useEffect(() => {
     if (!marketPlaceModule) return;
     (async () => {
       console.log('[collectionId]: getting active listings in Marketplace');
 
-      //TO:DO - only get listings for this particular collection
       const listings = await marketPlaceModule.getActiveListings({
         tokenContract: thisCollection,
       });
+
       setListings(listings);
     })();
-  }, [marketPlaceModule]);
+  }, [marketPlaceModule, thisCollection]);
 
   /************************************************************************************************************************************/
   /*    GET SANITY ENRICHMENT DATA FOR THE COLLECTION

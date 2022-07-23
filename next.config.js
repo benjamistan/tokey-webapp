@@ -11,6 +11,7 @@ const nextConfig = {
     AWS_REGION: 'eu-west-2',
     ENVIRONMENT: process.env.ENVIRONMENT || 'production',
     ALCHEMY_KEY_POLYGON_MUMBAI: process.env.ALCHEMY_KEY_POLYGON_MUMBAI,
+    INFURA_KEY_POLYGON_MUMBAI: process.env.INFURA_KEY_POLYGON_MUMBAI,
     TOKEY_MKT_ADDRESS_MUMBAI: process.env.TOKEY_MKT_ADDRESS_MUMBAI,
   },
   webpack(config) {

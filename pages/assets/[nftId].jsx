@@ -1,5 +1,5 @@
-import { AlchemyProvider } from '@ethersproject/providers';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { ethers } from 'ethers';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import GeneralDetails from '../../components/nft/GeneralDetails';
@@ -16,14 +16,20 @@ const style = {
 };
 
 const Nft = () => {
-  const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
+  /************************************************************************************************************************************/
+  /*    SET UP PROVIDER
+  /************************************************************************************************************************************/
+  const infuraMumbaiApiKey = process.env.INFURA_KEY_POLYGON_MUMBAI;
+  const provider = new ethers.providers.InfuraProvider(
+    'maticmum',
+    infuraMumbaiApiKey
+  );
 
-  const provider = useMemo(() => {
-    return new AlchemyProvider('maticmum', apiKey);
-  }, [apiKey]);
+  const sdk = new ThirdwebSDK(provider);
 
-  //console.log('[nftId] - collectionTitle is', collectionTitle);
-
+  /************************************************************************************************************************************/
+  /*    GET PARAMS FROM ROUTER
+  /************************************************************************************************************************************/
   const router = useRouter();
   const {
     query: { nftItemId, collectionId, isListed, collectionTitle },
@@ -33,21 +39,20 @@ const Nft = () => {
   const [selectedNft, setSelectedNft] = useState();
   const [listings, setListings] = useState([]);
 
+  /************************************************************************************************************************************/
+  /*    INSTANTIATE NFT MODULE
+  /************************************************************************************************************************************/
   const nftModule = useMemo(() => {
-    if (!provider) {
-      console.log('No provider');
-      return;
-    }
-
     if (!collectionId) {
       console.log('No collectionId');
       return;
     }
-
-    const sdk = new ThirdwebSDK(provider);
     return sdk.getNFTCollection(collectionId);
-  }, [provider, collectionId]);
+  }, [collectionId]);
 
+  /************************************************************************************************************************************/
+  /*    GET ALL NFTS IN COLLECTION
+  /************************************************************************************************************************************/
   useEffect(() => {
     if (!nftModule) return;
     (async () => {
@@ -55,6 +60,9 @@ const Nft = () => {
     })();
   }, [nftModule]);
 
+  /************************************************************************************************************************************/
+  /*    GET THE NFT PASSED IN AS PARAMS FROM THE LIST OF ALL NFTS IN THE COLLECTION
+  /************************************************************************************************************************************/
   useEffect(() => {
     if (!nfts) {
       console.log('nfts are not ready');
@@ -67,6 +75,9 @@ const Nft = () => {
     setSelectedNft(selectedNftItem);
   }, [nfts]);
 
+  /************************************************************************************************************************************/
+  /*    INSTANTIATE THE MARKETPLACE
+  /************************************************************************************************************************************/
   const marketPlaceModule = useMemo(() => {
     if (!provider) return;
 
@@ -75,10 +86,17 @@ const Nft = () => {
     return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
   }, [provider, nftModule]);
 
+  /************************************************************************************************************************************/
+  /*    GET ALL ACTIVE LISTINGS
+  /************************************************************************************************************************************/
   useEffect(() => {
     if (!marketPlaceModule) return;
     (async () => {
-      setListings(await marketPlaceModule.getAllListings());
+      setListings(
+        await marketPlaceModule.getActiveListings({
+          tokenContract: collectionId,
+        })
+      );
     })();
   }, [marketPlaceModule]);
 
