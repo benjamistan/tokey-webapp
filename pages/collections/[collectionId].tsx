@@ -1,5 +1,5 @@
 import { AlchemyProvider } from '@ethersproject/providers';
-import { ThirdwebSDK } from '@thirdweb-dev/sdk';
+import { NFTMetadataOwner, ThirdwebSDK } from '@thirdweb-dev/sdk';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import NFTCard from '../../components/nft/NFTCard';
@@ -29,54 +29,89 @@ const style = {
 };
 
 const Collection = () => {
+	/************************************************************************************************************************************/
+	/*    SET UP PROVIDER
+  /************************************************************************************************************************************/
 	const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
 	const provider = new AlchemyProvider('maticmum', apiKey);
 	const sdk = new ThirdwebSDK(provider);
 
+	/************************************************************************************************************************************/
+	/*    GET COLLECTION ID FROM ROUTER
+  /************************************************************************************************************************************/
 	const router = useRouter();
 	const {
 		query: { collectionId },
 	} = router;
+	const thisCollection = collectionId as string;
 
-	const [collection, setCollection] = useState({});
-	const [nfts, setNfts] = useState([]);
-	const [listings, setListings] = useState([]);
+	interface Collection {
+		bannerImageUrl?: string;
+		imageUrl?: string;
+		title?: string;
+		creator?: string;
+		allOwners?: string[];
+		floorPrice?: number;
+		description?: string;
+		volumeTraded?: number;
+	}
 
-	// create the Collection object
+	const [collection, setCollection] = useState<Collection>({});
+	const [nfts, setNfts] = useState<NFTMetadataOwner[]>([]);
+	const [listings, setListings] = useState<any[]>([]);
+
+	/************************************************************************************************************************************/
+	/*    INSTANTIATE COLLECTION OBJECT FROM THIRDWEB SDK
+  /************************************************************************************************************************************/
 	const nftModule = useMemo(() => {
-		if (!collectionId) {
-			console.log('collectionId not ready');
+		if (!thisCollection) {
+			console.log('thisCollection not ready');
 			return;
 		}
-		return sdk.getNFTCollection(collectionId);
-	}, [collectionId]);
+		return sdk.getNFTCollection(thisCollection);
+	}, [thisCollection]);
 
-	// get the NFTs from the Collection
+	/************************************************************************************************************************************/
+	/*    GET ALL NFTS IN THE COLLECTION INTO STATE
+  /************************************************************************************************************************************/
 	useEffect(() => {
 		if (!nftModule) return;
 		(async () => {
+			console.log('[collectionId]: getting all NFTs in collection');
 			const nfts = await nftModule.getAll();
 
 			setNfts(nfts);
 		})();
 	}, [nftModule]);
 
-	// create the Marketplace object
+	/************************************************************************************************************************************/
+	/*    INSTANTIATE THE THIRDWEB SDK MARKETPLACE OBJECT
+  /************************************************************************************************************************************/
 	const marketPlaceModule = useMemo(() => {
 		return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
 	}, []);
 
-	// get the listings from the Marketplace
+	/************************************************************************************************************************************/
+	/*    GET *ALL* THE LISTINGS FROM THE MARKETPLACE
+  /************************************************************************************************************************************/
 	useEffect(() => {
 		if (!marketPlaceModule) return;
 		(async () => {
-			setListings(await marketPlaceModule.getAllListings());
+			console.log('[collectionId]: getting active listings in Marketplace');
+
+			//TO:DO - only get listings for this particular collection
+			const listings = await marketPlaceModule.getActiveListings({
+				tokenContract: thisCollection,
+			});
+			setListings(listings);
 		})();
 	}, [marketPlaceModule]);
 
-	// get our Collection data from Sanity
+	/************************************************************************************************************************************/
+	/*    GET SANITY ENRICHMENT DATA FOR THE COLLECTION
+  /************************************************************************************************************************************/
 	const fetchCollectionData = async (sanityClient = client) => {
-		const query = `*[_type == "marketItems" && contractAddress == "${collectionId}" ] {
+		const query = `*[_type == "marketItems" && contractAddress == "${thisCollection}" ] {
       "imageUrl": profileImage.asset->url,
       "bannerImageUrl": bannerImage.asset->url,
       volumeTraded,
@@ -98,7 +133,7 @@ const Collection = () => {
 		//console.log('[collectionId] collectionData.title is', collection.title);
 		//console.log('[collectionId] listings:', listings);
 		//console.log('[collectionId] nfts:', nfts);
-	}, [collectionId, listings, nfts]);
+	}, [thisCollection]);
 
 	return (
 		<div className='overflow-hidden'>
@@ -147,25 +182,11 @@ const Collection = () => {
 						<div className={style.statName}>owners</div>
 					</div>
 					<div className={style.collectionStat}>
-						<div className={style.statValue}>
-							<img
-								src='https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg'
-								alt='eth'
-								className={style.ethLogo}
-							/>
-							{collection?.floorPrice}
-						</div>
+						<div className={style.statValue}>{collection?.floorPrice}</div>
 						<div className={style.statName}>floor price</div>
 					</div>
 					<div className={style.collectionStat}>
-						<div className={style.statValue}>
-							<img
-								src='https://storage.opensea.io/files/6f8e2979d428180222796ff4a33ab929.svg'
-								alt='eth'
-								className={style.ethLogo}
-							/>
-							{collection?.volumeTraded}
-						</div>
+						<div className={style.statValue}>{collection?.volumeTraded}</div>
 						<div className={style.statName}>volume traded</div>
 					</div>
 				</div>
