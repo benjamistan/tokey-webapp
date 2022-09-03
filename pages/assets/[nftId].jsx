@@ -5,7 +5,6 @@ import { useEffect, useMemo, useState } from 'react';
 import GeneralDetails from '../../components/nft/GeneralDetails';
 import ItemActivity from '../../components/nft/ItemActivity';
 import NFTImage from '../../components/nft/NFTImage';
-import Purchase from '../../components/nft/Purchase';
 
 const style = {
   wrapper: `flex flex-col items-center container-lg text-[#e5e8eb]`,
@@ -25,7 +24,9 @@ const Nft = () => {
     infuraMumbaiApiKey
   );
 
-  const sdk = new ThirdwebSDK(provider);
+  const sdk = useMemo(() => {
+    new ThirdwebSDK(provider);
+  }, [provider]);
 
   /************************************************************************************************************************************/
   /*    GET PARAMS FROM ROUTER
@@ -35,7 +36,7 @@ const Nft = () => {
     query: { nftItemId, collectionId, isListed, collectionTitle },
   } = router;
 
-  const [nfts, setNfts] = useState([]);
+  const [thisNft, setThisNft] = useState([]);
   const [selectedNft, setSelectedNft] = useState();
   const [listings, setListings] = useState([]);
 
@@ -48,46 +49,51 @@ const Nft = () => {
       return;
     }
     return sdk.getNFTCollection(collectionId);
-  }, [collectionId]);
+  }, [collectionId, sdk]);
 
   /************************************************************************************************************************************/
-  /*    GET ALL NFTS IN COLLECTION
+  /*    GET THE NFT FROM COLLECTION
   /************************************************************************************************************************************/
   useEffect(() => {
     if (!nftModule) return;
     (async () => {
-      setNfts(await nftModule.getAll());
+      console.log(
+        `[nftId] - Getting item ${nftItemId} from collection at ${collectionId}`
+      );
+      const thisNft = await nftModule.getAll({ start: nftItemId, count: 1 });
+      console.log('[nftId] - thisNft is:', thisNft);
+      setThisNft(thisNft);
     })();
   }, [nftModule]);
 
   /************************************************************************************************************************************/
   /*    GET THE NFT PASSED IN AS PARAMS FROM THE LIST OF ALL NFTS IN THE COLLECTION
   /************************************************************************************************************************************/
-  useEffect(() => {
-    if (!nfts) {
-      console.log('nfts are not ready');
-      return;
-    }
-    const selectedNftItem = nfts.find(
-      (nft) => nft.metadata.id.toString() === nftItemId
-    );
-    console.log('[nftId].jsx - setting selectedNftItem as', selectedNftItem);
-    setSelectedNft(selectedNftItem);
-  }, [nfts]);
+  // useEffect(() => {
+  //   if (!nfts) {
+  //     console.log('nfts are not ready');
+  //     return;
+  //   }
+  //   const selectedNftItem = nfts.find(
+  //     (nft) => nft.metadata.id.toString() === nftItemId
+  //   );
+  //   console.log('[nftId].jsx - setting selectedNftItem as', selectedNftItem);
+  //   setSelectedNft(selectedNftItem);
+  // }, [nfts]);
 
   /************************************************************************************************************************************/
   /*    INSTANTIATE THE MARKETPLACE
   /************************************************************************************************************************************/
   const marketPlaceModule = useMemo(() => {
-    if (!provider) return;
-
-    const sdk = new ThirdwebSDK(provider);
-
+    if (!provider) {
+      console.log('provider not yet ready');
+      return;
+    }
     return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
-  }, [provider, nftModule]);
+  }, [sdk]);
 
   /************************************************************************************************************************************/
-  /*    GET ALL ACTIVE LISTINGS
+  /*    GET ACTIVE LISTING **IF IT IS LISTED**
   /************************************************************************************************************************************/
   useEffect(() => {
     if (!marketPlaceModule) return;
@@ -95,10 +101,11 @@ const Nft = () => {
       setListings(
         await marketPlaceModule.getActiveListings({
           tokenContract: collectionId,
+          tokenId: nftItemId,
         })
       );
     })();
-  }, [marketPlaceModule]);
+  }, [collectionId, nftItemId, marketPlaceModule]);
 
   return (
     <div>
@@ -116,13 +123,13 @@ const Nft = () => {
                 selectedNft={selectedNft}
                 collectionTitle={collectionTitle}
               />
-              <Purchase
+              {/* <Purchase
                 isListed={router.query.isListed}
                 selectedNft={selectedNft}
                 listings={listings}
                 marketPlaceModule={marketPlaceModule}
                 collectionId={collectionId}
-              />
+              /> */}
             </div>
           </div>
           <ItemActivity />

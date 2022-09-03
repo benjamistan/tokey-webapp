@@ -1,7 +1,6 @@
-import { AlchemyProvider } from '@ethersproject/providers';
 import { useAddress, useSigner } from '@thirdweb-dev/react';
 import { ThirdwebSDK } from '@thirdweb-dev/sdk';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { HiTag } from 'react-icons/hi';
 import { IoMdWallet } from 'react-icons/io';
@@ -26,48 +25,20 @@ const MakeOffer = ({
   const [isOwnedByConnectedWallet, setIsOwnedByConnectedWallet] =
     useState(false);
 
-  const apiKey = process.env.ALCHEMY_KEY_POLYGON_MUMBAI;
-  console.log('Purchase.jsx - apiKey is ', apiKey);
-  const provider = useMemo(() => {
-    return new AlchemyProvider('maticmum', apiKey);
-  }, [apiKey]);
-
+  /************************************************************************************************************************************/
+  /*    SET UP SIGNER
+  /*    We use a signer instead of a provider here because a) we're not doing massive numbers of transactions 
+  /*    and b) we want the user to pay gas fees
+  /************************************************************************************************************************************/
   const signer = useSigner();
   const sdk = new ThirdwebSDK(signer);
 
   const tokeyMarketAddress = process.env.TOKEY_MKT_ADDRESS_MUMBAI;
   const connectedWalletAddress = useAddress();
 
-  /********************************************/
-  /*    GET LISTING IF LISTED
-  /********************************************/
-  useEffect(() => {
-    if (!listings || isListed === 'false') {
-      console.log('Purchase.jsx - no listings or this item is not listed');
-      return;
-    }
-    (async () => {
-      setSelectedMarketNft(
-        listings.find((marketNft) => marketNft.asset?.id === selectedNft.id)
-      );
-    })();
-  }, [selectedNft, listings, isListed]);
-
-  /********************************************/
-  /*    ENABLE BUY BUTTON
-  /********************************************/
-  useEffect(() => {
-    if (!selectedMarketNft || !selectedNft) {
-      console.log('Purchase.jsx - No selected NFT');
-      return;
-    }
-
-    setEnableButton(true);
-  }, [selectedMarketNft, selectedNft]);
-
-  /********************************************/
+  /************************************************************************************************************************************/
   /*    IS CONNECTED WALLET OWNER OF THIS NFT?
-  /********************************************/
+  /************************************************************************************************************************************/
   useEffect(() => {
     if (!connectedWalletAddress || !selectedNft) {
       console.log('Purchase.jsx - no collected wallet and/or selected NFT');
@@ -79,8 +50,41 @@ const MakeOffer = ({
         setIsOwnedByConnectedWallet(true);
       }
     })();
-  }, [connectedWalletAddress]);
+  }, [connectedWalletAddress, selectedNft]);
 
+  /************************************************************************************************************************************/
+  /*    GET LISTING IF LISTED
+  /************************************************************************************************************************************/
+  useEffect(() => {
+    if (!listings || isListed === 'false') {
+      console.log('Purchase.jsx - no listings or this item is not listed');
+      return;
+    }
+    (async () => {
+      console.log('Purchase.jsx - setting selectedMarketNft');
+      const selectedMarketNft = listings.find(
+        (marketNft) => marketNft.asset?.id === selectedNft.id
+      );
+      console.count('Purchase.jsx - selectedMarketNft is', selectedMarketNft);
+      setSelectedMarketNft(selectedMarketNft);
+    })();
+  }, []);
+
+  /************************************************************************************************************************************/
+  /*    ENABLE BUY BUTTON
+  /************************************************************************************************************************************/
+  useEffect(() => {
+    if (!selectedMarketNft || !selectedNft) {
+      console.log('Purchase.jsx - No selected NFT');
+      return;
+    }
+
+    setEnableButton(true);
+  }, [selectedMarketNft, selectedNft]);
+
+  /************************************************************************************************************************************/
+  /*    CONFIRM PURCHASE TOAST
+  /************************************************************************************************************************************/
   const confirmPurchase = (toastHandler = toast) =>
     toastHandler.success(`Purchase successful!`, {
       style: {
@@ -89,9 +93,9 @@ const MakeOffer = ({
       },
     });
 
-  /********************************************/
+  /************************************************************************************************************************************/
   /*    LIST THE ITEM (IF YOU OWN IT)
-  /********************************************/
+  /************************************************************************************************************************************/
   const listItem = async () => {
     // confirm attached wallet is the owner
     if (selectedNft.owner === connectedWalletAddress) {
@@ -124,9 +128,9 @@ const MakeOffer = ({
     );
   };
 
-  /********************************************/
+  /************************************************************************************************************************************/
   /*    UNLIST THE ITEM (IF YOU OWN IT)
-  /********************************************/
+  /************************************************************************************************************************************/
   const unlistItem = async () => {
     console.log('Purchase.jsx - unlisting item');
 
@@ -144,6 +148,9 @@ const MakeOffer = ({
     return;
   };
 
+  /************************************************************************************************************************************/
+  /*    BUY THE ITEM
+  /************************************************************************************************************************************/
   const buyItem = async (
     listingId = selectedMarketNft.id,
     quantityDesired = 1,

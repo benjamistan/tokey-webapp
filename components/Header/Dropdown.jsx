@@ -1,14 +1,13 @@
 import { Menu, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
 import { ChevronDownIcon } from '@heroicons/react/solid';
+import { Fragment } from 'react';
 
 import {
-  useMetamask,
-  useWalletConnect,
-  useCoinbaseWallet,
-  useNetwork,
   useAddress,
-  useDisconnect,
+  useCoinbaseWallet,
+  useMetamask,
+  useNetwork,
+  useWalletConnect,
 } from '@thirdweb-dev/react';
 
 export default function Dropdown() {
@@ -66,14 +65,14 @@ export default function Dropdown() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 w-36 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <Menu.Items className="absolute right-0 w-36 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="px-1 py-1 ">
               <Menu.Item>
                 {({ active }) => (
                   <button
                     className={`${
                       active ? 'bg-[#FE5F55] text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 pt-2 text-sm`}
+                    } group flex rounded-md items-center w-full px-2 py-1 text-sm`}
                     onClick={() => connectWithMetamask()}
                   >
                     Metamask
@@ -85,7 +84,7 @@ export default function Dropdown() {
                   <button
                     className={`${
                       active ? 'bg-[#FE5F55] text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 pt-2 text-sm`}
+                    } group flex rounded-md items-center w-full px-2 py-1 text-sm`}
                     onClick={() => connectWithCoinbaseWallet()}
                   >
                     Coinbase
@@ -97,7 +96,7 @@ export default function Dropdown() {
                   <button
                     className={`${
                       active ? 'bg-[#FE5F55] text-white' : 'text-gray-900'
-                    } group flex rounded-md items-center w-full px-2 pt-2 text-sm`}
+                    } group flex rounded-md items-center w-full px-2 py-1 text-sm`}
                     onClick={() => connectWithWalletConnect()}
                   >
                     WalletConnect

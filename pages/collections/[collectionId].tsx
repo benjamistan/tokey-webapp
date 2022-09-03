@@ -32,12 +32,14 @@ const Collection = () => {
   /************************************************************************************************************************************/
   /*    SET UP PROVIDER
   /************************************************************************************************************************************/
-  const infuraMumbaiApiKey = process.env.INFURA_KEY_POLYGON_MUMBAI;
-  const provider = new ethers.providers.InfuraProvider(
-    'maticmum',
-    infuraMumbaiApiKey
-  );
-  const sdk = new ThirdwebSDK(provider);
+  const sdk = useMemo(() => {
+    const infuraMumbaiApiKey = process.env.INFURA_KEY_POLYGON_MUMBAI;
+    const provider = new ethers.providers.InfuraProvider(
+      'maticmum',
+      infuraMumbaiApiKey
+    );
+    return new ThirdwebSDK(provider);
+  }, []);
 
   /************************************************************************************************************************************/
   /*    GET COLLECTION ID FROM ROUTER
@@ -72,7 +74,7 @@ const Collection = () => {
       return;
     }
     return sdk.getNFTCollection(thisCollection);
-  }, [thisCollection]);
+  }, [sdk, thisCollection]);
 
   /************************************************************************************************************************************/
   /*    GET ALL NFTS IN THE COLLECTION INTO STATE
@@ -92,23 +94,11 @@ const Collection = () => {
   /************************************************************************************************************************************/
   const marketPlaceModule = useMemo(() => {
     return sdk.getMarketplace('0xe2e5dDda1ECA5127f4A85305be3ed102be9906CF');
-  }, []);
+  }, [sdk]);
 
   /************************************************************************************************************************************/
   /*    GET THE ACTIVE LISTINGS FROM THIS COLLECTION
   /************************************************************************************************************************************/
-  useEffect(() => {
-    if (!marketPlaceModule) return;
-    (async () => {
-      console.log('[collectionId]: getting active listings in Marketplace');
-
-      const listings = await marketPlaceModule.getActiveListings({
-        tokenContract: thisCollection,
-      });
-
-      setListings(listings);
-    })();
-  }, [marketPlaceModule, thisCollection]);
 
   /************************************************************************************************************************************/
   /*    GET SANITY ENRICHMENT DATA FOR THE COLLECTION
