@@ -10,7 +10,7 @@ import {
   useWalletConnect,
 } from '@thirdweb-dev/react';
 
-export default function Dropdown() {
+export default function WalletConnectDropdown() {
   const connectWithCoinbaseWallet = useCoinbaseWallet();
   const connectWithMetamask = useMetamask();
   const connectWithWalletConnect = useWalletConnect();
@@ -27,7 +27,7 @@ export default function Dropdown() {
 
   if (address) {
     return (
-      <div className="w-46 text-right text-tred text-sm mt-2">
+      <div className="w-46 text-right text-white text-sm mt-2">
         <Menu as="div" className="inline-block text-left">
           <div className="block font-semibold">
             Address:{' '}
@@ -47,7 +47,7 @@ export default function Dropdown() {
   }
 
   return (
-    <div className="w-46 text-right">
+    <div className="ml-10 space-x-4">
       <Menu as="div" className="relative inline-block text-left">
         <Menu.Button className="inline-flex justify-center w-full px-4 py-2 font-medium text-[#F7F7FF] bg-[#FE5F55] rounded-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           Connect
