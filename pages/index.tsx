@@ -1,4 +1,32 @@
+import useAxios from 'axios-hooks';
+import { useEffect, useState } from 'react';
+
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState<string>();
+
+  const [{ data, loading }, refetch] = useAxios(
+    {
+      url: '/api/emailSignup',
+      method: 'POST',
+      data: { email, message },
+    },
+    {
+      manual: true,
+    }
+  );
+
+  console.log('success is', data?.success);
+  console.log('loading is currently', loading);
+  console.log('message is currently', data?.message);
+
+  useEffect(() => {
+    if (!loading) {
+      setEmail('');
+      setMessage('');
+    }
+  }, [data?.success, loading]);
+
   return (
     <div className="bg-white">
       <main>
@@ -14,35 +42,49 @@ export default function Home() {
                   <h1 className="text-4xl font-bold tracking-tight text-tblue sm:text-5xl">
                     The World&apos;s Newest NFT Marketplace
                   </h1>
-                  <p className="mt-6 text-xl text-gray-500">
-                    We believe NFTs are the future. We&apos;ll help you get
-                    there. Join our waiting list and stay in the loop.
-                  </p>
                 </div>
-                <form
-                  action="#"
-                  className="mt-12 sm:flex sm:w-full sm:max-w-lg"
-                >
-                  <div className="min-w-0 flex-1">
-                    <label htmlFor="hero-email" className="sr-only">
-                      Email address
-                    </label>
-                    <input
-                      id="hero-email"
-                      type="email"
-                      className="block w-full rounded-md border border-gray-300 px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-black"
-                      placeholder="Email"
-                    />
+                {/*-----------------------------------------------------------------*/
+                /* FORM
+                /*-----------------------------------------------------------------*/}
+                {data?.message ? (
+                  <div className="mt-10 text-xl text-gray-500">
+                    {data?.message}
                   </div>
-                  <div className="mt-4 sm:mt-0 sm:ml-3">
-                    <button
-                      type="submit"
-                      className="block w-full rounded-md border border-transparent bg-tblue px-5 py-3 text-base font-medium text-white shadow hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                ) : (
+                  <div>
+                    <p className="mt-6 text-xl text-gray-500">
+                      We believe NFTs are the future. We&apos;ll help you get
+                      there. Join our waiting list and stay in the loop.
+                    </p>
+                    <form
+                      action="#"
+                      className="mt-12 sm:flex sm:w-full sm:max-w-lg"
                     >
-                      Notify me
-                    </button>
+                      <div className="min-w-0 flex-1">
+                        <label htmlFor="hero-email" className="sr-only">
+                          Email address
+                        </label>
+                        <input
+                          id="hero-email"
+                          type={'email'}
+                          className="block w-full rounded-md border border-gray-300 px-5 py-3 text-base text-gray-900 placeholder-gray-500 shadow-sm focus:border-black"
+                          placeholder="Email"
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                      </div>
+                      <div className="mt-4 sm:mt-0 sm:ml-3">
+                        <button
+                          type={'submit'}
+                          className="block w-full rounded-md border border-transparent bg-tblue px-5 py-3 text-base font-medium text-white shadow hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-rose-500 focus:ring-offset-2 sm:px-10"
+                          disabled={loading}
+                          onClick={() => refetch()}
+                        >
+                          Notify me
+                        </button>
+                      </div>
+                    </form>
                   </div>
-                </form>
+                )}
               </div>
             </div>
           </div>
