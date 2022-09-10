@@ -1,6 +1,6 @@
 ![Tokey](https://s3.eu-west-2.amazonaws.com/tokey.app/tokey_logo300x99.svg)
 
-This is an NFT Marketplace.
+This is an NFT Marketplace configured to run on AWS.
 
 Note to the casual observer - this repo uses a Sanity store for enriching metadata on NFTs in the marketplace. As such, you will not be able to run this locally on your side and have the full site experience.
 

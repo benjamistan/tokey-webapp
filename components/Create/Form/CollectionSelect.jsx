@@ -7,11 +7,11 @@ const options = [{ type: 'collection', label: 'Naw collection' }];
 const customStyles = {};
 
 const CollectionSelect = () => {
-	return (
-		<div>
-			<Select styles={customStyles} menuColor='red' options={options} />
-		</div>
-	);
+  return (
+    <div>
+      <Select styles={customStyles} menuColor="red" options={options} />
+    </div>
+  );
 };
 
 export default CollectionSelect;
