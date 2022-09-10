@@ -1,3 +1,5 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -7,10 +9,8 @@ module.exports = {
     extend: {
       colors: {
         tblue: '#0d559d',
-        tlightblue: '#bdd5ea',
-        twhite: '#f7f7ff',
-        tred: '#fe5f55',
-        tpink: '#a2708a',
+        tblue2: '#0458A0',
+        tdarkblue: '#232463',
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
@@ -24,5 +24,5 @@ module.exports = {
       center: true,
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms')],
 };

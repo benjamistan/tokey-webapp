@@ -2,8 +2,6 @@ import { withPasswordProtect } from '@storyofams/next-password-protect';
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
-import Footer from '../components/Footer/Footer';
-import Header from '../components/Header/Header';
 import '../styles/globals.css';
 
 console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
@@ -20,12 +18,10 @@ function App({ Component, pageProps }: AppProps) {
           <Head>
             <title>Tokey NFT Marketplace</title>
           </Head>
-          <Header />
+          {/* <Header /> */}
           <Component {...pageProps} />
         </div>
-        <div>
-          <Footer />
-        </div>
+        <div>{/* <Footer /> */}</div>
       </div>
     </ThirdwebProvider>
   );
