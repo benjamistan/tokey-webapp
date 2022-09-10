@@ -1,4 +1,3 @@
-import { withPasswordProtect } from '@storyofams/next-password-protect';
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -27,14 +26,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default process.env.PASSWORD_PROTECT
-  ? withPasswordProtect(App, {
-      loginApiUrl: '/api/login',
-      checkApiUrl: '/api/passwordCheck',
-      loginComponentProps: {
-        buttonBackgroundColor: '#0d559d',
-        buttonColor: '#ffffff',
-        logo: 'tokey_logo_262x724.png',
-      },
-    })
-  : App;
+export default App;
