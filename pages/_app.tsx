@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import '../styles/globals.css';
 
-console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
+//console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
 
 const styles = {
   container: 'container mx-auto',
