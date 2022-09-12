@@ -15,6 +15,15 @@
     "jsx": "preserve",
     "incremental": true
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "pages/create.jsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "pages/create.jsx",
+    "pages/index.jsx",
+    "pages/index.jsx",
+    "pages/index.jsx",
+    "components/HubspotForms/HubspotContactForm.jsx"
+  ],
   "exclude": ["node_modules"]
 }
