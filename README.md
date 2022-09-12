@@ -4,9 +4,9 @@ This is an NFT Marketplace configured to run on AWS.
 
 Note to the casual observer - this repo uses a Sanity store for enriching metadata on NFTs in the marketplace. As such, you will not be able to run this locally on your side and have the full site experience.
 
-<br>
+<br><br>
 
-## Running Locally
+# Running Locally
 
 Create a `.env.local` file at the root of the repo. You'll need to create the following env vars:
 
