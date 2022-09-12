@@ -28,7 +28,7 @@ export default function Home(props) {
                 {/*-----------------------------------------------------------------*/
                 /* FORM
                 /*-----------------------------------------------------------------*/}
-                <div className="pt-10">
+                <div>
                   <HubspotForm />
                 </div>
               </div>
@@ -36,9 +36,9 @@ export default function Home(props) {
           </div>
           <div className="sm:mx-auto sm:max-w-3xl sm:px-6">
             <div className="py-12 sm:relative sm:mt-12 sm:py-16 lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-              <div className="relative -mr-40 sm:mx-auto sm:max-w-3xl sm:px-0 lg:h-full lg:max-w-none ">
+              <div className="relative sm:mx-auto sm:max-w-3xl sm:px-0 lg:h-full lg:max-w-none ">
                 <img
-                  className="w-full rounded-md lg:h-full lg:w-auto lg:max-w-none"
+                  className="w-full rounded-md lg:w-auto "
                   src="assets/lemon_smaller.jpg"
                   alt=""
                 />
