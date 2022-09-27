@@ -1,4 +1,3 @@
-import { withPasswordProtect } from '@storyofams/next-password-protect';
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -6,19 +5,15 @@ import '../styles/globals.css';
 
 console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
 
-const styles = {
-  container: 'container mx-auto',
-};
-
 function App({ Component, pageProps }: AppProps) {
   return (
     <ThirdwebProvider desiredChainId={ChainId.Mumbai}>
-      <div className={styles.container}>
-        <div className={styles.container}>
+      <div>
+        <div className="container max-w-screen-xl">
           <Head>
             <title>Tokey NFT Marketplace</title>
           </Head>
-          {/* <Header /> */}
+
           <Component {...pageProps} />
         </div>
         <div>{/* <Footer /> */}</div>
@@ -27,14 +22,4 @@ function App({ Component, pageProps }: AppProps) {
   );
 }
 
-export default process.env.PASSWORD_PROTECT
-  ? withPasswordProtect(App, {
-      loginApiUrl: '/api/login',
-      checkApiUrl: '/api/passwordCheck',
-      loginComponentProps: {
-        buttonBackgroundColor: '#0d559d',
-        buttonColor: '#ffffff',
-        logo: 'tokey_logo_262x724.png',
-      },
-    })
-  : App;
+export default App;

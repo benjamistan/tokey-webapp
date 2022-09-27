@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import Logo from '../../assets/tokey_logo_white.svg';
+import Logo from '../../public/assets/tokey_logo_white.svg';
 
 const ClickableLogo = React.forwardRef(({ onClick, href }, ref) => {
   return (
