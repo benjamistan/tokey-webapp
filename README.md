@@ -20,10 +20,12 @@ Navigate to the `studio` folder and run `npx @sanity/cli init`. This will requir
 Once you're authenticated, run `npm install -g @sanity/cli` to install the cli. You can then run Sanity from the `studio` folder at a command line by sanity start. The Dashboard is available at http://localhost:3333.
 
 Sanity will only accept connections from http://localhost:3000, so if your local site is running on another port, you will see errors.
+<br><br>
 
-## Pre-build Config
+# Running in Docker
 
 In `next.config.js`, update the AWS_REGION param to your desired region. By default it is eu-west-2 (London).
+<br><br>
 
 ## Building the Docker image
 
