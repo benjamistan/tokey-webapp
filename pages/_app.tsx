@@ -1,6 +1,7 @@
 import { ChainId, ThirdwebProvider } from '@thirdweb-dev/react';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
+import Layout from '../components/Layout/Layout';
 import '../styles/globals.css';
 
 console.log('ENVIRONMENT is', process.env.ENVIRONMENT);
@@ -13,10 +14,10 @@ function App({ Component, pageProps }: AppProps) {
           <Head>
             <title>Tokey NFT Marketplace</title>
           </Head>
-
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </div>
-        <div>{/* <Footer /> */}</div>
       </div>
     </ThirdwebProvider>
   );
