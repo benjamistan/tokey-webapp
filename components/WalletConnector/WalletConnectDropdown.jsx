@@ -49,7 +49,7 @@ export default function WalletConnectDropdown() {
   return (
     <div className="ml-10 space-x-4">
       <Menu as="div" className="relative inline-block text-left">
-        <Menu.Button className="inline-flex justify-center w-full px-4 py-2 font-medium text-[#F7F7FF] bg-[#FE5F55] rounded-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
+        <Menu.Button className="inline-flex justify-center w-full px-4 py-2 font-medium text-[#F7F7FF] bg-tblue rounded-md  hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75">
           Connect Wallet
           <ChevronDownIcon
             className="w-5 h-5 ml-2 -mr-1 text-violet-200 hover:text-violet-100"
@@ -71,7 +71,7 @@ export default function WalletConnectDropdown() {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? 'bg-[#FE5F55] text-white' : 'text-gray-900'
+                      active ? 'bg-tblue text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-1 text-sm`}
                     onClick={() => connectWithMetamask()}
                   >
@@ -83,7 +83,7 @@ export default function WalletConnectDropdown() {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? 'bg-[#FE5F55] text-white' : 'text-gray-900'
+                      active ? 'bg-tblue text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-1 text-sm`}
                     onClick={() => connectWithCoinbaseWallet()}
                   >
@@ -95,7 +95,7 @@ export default function WalletConnectDropdown() {
                 {({ active }) => (
                   <button
                     className={`${
-                      active ? 'bg-[#FE5F55] text-white' : 'text-gray-900'
+                      active ? 'bg-tblue text-white' : 'text-gray-900'
                     } group flex rounded-md items-center w-full px-2 py-1 text-sm`}
                     onClick={() => connectWithWalletConnect()}
                   >

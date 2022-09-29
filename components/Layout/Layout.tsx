@@ -1,7 +1,8 @@
 /* This example requires Tailwind CSS v2.0+ */
-import { Disclosure, Menu, Transition } from '@headlessui/react';
+import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import { Fragment } from 'react';
+
+import WalletConnectDropdown from '../WalletConnector/WalletConnectDropdown';
 
 const user = {
   name: 'Tom Cook',
@@ -46,12 +47,12 @@ export default function Layout({ children }: { children: any }) {
                     <div className="flex flex-shrink-0 items-center">
                       <img
                         className="block h-8 w-auto lg:hidden"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                        src="https://tokey.imgix.net/tokey_logo_262x724.png"
                         alt="Your Company"
                       />
                       <img
                         className="hidden h-8 w-auto lg:block"
-                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
+                        src="https://tokey.imgix.net/tokey_logo_262x724.png"
                         alt="Your Company"
                       />
                     </div>
@@ -69,16 +70,17 @@ export default function Layout({ children }: { children: any }) {
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
-                    <button
+                    <WalletConnectDropdown />
+                    {/* <button
                       type="button"
                       className="rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
-                    </button>
+                    </button> */}
 
                     {/* Profile dropdown */}
-                    <Menu as="div" className="relative ml-3">
+                    {/* <Menu as="div" className="relative ml-3">
                       <div>
                         <Menu.Button className="flex max-w-xs items-center rounded-full bg-white text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
                           <span className="sr-only">Open user menu</span>
@@ -116,7 +118,7 @@ export default function Layout({ children }: { children: any }) {
                           ))}
                         </Menu.Items>
                       </Transition>
-                    </Menu>
+                    </Menu> */}
                   </div>
                   <div className="-mr-2 flex items-center sm:hidden">
                     {/* Mobile menu button */}
