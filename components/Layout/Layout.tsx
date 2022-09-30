@@ -1,6 +1,7 @@
 /* This example requires Tailwind CSS v2.0+ */
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import CreateDropdownButton from '../Header/CreateDropdownButton';
 
 import WalletConnectDropdown from '../WalletConnector/WalletConnectDropdown';
 
@@ -13,7 +14,7 @@ const user = {
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard' },
-  { name: 'Create', href: '/create' },
+  // { name: 'Create', href: '/create' },
   { name: 'Exchange', href: '#' },
   { name: 'Performance', href: '#' },
 ];
@@ -68,6 +69,9 @@ export default function Layout({ children }: { children: any }) {
                           {item.name}
                         </a>
                       ))}
+                      <div className="border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium">
+                        <CreateDropdownButton />
+                      </div>
                     </div>
                   </div>
                   <div className="hidden sm:ml-6 sm:flex sm:items-center">
