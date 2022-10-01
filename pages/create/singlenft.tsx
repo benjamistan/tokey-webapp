@@ -95,7 +95,7 @@ export default function Example() {
                     <div className="flex text-sm text-gray-600">
                       <label
                         htmlFor="file-upload"
-                        className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
+                        className="relative cursor-pointer rounded-md bg-white font-medium text-tblue focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-gray-700"
                       >
                         <span>Upload a file</span>
                         <input
@@ -127,7 +127,7 @@ export default function Example() {
                       name="username"
                       id="username"
                       autoComplete="username"
-                      className="block w-full min-w-0 flex-grow rounded-none rounded-r-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="block w-full min-w-0 flex-grow rounded-md border-gray-300 focus:border-tblue focus:ring-tblue sm:text-sm"
                     />
                   </div>
                 </div>
@@ -144,7 +144,7 @@ export default function Example() {
                       id="about"
                       name="about"
                       rows={3}
-                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                      className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:tblue focus:ring-tblue sm:text-sm"
                       placeholder="describe your NFT token"
                       defaultValue={''}
                     />
@@ -159,7 +159,7 @@ export default function Example() {
                         id="comments"
                         name="comments"
                         type="checkbox"
-                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                        className="h-4 w-4 rounded border-gray-300 text-tblue focus:ring-tblue"
                       />
                     </div>
                     <div className="ml-3 text-sm">
@@ -178,7 +178,7 @@ export default function Example() {
             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className="inline-flex justify-center rounded-md border border-transparent bg-tblue py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-tblue focus:ring-offset-2"
               >
                 Save
               </button>
