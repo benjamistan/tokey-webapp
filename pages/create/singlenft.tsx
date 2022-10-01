@@ -48,7 +48,7 @@ export default function Example() {
               href={item.href}
               className={classNames(
                 item.current
-                  ? 'bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white'
+                  ? 'bg-gray-50 text-tblue hover:text-tdarkblue hover:bg-white pointer-events-none'
                   : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50',
                 'group rounded-md px-3 py-2 flex items-center text-sm font-medium'
               )}
@@ -178,7 +178,7 @@ export default function Example() {
             <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
               <button
                 type="submit"
-                className="inline-flex justify-center rounded-md border border-transparent bg-tblue py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-tblue focus:ring-offset-2"
+                className="inline-flex justify-center rounded-md border border-transparent bg-tblue py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-tblue focus:ring-offset-2"
               >
                 Save
               </button>

@@ -48,7 +48,7 @@ export default function Example() {
               href={item.href}
               className={classNames(
                 item.current
-                  ? 'bg-gray-50 text-indigo-700 hover:text-indigo-700 hover:bg-white'
+                  ? 'bg-gray-50 text-tblue hover:text-tdarkblue hover:bg-white pointer-events-none'
                   : 'text-gray-900 hover:text-gray-900 hover:bg-gray-50',
                 'group rounded-md px-3 py-2 flex items-center text-sm font-medium'
               )}
