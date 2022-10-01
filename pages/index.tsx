@@ -1,5 +1,11 @@
+import AlphaWarning from '../components/Modals/AlphaWarning';
 function Home() {
-  return <div>Homepage</div>;
+  return (
+    <div>
+      <AlphaWarning />
+      Homepage
+    </div>
+  );
 }
 
 export default Home;
