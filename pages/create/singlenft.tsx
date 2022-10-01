@@ -1,15 +1,13 @@
-import Link from 'next/link';
-
 const navigation = [
   {
     name: 'Single NFT',
     href: 'singlenft',
-    current: false,
+    current: true,
   },
   {
     name: 'NFT Collection',
     href: 'nftcollection',
-    current: true,
+    current: false,
   },
   { name: 'NFT Drop', href: 'nftdrop', current: false },
   {
@@ -68,14 +66,10 @@ export default function Example() {
             <div className="space-y-6 bg-white py-6 px-4 sm:p-6">
               <div>
                 <h3 className="text-lg font-medium leading-6 text-gray-900">
-                  NFT Collection
+                  Single NFT
                 </h3>
                 <p className="mt-1 text-sm text-gray-500">
-                  For instantly minting a collection of NFTs. To only mint one
-                  NFT, use{' '}
-                  <span className="text-indigo-600 hover:text-indigo-200">
-                    <Link href="singlenft">single NFT</Link>.
-                  </span>
+                  For instantly minting a single NFT.
                 </p>
               </div>
               <div className="col-span-3">

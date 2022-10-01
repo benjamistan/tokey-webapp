@@ -1,5 +1,10 @@
 const navigation = [
   {
+    name: 'Single NFT',
+    href: 'singlenft',
+    current: false,
+  },
+  {
     name: 'NFT Collection',
     href: 'nftcollection',
     current: false,
